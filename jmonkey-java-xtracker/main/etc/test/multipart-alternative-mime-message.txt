@@ -1,0 +1,248 @@
+From - Tue Jun 14 19:53:54 2005
+X-Account-Key: account1
+X-UIDL: Mail1118772259179-208
+X-Mozilla-Status: 0003
+X-Mozilla-Status2: 06000000
+Return-Path: <paul@dowman.net>
+Received: from 189-224.SPEEDe.golden.net ([216.75.189.224])
+          by mail.pappin.ca (JAMES SMTP Server 3.0a1) with SMTP ID 281
+          for <brill@pappin.ca>;
+          Tue, 14 Jun 2005 14:04:09 -0400 (EDT)
+Received: from [10.60.24.199] (host1.cellbucks.com [216.13.103.250])
+	(using TLSv1 with cipher RC4-SHA (128/128 bits))
+	(No client certificate requested)
+	by eponymous.ath.cx (Postfix) with ESMTP id B820F7376B
+	for <brill@pappin.ca>; Tue, 14 Jun 2005 14:01:23 -0400 (EDT)
+Mime-Version: 1.0 (Apple Message framework v730)
+To: Brill Pappin <brill@pappin.ca>
+Message-Id: <29F99D4B-3329-4A36-AB40-82966BAA6166@dowman.net>
+Content-Type: multipart/alternative; boundary=Apple-Mail-13-878593750
+From: Paul Dowman <paul@dowman.net>
+Subject: on setting up objects by constructor or setters
+Date: Tue, 14 Jun 2005 14:03:50 -0400
+X-Mailer: Apple Mail (2.730)
+
+
+--Apple-Mail-13-878593750
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain;
+	charset=US-ASCII;
+	delsp=yes;
+	format=flowed
+
+This relates to something we talked about once. This is from a martin  
+fowler article on dependency injection at http://martinfowler.com/ 
+articles/injection.html
+
+
+
+Constructor versus Setter Injection
+
+For service combination, you always have to have some convention in  
+order to wire things together. The advantage of injection is  
+primarily that it requires very simple conventions - at least for the  
+constructor and setter injections. You don't have to do anything odd  
+in your component and it's fairly straightforward for an injector to  
+get everything configured.
+
+Interface injection is more invasive since you have to write a lot of  
+interfaces to get things all sorted out. For a small set of  
+interfaces required by the container, such as in Avalon's approach,  
+this isn't too bad. But it's a lot of work for assembling components  
+and dependencies, which is why the current crop of lightweight  
+containers go with setter and constructor injection.
+
+The choice between setter and constructor injection is interesting as  
+it mirrors are more general issue with object-oriented programming -  
+should you fill fields in a constructor or with setters.
+
+My long running default with objects is as much as possible, to  
+create valid objects at construction time. This advice goes back to  
+Kent Beck's Smalltalk Best Practice Patterns: Constructor Method and  
+Constructor Parameter Method. Constructors with parameters give you a  
+clear statement of what it means to create a valid object in an  
+obvious place. If there's more than one way to do it, create multiple  
+constructors that show the different combinations.
+
+Another advantage with constructor initialization is that it allows  
+you to clearly hide any fields that are immutable by simply not  
+providing a setter. I think this is important - if something  
+shouldn't change then the lack of a setter communicates this very  
+well. If you use setters for initialization, then this can become a  
+pain. (Indeed in these situations I prefer to avoid the usual setting  
+convention, I'd prefer a method like initFoo, to stress that it's  
+something you should only do at birth.)
+
+But with any situation there are exceptions. If you have a lot of  
+constructor parameters things can look messy, particularly in  
+languages without keyword parameters. It's true that a long  
+constructor is often a sign of an over-busy object that should be  
+split, but there are cases when that's what you need.
+
+If you have multiple ways to construct a valid object, it can be hard  
+to show this through constructors, since constructors can only vary  
+on the number and type of parameters. This is when Factory Methods  
+come into play, these can use a combination of private constructors  
+and setters to implement their work. The problem with classic Factory  
+Methods for components assembly is that they are usually seen as  
+static methods, and you can't have those on interfaces. You can make  
+a factory class, but then that just becomes another service instance.  
+A factory service is often a good tactic, but you still have to  
+instantiate the factory using one of the techniques here.
+
+Constructors also suffer if you have simple parameters such as  
+strings. With setter injection you can give each setter a name to  
+indicate what the string is supposed to do. With constructors you are  
+just relying on the position, which is harder to follow.
+
+If you have multiple constructors and inheritance, then things can  
+get particularly awkward. In order to initialize everything you have  
+to provide constructors to forward to each superclass constructor,  
+while also adding you own arguments. This can lead to an even bigger  
+explosion of constructors.
+
+Despite the disadvantages my preference is to start with constructor  
+injection, but be ready to switch to setter injection as soon as the  
+problems I've outlined above start to become a problem.
+
+This issue has led to a lot of debate between the various teams who  
+provide dependency injectors as part of their frameworks. However it  
+seems that most people who build these frameworks have realized that  
+it's important to support both mechanisms, even if there's a  
+preference for one of them.
+
+  
+    
+--Apple-Mail-13-878593750
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html;
+	charset=ISO-8859-1
+
+<HTML><BODY style=3D"word-wrap: break-word; -khtml-nbsp-mode: space; =
+-khtml-line-break: after-white-space; "><P style=3D"margin: 0.0px 0.0px =
+18.0px 0.0px"><FONT class=3D"Apple-style-span" size=3D"3"><FONT =
+class=3D"Apple-style-span" size=3D"3"><SPAN class=3D"Apple-style-span" =
+style=3D"font-size: 13px;"><FONT class=3D"Apple-style-span" =
+size=3D"4"><SPAN class=3D"Apple-style-span" style=3D"font-size: =
+14px;">T</SPAN></FONT></SPAN></FONT><SPAN class=3D"Apple-style-span" =
+style=3D"font-size: 13px;"><FONT class=3D"Apple-style-span" =
+size=3D"4"><SPAN class=3D"Apple-style-span" style=3D"font-size: =
+14px;">his relates to something we talked about once. This is =
+f</SPAN></FONT></SPAN></FONT><SPAN class=3D"Apple-style-span" =
+style=3D"font-size: 13px;"><FONT class=3D"Apple-style-span" =
+size=3D"4"><SPAN class=3D"Apple-style-span" style=3D"font-size: =
+14px;">rom a martin fowler article on dependency injection =
+at=A0</SPAN></FONT><FONT class=3D"Apple-style-span" size=3D"4"><SPAN =
+class=3D"Apple-style-span" style=3D"font-size: 14px;"><A =
+href=3D"http://martinfowler.com/articles/injection.html">http://martinfowl=
+er.com/articles/injection.html</A></SPAN></FONT></SPAN></P><P =
+style=3D"margin: 0.0px 0.0px 18.0px 0.0px"><FONT =
+class=3D"Apple-style-span" face=3D"Times" size=3D"6"><SPAN =
+class=3D"Apple-style-span" style=3D"font-size: 18.7px;"><B><BR =
+class=3D"khtml-block-placeholder"></B></SPAN></FONT></P><P =
+style=3D"margin: 0.0px 0.0px 18.0px 0.0px"><FONT =
+class=3D"Apple-style-span" face=3D"Times" size=3D"6"><SPAN =
+class=3D"Apple-style-span" style=3D"font-size: 18.7px;"><B>Constructor =
+versus Setter Injection</B></SPAN></FONT></P><P style=3D"margin: 0.0px =
+0.0px 16.0px 0.0px"><FONT class=3D"Apple-style-span" face=3D"Times" =
+size=3D"4"><SPAN class=3D"Apple-style-span" style=3D"font-size: =
+16px;">For service combination, you always have to have some convention =
+in order to wire things together. The advantage of injection is =
+primarily that it requires very simple conventions - at least for the =
+constructor and setter injections. You don't have to do anything odd in =
+your component and it's fairly straightforward for an injector to get =
+everything configured.</SPAN></FONT></P><P style=3D"margin: 0.0px 0.0px =
+16.0px 0.0px"><FONT class=3D"Apple-style-span" face=3D"Times" =
+size=3D"4"><SPAN class=3D"Apple-style-span" style=3D"font-size: =
+16px;">Interface injection is more invasive since you have to write a =
+lot of interfaces to get things all sorted out. For a small set of =
+interfaces required by the container, such as in Avalon's approach, this =
+isn't too bad. But it's a lot of work for assembling components and =
+dependencies, which is why the current crop of lightweight containers go =
+with setter and constructor injection.</SPAN></FONT></P><P =
+style=3D"margin: 0.0px 0.0px 16.0px 0.0px"><FONT =
+class=3D"Apple-style-span" face=3D"Times" size=3D"4"><SPAN =
+class=3D"Apple-style-span" style=3D"font-size: 16px;">The choice between =
+setter and constructor injection is interesting as it mirrors are more =
+general issue with object-oriented programming - should you fill fields =
+in a constructor or with setters.</SPAN></FONT></P><P style=3D"margin: =
+0.0px 0.0px 16.0px 0.0px"><FONT class=3D"Apple-style-span" face=3D"Times" =
+size=3D"4"><SPAN class=3D"Apple-style-span" style=3D"font-size: =
+16px;">My long running default with objects is as much as possible, to =
+create valid objects at construction time. This advice goes back to Kent =
+Beck's </SPAN></FONT><A =
+href=3D"http://www.amazon.com/exec/obidos/ASIN/013476904X"><FONT =
+class=3D"Apple-style-span" face=3D"Times" size=3D"4"><SPAN =
+class=3D"Apple-style-span" style=3D"font-size: 16px;"><FONT =
+class=3D"Apple-style-span" color=3D"#0032DC">Smalltalk Best Practice =
+Patterns</FONT></SPAN></FONT></A><FONT class=3D"Apple-style-span" =
+face=3D"Times" size=3D"4"><SPAN class=3D"Apple-style-span" =
+style=3D"font-size: 16px;">: Constructor Method and Constructor =
+Parameter Method. Constructors with parameters give you a clear =
+statement of what it means to create a valid object in an obvious place. =
+If there's more than one way to do it, create multiple constructors that =
+show the different combinations.</SPAN></FONT></P><P style=3D"margin: =
+0.0px 0.0px 16.0px 0.0px"><FONT class=3D"Apple-style-span" face=3D"Times" =
+size=3D"4"><SPAN class=3D"Apple-style-span" style=3D"font-size: =
+16px;">Another advantage with constructor initialization is that it =
+allows you to clearly hide any fields that are immutable by simply not =
+providing a setter. I think this is important - if something shouldn't =
+change then the lack of a setter communicates this very well. If you use =
+setters for initialization, then this can become a pain. (Indeed in =
+these situations I prefer to avoid the usual setting convention, I'd =
+prefer a method like </SPAN></FONT><FONT class=3D"Apple-style-span" =
+face=3D"Courier" size=3D"3"><SPAN class=3D"Apple-style-span" =
+style=3D"font-size: 13px;">initFoo</SPAN></FONT><FONT =
+class=3D"Apple-style-span" face=3D"Times" size=3D"4"><SPAN =
+class=3D"Apple-style-span" style=3D"font-size: 16px;">, to stress that =
+it's something you should only do at birth.)</SPAN></FONT></P><P =
+style=3D"margin: 0.0px 0.0px 16.0px 0.0px"><FONT =
+class=3D"Apple-style-span" face=3D"Times" size=3D"4"><SPAN =
+class=3D"Apple-style-span" style=3D"font-size: 16px;">But with any =
+situation there are exceptions. If you have a lot of constructor =
+parameters things can look messy, particularly in languages without =
+keyword parameters. It's true that a long constructor is often a sign of =
+an over-busy object that should be split, but there are cases when =
+that's what you need.</SPAN></FONT></P><P style=3D"margin: 0.0px 0.0px =
+16.0px 0.0px"><FONT class=3D"Apple-style-span" face=3D"Times" =
+size=3D"4"><SPAN class=3D"Apple-style-span" style=3D"font-size: =
+16px;">If you have multiple ways to construct a valid object, it can be =
+hard to show this through constructors, since constructors can only vary =
+on the number and type of parameters. This is when Factory Methods come =
+into play, these can use a combination of private constructors and =
+setters to implement their work. The problem with classic Factory =
+Methods for components assembly is that they are usually seen as static =
+methods, and you can't have those on interfaces. You can make a factory =
+class, but then that just becomes another service instance. A factory =
+service is often a good tactic, but you still have to instantiate the =
+factory using one of the techniques here.</SPAN></FONT></P><P =
+style=3D"margin: 0.0px 0.0px 16.0px 0.0px"><FONT =
+class=3D"Apple-style-span" face=3D"Times" size=3D"4"><SPAN =
+class=3D"Apple-style-span" style=3D"font-size: 16px;">Constructors also =
+suffer if you have simple parameters such as strings. With setter =
+injection you can give each setter a name to indicate what the string is =
+supposed to do. With constructors you are just relying on the position, =
+which is harder to follow.</SPAN></FONT></P><P style=3D"margin: 0.0px =
+0.0px 16.0px 0.0px"><FONT class=3D"Apple-style-span" face=3D"Times" =
+size=3D"4"><SPAN class=3D"Apple-style-span" style=3D"font-size: =
+16px;">If you have multiple constructors and inheritance, then things =
+can get particularly awkward. In order to initialize everything you have =
+to provide constructors to forward to each superclass constructor, while =
+also adding you own arguments. This can lead to an even bigger explosion =
+of constructors.</SPAN></FONT></P><P style=3D"margin: 0.0px 0.0px 16.0px =
+0.0px"><FONT class=3D"Apple-style-span" face=3D"Times" size=3D"4"><SPAN =
+class=3D"Apple-style-span" style=3D"font-size: 16px;">Despite the =
+disadvantages my preference is to start with constructor injection, but =
+be ready to switch to setter injection as soon as the problems I've =
+outlined above start to become a problem.</SPAN></FONT></P><P =
+style=3D"margin: 0.0px 0.0px 16.0px 0.0px"><FONT =
+class=3D"Apple-style-span" face=3D"Times" size=3D"4"><SPAN =
+class=3D"Apple-style-span" style=3D"font-size: 16px;">This issue has led =
+to a lot of debate between the various teams who provide dependency =
+injectors as part of their frameworks. However it seems that most people =
+who build these frameworks have realized that it's important to support =
+both mechanisms, even if there's a preference for one of =
+them.</SPAN></FONT></P><P style=3D"margin: 0.0px 0.0px 16.0px =
+0.0px">=A0=A0=A0=A0</P></BODY></HTML>=
+
+--Apple-Mail-13-878593750--

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+	<class name="com.jmonkey.xtracker.profile.Person"
+		table="profile_person">
+		<id name="id" column="id" type="java.lang.String">
+			<generator class="uuid.hex" />
+		</id>
+
+		<property name="username" column="username" type="java.lang.String" not-null="true" access="property" unique="true" />
+		<property name="realname" column="realname" type="java.lang.String" not-null="true" access="property" />
+		<property name="initials" column="initials" type="java.lang.String" not-null="true" access="property" />
+		<property name="password" column="password" type="java.lang.String" not-null="true" access="property" />
+		<property name="emailAddress" column="email" type="java.lang.String" not-null="true" access="property" />
+		<property name="phoneNumber" column="phone_number" type="java.lang.String" not-null="false" access="property" />
+		<property name="signature" column="signature" type="java.lang.String" not-null="false" access="property" />
+		<property name="createDate" column="create_date" type="java.util.Date" not-null="true" access="property" />
+		<property name="active" column="active" type="java.lang.Boolean" not-null="true" access="property" />
+		<property name="selectable" column="selectable" type="java.lang.Boolean" not-null="true" access="property" />
+		<property name="anonymous" column="anonymous" type="java.lang.Boolean" not-null="true" access="property" />
+		<property name="administrator" column="administrator" type="java.lang.Boolean" not-null="true" access="property" />
+		<property name="immutable" column="immutable" type="boolean" not-null="true" access="property" />
+		<many-to-one name="defaultQueue" column="queue_id" class="com.jmonkey.xtracker.issue.Queue" cascade="none" access="property" />
+	
+		<list name="roles" table="profile_person_roles" cascade="all">
+			<key column="person_id" />
+			<index column="idx" />
+			<one-to-many class="com.jmonkey.xtracker.profile.PersonRole" />
+		</list>
+		
+		<property name="xplannerUsername" column="xplanner_username" type="java.lang.String" not-null="false" access="property" unique="false" />
+		<property name="xplannerPassword" column="xplanner_password" type="java.lang.String" not-null="false" access="property" unique="false"/>
+		
+		<property name="jiraUsername" column="jira_username" type="java.lang.String" not-null="false" access="property" unique="false" />
+		<property name="jiraPassword" column="jira_password" type="java.lang.String" not-null="false" access="property" unique="false"/>
+	</class>
+
+</hibernate-mapping>

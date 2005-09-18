@@ -1,0 +1,30 @@
+From - Tue Jun 21 23:34:04 2005
+X-Account-Key: account1
+X-UIDL: Mail1119408119776-1711
+X-Mozilla-Status: 0011
+X-Mozilla-Status2: 00000000
+Return-Path: <somebody@somebody.com>
+Received: from smtp.example.com ([167.206.4.199])
+          by mail.anywhere.org (JAMES SMTP Server 3.0a1) with SMTP ID 705
+          for <me@example.com>;
+          Tue, 21 Jun 2005 22:41:53 -0400 (EDT)
+Received: from [192.168.1.101]
+ (ool-18bd7ef4.dyn.optonline.net [24.189.126.244]) by smtp.example.com
+ (Sun Java System Messaging Server 6.2-2.06 (built May 11 2005))
+ with ESMTP id <0IIG002SWSTBA060@smtp.example.com> for me@example.com;
+ Tue, 21 Jun 2005 22:41:36 -0400 (EDT)
+Date: Tue, 21 Jun 2005 22:41:30 -0400
+From: "Jane Doe" <somebody@somebody.com>
+Subject: This is a test subject
+In-reply-to: <42B8C99D.5010005@pappin.ca>
+To: John Doe <me@example.com>
+Message-id: <20050622024130.31775@mail.optonline.net>
+Organization: Connected Hearth
+MIME-version: 1.0
+X-Mailer: CTM PowerMail version 5.2 build 4388 English <http://www.ctmdev.com>
+Content-type: text/plain; charset=US-ASCII
+Content-transfer-encoding: 7BIT
+References: <20050622004036.26396@mail.optonline.net>
+ <42B8C99D.5010005@pappin.ca>
+
+This is a test message...

@@ -1,0 +1,79 @@
+<document>
+  <properties>
+    <author email="brill@pappin.ca">Brill Pappin</author>
+    <title>Installation</title>
+  </properties>
+  <!-- Optional HEAD element, which is copied as is into the XHTML <head> element -->
+  <head>
+  </head>
+  <body>
+	 <p>Please send improvments or questions about this documentation to <a href="mailto:xtracker@pappin.ca">xtracker@pappin.ca</a></p>
+    <section name="Quick Start">
+	 <subsection name="Set up your database">
+	 	<p>See the <em>Requirements</em> section for databases that XTracker has been 
+	 		tested on. Send in your success story if you choose another database and 
+	 		I'll add it to the list.</p>
+        <p>XTracker uses a database to store it's tickets and you will need to prepare 
+        	the one you are using before you install the WAR file.</p>
+        <p>Setup a new database for XTracker (something like "xtracker" would be 
+        	obvious).</p>
+        <p>Setup a new user that can access the new database. The user should have 
+        	permission to create tables and indexes on that database as the application 
+        	will attempt to set it up for you whe you first run it. Once the application 
+        	is installed and running, you can restrict the database users permissions to 
+        	select, insert, delete etc.</p>
+     </subsection>
+      
+     <subsection name="Set up Java">
+     	<p>See the <em>Requirements</em> section for the JDK version you should use.</p>
+        <p>You must have java properly set up before you can run your servlet container. 
+        	I will assume at this point that you know how to install Java on your machine 
+        	and properly configure it. Let me know if I need to update this documentation 
+        	and give an overview.</p>
+     </subsection>
+     
+     <subsection name="Set up your application server">
+     	<p>See the <em>Requirements</em> section for the application servers that have 
+     		been tested.</p>
+        <p>Install and configure your application server. XTracker is simply installed 
+        	as any other WAR file would be.</p>
+        <subsection name="Running for the first time">
+        	<p>Once XTracker is running, the first person to access it should be the 
+        		installer as that person will be required to input some configuration 
+        		information  that the installer will know. You only have to do this 
+        		once however and  XTracker will not allow the setup page to be run 
+        		again.</p>
+        	<p>You should be familiar with how to set properties for JDBC as you 
+        		<strong>must</strong> enter them properly for XTrtacker to work.</p>
+    	    <p>If you need to change its configuration manually (if for instance you 
+    	    	don't configure JDBC properly), the config files are stored in the 
+    	    	directory you where asked for on the setup page. Otherwise use the 
+    	    	administration console built into the application.</p>
+	    </subsection> 
+	    <p>The admin password upon installation is "admin". <strong>Don't forget to 
+	    	change it!</strong></p>  
+     </subsection>
+    </section>
+
+    <section name="Setting up a Queue">
+    	<p>Currently XTracker only supports POP3 access to the Queues. Future versions 
+    		will have alternative methods of getting tickets into the system.</p> 
+    	<p>To set up a new Queue, create the queue and give it an alias. The alias is a 
+    		mail alias so you should create a main account for XTracker on your mail 
+    		server and give it an alias that matches the queue alias.</p>
+    	<p>You can change how often XTracker checks for incoming tickets by changing the 
+    		cron property. Be carefule however as this is not a standard unix cron string. 
+    		For more information on the cron string, see the Quartz project (Yes, the 
+    		traling "?" is required).</p> 
+    	<p>If you make a mistake and need to reset the cron, simply edit the 
+    		mail.properties in your config directory. the original cron 
+    		is: "0 * * * * ?" which mean to check for new mail every 60 seconds.</p>
+    </section>
+    
+    <section name="Tips and Tricks">
+    	<p>Make sure you set the "XTracker Context" to point to you installation. 
+    		This URL will be used when sending out mail so that the users of the 
+    		system can simply click through to a ticket.</p>
+    </section>
+  </body>
+ </document>

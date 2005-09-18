@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<project name="XTracker Issue tracking">
+
+  <!-- Page Title -->
+  <title>XTracker Issue tracking</title>
+
+  <body>
+
+    <!-- Links defined across the top right of the site -->
+    <links>
+      <item name="Maven"  href="http://maven.apache.org/"/>
+      <item name="XPlanner"  href="http://www.xplanner.org/"/>
+    </links>
+	<menu name="Overview">
+      <item href="/news.html" name="News"/>
+      <item href="/requirements.html" name="Requirements"/>
+      <item href="/install.html" name="Installation"/>
+      <!-- item href="/downloads.html" name="Downloads"/ -->
+    </menu>
+  </body>
+</project>

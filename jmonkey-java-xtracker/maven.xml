@@ -1,0 +1,51 @@
+<project xmlns:j="jelly:core" xmlns:util="jelly:util" xmlns:maven="jelly:maven">
+
+	<goal name="release">
+	<!--
+		<maven:set plugin="maven-scm-plugin" property="maven.test.skip" value="SNAPSHOT"/>
+		<attainGoal name="scm:perform-release"/>
+	-->
+		<attainGoal name="announcement"/>
+		<!-- attainGoal name="announcement:mail"/ -->
+	</goal>
+	
+	<goal name="hibernate:check-config">
+		<available file="${basedir}/main/etc/hibernate/hibernate.properties" property="hibernate.plugin.properties.set"/>
+		<fail unless="hibernate.plugin.properties.set" message="You must copy /main/etc/hibernate/example-[dbname]-hibernate.properties to 'hibernate.properties' and edit it to connect to your database."/>
+	</goal>
+	
+	<preGoal name="hibernate:schema-export">
+		<attainGoal name="hibernate:check-config"/>
+	</preGoal>
+	
+	<preGoal name="hibernate:schema-update">
+		<attainGoal name="hibernate:check-config"/>
+	</preGoal>
+	
+	<preGoal name="site">
+		<!-- maven.test.failure.ignore -->
+		<maven:set plugin="maven-test-plugin" property="maven.test.failure.ignore" value="true"/>
+	</preGoal>
+	
+	<postGoal name="site">
+		<maven:set plugin="maven-test-plugin" property="maven.test.failure.ignore" value="false"/>
+	</postGoal>
+
+	<postGoal name="xdoc:register-reports">
+		<attainGoal name="maven-jdepend-plugin:register" />
+		<attainGoal name="maven-changes-plugin:register" />
+		
+		<attainGoal name="maven-checkstyle-plugin:deregister" />
+		<attainGoal name="maven-javadoc-plugin:deregister" />
+		<attainGoal name="maven-jxr-plugin:deregister" />
+		<attainGoal name="maven-linkcheck-plugin:deregister" />
+		<attainGoal name="maven-jcoverage-plugin:deregister" />
+		<attainGoal name="maven-simian-plugin:deregister" />
+		<attainGoal name="maven-pmd-plugin:deregister" />
+		<attainGoal name="maven-changelog-plugin:deregister" />
+		<attainGoal name="maven-file-activity-plugin:deregister" />
+		<attainGoal name="maven-developer-activity-plugin:deregister" />
+		<attainGoal name="maven-clover-plugin:deregister" />
+	</postGoal>
+
+</project>

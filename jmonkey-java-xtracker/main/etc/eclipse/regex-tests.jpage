@@ -1,0 +1,26 @@
+String test1 = "Re: [Ticket 1234] This is the rest...";
+String test2 = "Re: [Ticket1234] This is the rest...";
+String test3 = "Re: [1234] This is the rest...";
+String test4 = "This is the rest...";
+String test5 = "Re: This is the rest...";
+String test6 = "Re: [Ticket 1234 This is the rest...";
+String matchRegex = "\\A.*\\[Ticket\\s\\d+\\].*";
+System.out.println("true="+ test1.matches(matchRegex));
+System.out.println("false="+  test2.matches(matchRegex));
+System.out.println("false="+  test3.matches(matchRegex));
+System.out.println("false="+  test4.matches(matchRegex));
+System.out.println("false="+  test5.matches(matchRegex));
+System.out.println("false="+  test6.matches(matchRegex));
+String test1 = "Re: [Ticket 1234] This is the rest...";
+String splitRegex = "\\[Ticket\\s\\d+\\]";
+
+Pattern pattern = Pattern.compile(splitRegex);
+Matcher matcher = pattern.matcher(test1);
+matcher.find();
+String 	group = matcher.group();
+System.out.println("group="+group);
+
+String[] split1 = test1.split(splitRegex);
+for(int i = 0; i < split1.length; i++){
+	System.out.println("split["+i+"]="+split1[i]);
+}

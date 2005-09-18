@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+
+<struts-config>
+	<data-sources/>
+	<form-beans>
+		<form-bean name="statusForm" type="com.jmonkey.xtracker.admin.status.StatusForm"/>
+		<form-bean name="severityForm" type="com.jmonkey.xtracker.admin.severity.SeverityForm"/>
+		<form-bean name="profileForm" type="com.jmonkey.xtracker.admin.profile.ProfileForm"/>
+		<form-bean name="queueForm" type="com.jmonkey.xtracker.admin.queue.QueueForm"/>
+		<form-bean name="myTicketsForm" type="com.jmonkey.xtracker.my.tickets.MyTicketsForm"/>
+		<form-bean name="projectForm" type="com.jmonkey.xtracker.admin.project.ProjectForm"/>
+		<form-bean name="logoutForm" type="com.jmonkey.xtracker.logout.LogoutForm"/>
+		<form-bean name="openTicketForm" type="com.jmonkey.xtracker.my.tickets.OpenTicketForm"/>
+		<form-bean name="ticketMessageForm" type="com.jmonkey.xtracker.my.tickets.TicketMessageForm"/>
+		<form-bean name="ticketDetailsForm" type="com.jmonkey.xtracker.my.tickets.TicketDetailsForm"/>
+		<form-bean name="ticketRelationshipsForm" type="com.jmonkey.xtracker.my.tickets.TicketRelationshipsForm"/>
+		<form-bean name="ticketPeopleForm" type="com.jmonkey.xtracker.my.tickets.TicketPeopleForm"/>
+		<form-bean name="displayPersonForm" type="com.jmonkey.xtracker.my.tickets.DisplayPersonForm"/>
+		<form-bean name="displayQueueForm" type="com.jmonkey.xtracker.queueview.DisplayQueueForm"/>
+		<form-bean name="displayProjectForm" type="com.jmonkey.xtracker.projectview.DisplayProjectForm"/>
+		<form-bean name="runtimeForm" type="com.jmonkey.xtracker.admin.runtime.RuntimeForm"/>
+		<form-bean name="ticketDatesForm" type="com.jmonkey.xtracker.my.tickets.TicketDatesForm"/>
+		<form-bean name="dispositionForm" type="com.jmonkey.xtracker.admin.disposition.DispositionForm"/>
+		<form-bean name="anonTicketsForm" type="com.jmonkey.xtracker.anontickets.AnonTicketsForm"/>
+		<form-bean name="profilePathSelectForm" type="com.jmonkey.xtracker.auth.ProfilePathSelectForm"/>
+		<form-bean name="addAnonTicketForm" type="com.jmonkey.xtracker.anon.tickets.AddAnonTicketForm"/>
+		<form-bean name="openAnonTicketForm" type="com.jmonkey.xtracker.anon.tickets.OpenAnonTicketForm"/>
+		<form-bean name="anonTicketMessageForm" type="com.jmonkey.xtracker.anon.tickets.AnonTicketMessageForm"/>
+		<form-bean name="configInitForm" type="com.jmonkey.xtracker.config.ConfigInitForm"/>
+		<form-bean name="simpleAuthLoginForm" type="com.jmonkey.xtracker.auth.simple.SimpleAuthLoginForm"/>
+		<form-bean name="searchForm" type="com.jmonkey.xtracker.my.search.SearchForm"/>
+		<form-bean name="reportErrorForm" type="com.jmonkey.xtracker.error.ReportErrorForm"/>
+		<form-bean name="myProfileForm" type="com.jmonkey.xtracker.my.profile.MyProfileForm"/>
+		<form-bean name="anonProfileForm" type="com.jmonkey.xtracker.anon.profile.AnonProfileForm"/>
+		<form-bean name="xplannerLinkForm" type="com.jmonkey.xtracker.linking.xplanner.XPlannerLinkForm"/>
+		<form-bean name="jiraLinkForm" type="com.jmonkey.xtracker.linking.jira.JiraLinkForm"/>
+		<form-bean name="mailReferencesForm" type="com.jmonkey.xtracker.my.mailrefs.MailReferencesForm"/>
+	</form-beans>
+	<global-exceptions/>
+	<global-forwards>
+		<forward name="mytickets" path="/my/tickets.do" redirect="true"/>
+		<forward name="adminRuntime" path="/admin/runtime.do" redirect="true"/>
+		<forward name="anontickets" path="/anon/tickets.do" redirect="true"/>
+		<forward name="principalPath" path="/auth/principalPath.do" redirect="true"/>
+		<forward name="init" path="/init.do" redirect="true"/>
+		<forward name="warnrestart" path="/warnrestart.jsp" redirect="false"/>
+	</global-forwards>
+	<action-mappings>
+		<action path="/sort" type="fr.improve.struts.taglib.layout.sort.SortAction" scope="request" validate="false"/>
+		<action path="/treeview" type="fr.improve.struts.taglib.layout.treeview.TreeviewAction" scope="request" validate="false"/>
+		<action path="/admin/displayStatus" type="com.jmonkey.xtracker.admin.status.DisplayStatusAction" name="statusForm" scope="request" input="/admin/status.jsp">
+			<forward name="input" path="/admin/status.jsp" redirect="false"/>
+		</action>
+		<action path="/admin/addStatus" type="com.jmonkey.xtracker.admin.status.AddStatusAction" name="statusForm" input="/admin/status.jsp" scope="request">
+			<forward name="display" path="/admin/displayStatus.do" redirect="true"/>
+		</action>
+		<action path="/admin/displaySeverity" type="com.jmonkey.xtracker.admin.severity.DisplaySeverityAction" name="severityForm" scope="request" input="/admin/severity.jsp">
+			<forward name="input" path="/admin/severity.jsp" redirect="false"/>
+		</action>
+		<action path="/admin/addSeverity" type="com.jmonkey.xtracker.admin.severity.AddSeverityAction" name="severityForm" input="/admin/severity.jsp" scope="request">
+			<forward name="display" path="/admin/displaySeverity.do" redirect="true"/>
+		</action>
+		<action path="/admin/addProfile" type="com.jmonkey.xtracker.admin.profile.AddProfileAction" name="profileForm" scope="request" input="/admin/add_profile.jsp">
+			<forward name="display" path="/admin/displayProfile.do" redirect="true"/>
+			<forward name="input" path="/admin/add_profile.jsp" redirect="false"/>
+		</action>
+		<action path="/admin/displayProfile" type="com.jmonkey.xtracker.admin.profile.DisplayProfileAction" name="profileForm" input="/admin/profile.jsp" scope="request">
+			<forward name="input" path="/admin/profile.jsp" redirect="false"/>
+		</action>
+		<action path="/admin/editProfile" type="com.jmonkey.xtracker.admin.profile.EditProfileAction" name="profileForm" scope="request" input="/admin/profile.jsp">
+			<forward name="display" path="/admin/displayProfile.do" redirect="true"/>
+			<forward name="edit" path="/admin/edit_profile.jsp" redirect="false"/>
+		</action>
+		<action path="/admin/updateProfile" type="com.jmonkey.xtracker.admin.profile.UpdateProfileAction" name="profileForm" scope="request" input="/admin/edit_profile.jsp">
+			<forward name="display" path="/admin/displayProfile.do" redirect="true"/>
+		</action>
+		<action path="/admin/displayQueue" type="com.jmonkey.xtracker.admin.queue.DisplayQueueAction" name="queueForm" scope="request" validate="false" input="/admin/queue.jsp">
+			<forward name="input" path="/admin/queue.jsp" redirect="false"/>
+		</action>
+		<action path="/admin/addQueue" type="com.jmonkey.xtracker.admin.queue.AddQueueAction" name="queueForm" scope="request" input="/admin/queue.jsp">
+			<forward name="input" path="/admin/queue.jsp" redirect="false"/>
+			<forward name="display" path="/admin/displayQueue.do" redirect="true"/>
+		</action>
+		<action path="/admin/displayDisposition" type="com.jmonkey.xtracker.admin.disposition.DisplayDispositionAction" name="dispositionForm" scope="request" validate="false" input="/admin/disposition.jsp">
+			<forward name="input" path="/admin/disposition.jsp" redirect="false"/>
+		</action>
+		<action path="/admin/addDisposition" type="com.jmonkey.xtracker.admin.disposition.AddDispositionAction" name="dispositionForm" scope="request" input="/admin/disposition.jsp">
+			<forward name="input" path="/admin/disposition.jsp" redirect="false"/>
+			<forward name="display" path="/admin/displayDisposition.do" redirect="true"/>
+		</action>
+		<action path="/admin/saveProfile" type="com.jmonkey.xtracker.admin.profile.SaveProfileAction" name="profileForm" scope="request" input="/admin/add_profile.jsp">
+			<forward name="display" path="/admin/displayProfile.do" redirect="true"/>
+		</action>
+		<action path="/my/tickets" type="com.jmonkey.xtracker.my.tickets.DisplayMyTicketsAction" name="myTicketsForm" scope="request" input="/my/index.jsp">
+			<forward name="input" path="/my/index.jsp" redirect="false"/>
+		</action>
+		<action path="/admin/displayProject" type="com.jmonkey.xtracker.admin.project.DisplayProjectAction" name="projectForm" scope="request" input="/admin/project.jsp">
+			<forward name="input" path="/admin/project.jsp" redirect="false"/>
+		</action>
+		<action path="/admin/addProject" type="com.jmonkey.xtracker.admin.project.AddProjectAction" name="projectForm" scope="request" input="/admin/project.jsp">
+			<forward name="input" path="/admin/project.jsp" redirect="false"/>
+			<forward name="display" path="/admin/displayProject.do" redirect="true"/>
+		</action>
+		<action path="/my/addTicket" type="com.jmonkey.xtracker.my.tickets.AddTicketAction" name="myTicketsForm" scope="request" input="/my/add_ticket.jsp">
+			<forward name="input" path="/my/add_ticket.jsp" redirect="false"/>
+			<forward name="display" path="/my/tickets.do" redirect="true"/>
+		</action>
+		<action path="/my/saveTicket" type="com.jmonkey.xtracker.my.tickets.SaveTicketAction" name="myTicketsForm" scope="request" input="/my/add_ticket.jsp">
+			<forward name="display" path="/my/tickets.do" redirect="true"/>
+			<forward name="input" path="/my/add_ticket.jsp" redirect="false"/>
+		</action>
+		<action path="/logout" name="logoutForm" scope="request" validate="false" unknown="false" input="/login.jsp" type="com.jmonkey.xtracker.logout.LogoutAction">
+			<forward name="tickets" path="/my/tickets.do" redirect="true"/>
+		</action>
+		<action path="/my/openTicket" type="com.jmonkey.xtracker.my.tickets.OpenTicketAction" name="openTicketForm" scope="request" input="/my/open_ticket.jsp">
+			<forward name="input" path="/my/open_ticket.jsp" redirect="false"/>
+			<forward name="display" path="/my/tickets.do" redirect="true"/>
+		</action>
+		<action path="/my/reply" type="com.jmonkey.xtracker.my.tickets.AddTicketMessageAction" name="ticketMessageForm" scope="request" input="/my/reply.jsp">
+			<forward name="input" path="/my/reply.jsp" redirect="false"/>
+			<forward name="display" path="/my/tickets.do" redirect="true"/>
+		</action>
+		<action path="/my/saveReply" type="com.jmonkey.xtracker.my.tickets.SaveReplyTicketAction" name="ticketMessageForm" scope="request" input="/my/reply.jsp">
+			<forward name="input" path="/my/reply.jsp" redirect="false"/>
+			<forward name="display" path="/my/tickets.do" redirect="true"/>
+		</action>
+		<action path="/my/comment" type="com.jmonkey.xtracker.my.tickets.AddTicketMessageAction" name="ticketMessageForm" scope="request" input="/my/comment.jsp">
+			<forward name="input" path="/my/comment.jsp" redirect="false"/>
+			<forward name="display" path="/my/tickets.do" redirect="true"/>
+		</action>
+		<action path="/my/saveComment" type="com.jmonkey.xtracker.my.tickets.SaveCommentTicketAction" name="ticketMessageForm" scope="request" input="/my/comment.jsp">
+			<forward name="display" path="/my/tickets.do" redirect="true"/>
+			<forward name="input" path="/my/comment.jsp" redirect="false"/>
+		</action>
+		<action path="/my/details" type="com.jmonkey.xtracker.my.tickets.EditTicketDetailsAction" name="ticketDetailsForm" scope="request" input="/my/details.jsp">
+			<forward name="input" path="/my/details.jsp" redirect="false"/>
+			<forward name="display" path="/my/tickets.do" redirect="true"/>
+		</action>
+		<action path="/my/saveDetails" type="com.jmonkey.xtracker.my.tickets.SaveTicketDetailsAction" name="ticketDetailsForm" scope="request" input="/my/details.jsp">
+			<forward name="input" path="/my/details.jsp" redirect="false"/>
+		</action>
+		<action path="/my/relationships" type="com.jmonkey.xtracker.my.tickets.EditTicketRelationshipsAction" name="ticketRelationshipsForm" scope="request" input="/my/relationships.jsp">
+			<forward name="input" path="/my/relationships.jsp" redirect="false"/>
+		</action>
+		<action path="/my/saveRelationships" type="com.jmonkey.xtracker.my.tickets.SaveTicketRelationshipsAction" name="ticketRelationshipsForm" scope="request" input="/my/relationships.jsp">
+			<forward name="input" path="/my/relationships.jsp" redirect="false"/>
+		</action>
+		<action path="/my/people" type="com.jmonkey.xtracker.my.tickets.EditTicketPeopleAction" name="ticketPeopleForm" scope="request" input="/my/people.jsp">
+			<forward name="input" path="/my/people.jsp" redirect="false"/>
+		</action>
+		<action path="/my/savePeople" type="com.jmonkey.xtracker.my.tickets.SaveTicketPeopleAction" name="ticketPeopleForm" scope="request" input="/my/people/jsp">
+			<forward name="input" path="/my/people.jsp" redirect="false"/>
+		</action>
+		<action path="/my/person" type="com.jmonkey.xtracker.my.tickets.DisplayPersonAction" name="displayPersonForm" scope="request" input="/my/person.jsp">
+			<forward name="input" path="/my/person.jsp" redirect="false"/>
+		</action>
+		<action path="/my/queue" type="com.jmonkey.xtracker.queueview.DisplayQueueAction" name="displayQueueForm" scope="request" input="/my/queue.jsp">
+			<forward name="input" path="/my/queue.jsp" redirect="false"/>
+		</action>
+		<action path="/my/project" type="com.jmonkey.xtracker.projectview.DisplayProjectAction" name="displayProjectForm" scope="request" input="/my/project.jsp">
+			<forward name="input" path="/my/project.jsp" redirect="false"/>
+		</action>
+		<action path="/admin/runtime" type="com.jmonkey.xtracker.admin.runtime.EditRuntimeAction" name="runtimeForm" input="/admin/runtime.jsp" scope="request">
+			<forward name="input" path="/admin/runtime.jsp" redirect="false"/>
+		</action>
+		<action path="/admin/saveRuntime" type="com.jmonkey.xtracker.admin.runtime.SaveRuntimeAction" name="runtimeForm" scope="request" input="/admin/runtime.jsp">
+			<forward name="input" path="/admin/runtime.jsp" redirect="false"/>
+			<forward name="home" path="/admin/index.jsp" redirect="true"/>
+		</action>
+		<action path="/my/saveDates" type="com.jmonkey.xtracker.my.tickets.SaveTicketDatesAction" name="ticketDatesForm" scope="request" input="/my/dates.jsp">
+			<forward name="input" path="/my/dates.jsp" redirect="false"/>
+		</action>
+		<action path="/my/dates" type="com.jmonkey.xtracker.my.tickets.EditTicketDatesAction" name="ticketDatesForm" scope="request" input="/my/dates.jsp">
+			<forward name="input" path="/my/dates.jsp" redirect="false"/>
+		</action>
+		<action path="/anon/tickets" type="com.jmonkey.xtracker.anon.tickets.DisplayAnonTicketsAction" name="anonTicketsForm" scope="request" input="/anon/index.jsp">
+			<forward name="input" redirect="false" path="/anon/index.jsp"/>
+		</action>
+		<action path="/auth/principalPath" type="com.jmonkey.xtracker.auth.ProfilePathSelectAction" name="profilePathSelectForm" scope="request" input="/index.jsp">
+			<forward name="anon" path="/anon/tickets.do" redirect="true"/>
+			<forward name="my" path="/my/tickets.do" redirect="true"/>
+		</action>
+		<action path="/anon/add" type="com.jmonkey.xtracker.anon.tickets.AddAnonTicketAction" name="addAnonTicketForm" scope="request" input="/anon/add.jsp">
+			<forward name="input" path="/anon/add.jsp" redirect="false"/>
+		</action>
+		<action path="/anon/open" type="com.jmonkey.xtracker.anon.tickets.OpenAnonTicketAction" name="openAnonTicketForm" scope="request" input="/anon/open.jsp">
+			<forward name="input" path="/anon/open.jsp" redirect="false"/>
+		</action>
+		<action path="/anon/saveTicket" type="com.jmonkey.xtracker.anon.tickets.SaveAnonTicketAction" name="addAnonTicketForm" scope="request" input="/anon/add.jsp">
+			<forward name="display" path="/anon/tickets.do" redirect="true"/>
+		</action>
+		<action path="/anon/comment" type="com.jmonkey.xtracker.anon.tickets.AddAnonTicketMessageAction" name="anonTicketMessageForm" input="/anon/comment.jsp" scope="request">
+			<forward name="input" path="/anon/comment.jsp" redirect="false"/>
+		</action>
+		<action path="/anon/reply" type="com.jmonkey.xtracker.anon.tickets.AddAnonTicketMessageAction" name="anonTicketMessageForm" input="/anon/reply.jsp" scope="request">
+			<forward name="input" path="/anon/reply.jsp" redirect="false"/>
+		</action>
+		<action path="/anon/saveComment" type="com.jmonkey.xtracker.anon.tickets.SaveAnonCommentTicketAction" name="anonTicketMessageForm" input="/anon/comment.jsp" scope="request"/>
+		<action path="/anon/saveReply" type="com.jmonkey.xtracker.anon.tickets.SaveAnonReplyTicketAction" name="anonTicketMessageForm" input="/anon/reply.jsp" scope="request"/>
+		<action path="/open" type="com.jmonkey.xtracker.auth.OpenTicketPathSelectAction" name="profilePathSelectForm" scope="request"/>
+		<action path="/init" type="com.jmonkey.xtracker.config.ConfigInitAction" name="configInitForm" input="/initialize.jsp" scope="request"/>
+		<action path="/simpleLogin" type="com.jmonkey.xtracker.auth.simple.SimpleAuthLoginAction" name="simpleAuthLoginForm" scope="request" input="/simplelogin.jsp"/>
+		<action path="/admin/toggle/dispositionActive" type="com.jmonkey.xtracker.admin.disposition.ToggleDispositionActiveStateAction" name="dispositionForm" input="/admin/disposition.jsp" scope="request">
+			<forward name="display" path="/admin/displayDisposition.do" redirect="true"/>
+		</action>
+		<action path="/admin/toggle/dispositionSelectable" type="com.jmonkey.xtracker.admin.disposition.ToggleDispositionSelectableStateAction" name="dispositionForm" input="/admin/disposition.jsp" scope="request">
+			<forward name="display" path="/admin/displayDisposition.do" redirect="true"/>
+		</action>
+		<action path="/admin/toggle/severityActive" type="com.jmonkey.xtracker.admin.severity.ToggleSeverityActiveStateAction" name="severityForm" input="/admin/severity.jsp" scope="request">
+			<forward name="display" path="/admin/displaySeverity.do" redirect="true"/>
+		</action>
+		<action path="/admin/toggle/severitySelectable" type="com.jmonkey.xtracker.admin.severity.ToggleSeveritySelectableStateAction" name="severityForm" input="/admin/severity.jsp" scope="request">
+			<forward name="display" path="/admin/displaySeverity.do" redirect="true"/>
+		</action>
+		<action path="/admin/toggle/statusActive" type="com.jmonkey.xtracker.admin.status.ToggleStatusActiveStateAction" name="statusForm" input="/admin/status.jsp" scope="request">
+			<forward name="display" path="/admin/displayStatus.do" redirect="true"/>
+		</action>
+		<action path="/admin/toggle/statusSelectable" type="com.jmonkey.xtracker.admin.status.ToggleStatusSelectableStateAction" name="statusForm" input="/admin/status.jsp" scope="request">
+			<forward name="display" path="/admin/displayStatus.do" redirect="true"/>
+		</action>
+		<action path="/admin/toggle/queueActive" type="com.jmonkey.xtracker.admin.queue.ToggleQueueActiveStateAction" name="queueForm" input="/admin/queue.jsp" scope="request">
+			<forward name="display" path="/admin/displayQueue.do" redirect="true"/>
+		</action>
+		<action path="/admin/toggle/queueSelectable" type="com.jmonkey.xtracker.admin.queue.ToggleQueueSelectableStateAction" name="queueForm" input="/admin/queue.jsp" scope="request">
+			<forward name="display" path="/admin/displayQueue.do" redirect="true"/>
+		</action>
+		<action path="/admin/toggle/projectActive" type="com.jmonkey.xtracker.admin.project.ToggleProjectActiveStateAction" name="projectForm" input="/admin/project.jsp" scope="request">
+			<forward name="display" path="/admin/displayProject.do" redirect="true"/>
+		</action>
+		<action path="/admin/toggle/projectSelectable" type="com.jmonkey.xtracker.admin.project.ToggleProjectSelectableStateAction" name="projectForm" input="/admin/project.jsp" scope="request">
+			<forward name="display" path="/admin/displayProject.do" redirect="true"/>
+		</action>
+		<action path="/admin/editQueue" type="com.jmonkey.xtracker.admin.queue.EditQueueAction" name="queueForm" scope="request" input="/admin/queue.jsp">
+			<forward name="display" path="/admin/displayQueue.do" redirect="true"/>
+			<forward name="input" path="/admin/queue.jsp" redirect="false"/>
+		</action>
+		<action path="/admin/editProject" type="com.jmonkey.xtracker.admin.project.EditProjectAction" name="projectForm" scope="request" input="/admin/project.jsp">
+			<forward name="display" path="/admin/displayProject.do" redirect="true"/>
+			<forward name="input" path="/admin/project.jsp" redirect="false"/>
+		</action>
+		<action path="/admin/editDisposition" type="com.jmonkey.xtracker.admin.disposition.EditDispositionAction" name="dispositionForm" scope="request" input="/admin/disposition.jsp">
+			<forward name="input" redirect="false" path="/admin/disposition.jsp"/>
+		</action>
+		<action path="/admin/editSeverity" type="com.jmonkey.xtracker.admin.severity.EditSeverityAction" name="severityForm" scope="request" input="/admin/severity.jsp">
+			<forward name="input" redirect="false" path="/admin/severity.jsp"/>
+		</action>
+		<action path="/admin/editStatus" type="com.jmonkey.xtracker.admin.status.EditStatusAction" name="statusForm" scope="request" input="/admin/status.jsp">
+			<forward name="input" redirect="false" path="/admin/status.jsp"/>
+		</action>
+		<action path="/redirLogin" type="com.jmonkey.xtracker.auth.simple.SimpleRedirectingAuthLoginAction" name="simpleAuthLoginForm" input="/simplelogin.jsp" scope="request"/>
+		<action path="/my/newSearch" type="com.jmonkey.xtracker.my.search.EditSearchAction" name="searchForm" input="/my/search.jsp" scope="request">
+			<forward name="input" path="/my/search.jsp" redirect="false"/>
+		</action>
+		<action path="/my/search" type="com.jmonkey.xtracker.my.search.RunSearchAction" name="searchForm" input="/my/search.jsp" scope="request">
+			<forward name="input" path="/my/search.jsp" redirect="false"/>
+		</action>
+		<action path="/report" type="com.jmonkey.xtracker.error.ReportErrorAction" name="reportErrorForm" scope="request" input="/errors/500.jsp" validate="false">
+			<forward name="input" path="/errors/500.jsp" redirect="false"/>
+		</action>
+		<action path="/error/collect" type="com.jmonkey.xtracker.error.CollectErrorAction" name="reportErrorForm" scope="request" input="/errors/500.jsp"/>
+		<action path="/my/editProfile" type="com.jmonkey.xtracker.my.profile.EditMyProfileAction" name="myProfileForm" scope="request" input="/my/profile.jsp"/>
+		<action path="/my/saveProfile" type="com.jmonkey.xtracker.my.profile.SaveMyProfileAction" name="myProfileForm" scope="request" input="/my/profile.jsp"/>
+		<action path="/anon/editProfile" type="com.jmonkey.xtracker.anon.profile.EditAnonProfileAction" name="anonProfileForm" scope="request" input="/anon/profile.jsp"/>
+		<action path="/anon/saveProfile" type="com.jmonkey.xtracker.anon.profile.SaveAnonProfileAction" name="anonProfileForm" scope="request" input="/anon/profile.jsp"/>
+		<action path="/my/editXplannerLink" type="com.jmonkey.xtracker.linking.xplanner.EditXPlannerLinkAction" name="xplannerLinkForm" input="/my/xplanner.jsp" scope="request"/>
+		<action path="/my/saveXplannerLink" type="com.jmonkey.xtracker.linking.xplanner.SaveXPlannerLinkAction" name="xplannerLinkForm" scope="request" input="/my/xplanner.jsp"/>
+		<action path="/my/editJiraLink" type="com.jmonkey.xtracker.linking.jira.EditJiraLinkAction" name="jiraLinkForm" scope="request" input="/my/jira.jsp"/>
+		<action path="/my/saveJiraLink" type="com.jmonkey.xtracker.linking.jira.SaveJiraLinkAction" name="jiraLinkForm" input="/my/jira.jsp" scope="request"/>
+		<action path="/my/mailReferences" type="com.jmonkey.xtracker.my.mailrefs.MailReferencesAction" name="mailReferencesForm" scope="request" input="/my/mailrefs.jsp"/>
+	</action-mappings>
+	<message-resources parameter="com.jmonkey.xtracker.Messages" null="true"/>
+</struts-config>

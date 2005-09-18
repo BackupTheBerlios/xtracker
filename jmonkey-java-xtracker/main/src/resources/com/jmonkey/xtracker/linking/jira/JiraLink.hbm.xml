@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+	<class name="com.jmonkey.xtracker.linking.jira.JiraLink" table="issue_link_jira">
+		<id name="id" column="id" type="java.lang.String">
+			<generator class="uuid.hex" />
+		</id>
+		<property name="key" column="oid" type="java.lang.String" not-null="true" access="property" unique="false" />
+		<property name="name" column="name" type="java.lang.String" not-null="true" access="property" unique="false" />
+		<property name="created" column="created_date" type="java.util.Date" not-null="true" access="property" />
+		<property name="updated" column="updated_date" type="java.util.Date" not-null="true" access="property" />
+		<many-to-one
+	        name="creator"
+	        column="creator_id"
+	        class="com.jmonkey.xtracker.profile.Person"
+	        cascade="none"
+    	    access="property" />
+	</class>
+
+</hibernate-mapping>

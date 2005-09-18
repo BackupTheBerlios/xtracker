@@ -1,0 +1,836 @@
+
+/************
+ *   link   *
+ ***********/
+
+A          {
+	color: Blue;
+}
+A:Visited  {
+	color: Blue;
+}
+A:Active   {
+	color: Red;
+}
+A:Hover    {
+	color: Blue;
+	text-decoration: none;
+}
+
+/*************
+ *   body    *
+ ************/
+
+BODY 	{
+	/*color      : #FFFFFF;
+	background-color      : #3366A3;*/
+	color: Black;
+	background-color: #FFFFFF;
+	margin-left: 0;
+	margin-top: 0;
+}
+
+
+/******************************
+ *    class used to display   *
+ *    the input field labels  *
+ *****************************/
+P.LABEL {
+	color: Black;
+	font-weight: bold;
+}
+TH.LABEL {
+		text-align:right;
+}
+
+
+H3 {
+	color: Black;
+}
+
+/*******************************************
+ * class for the title of the subscription *
+ ******************************************/
+P.SUBSCRIPTION {
+	color: Black;
+	font-family: arial;
+	font-weight: bold;
+	text-align: center;
+	font-size: 16px;
+}
+/********************************************************
+ * color of the thin line surrounding the subscriptions *
+ *******************************************************/
+TABLE.SUBSCRIPTION {
+	color: #000000;
+	background-color: #FFFFFF;
+}
+/*************************
+ * class for the headers *
+ ************************/
+TH.SUBSCRIPTION {
+		color      : #FFFFFF;
+		background-color : #274465;
+		font-weight: bold;			
+}
+/*******************************
+ * class for the subscriptions *
+ ******************************/
+TD.SUBSCRIPTION {
+		color      : #FFFFFF;
+		background-color : #336699;
+}
+
+
+P.SUBS {
+		  color : #336699;
+		  font-family: arial;
+		  font-weight : bold;
+		  text-align : center;
+		  font-size : 16px;
+}
+
+TABLE.SUBS {
+	color: White;
+	background-color: #274465;
+	border-collapse: collapse;
+}
+TABLE.subs2 {
+color: White;
+		background-color : #000000;
+}
+
+
+
+TH.SUBS {
+		color      : #FFFFFF;
+		background-color : #274465;
+		font-weight: bold;			
+		text-align : left;
+		font-size : 16px;
+		font-family: arial;
+}
+
+TR.SUBS {
+		background-color : #3366A3;
+}
+
+
+TD.SUBS {
+		color      : #FFFFFF;
+		background-color : #3366A3;
+}
+
+
+
+/*******************************
+ *  background color to use to *
+ *  display the errors         *
+ ******************************/
+TD.ERROR {
+		background-color : #ED4F50;
+}
+
+/***********************************************
+ * color of the thin line surrounding the form *
+ **********************************************/
+TABLE.FORM {		
+color      : #FFFFFF;
+		background-color : #000000;
+}
+/**************************************
+ * background color of the form title *
+ *************************************/
+TH.FORM {
+		color      : #FFFFFF;
+		background-color : #274465;
+		font-weight: bold;			
+}
+/********************************
+ * background color of the form *
+ *******************************/
+TD.FORM {
+		background-color :  #336699;
+}
+
+/*
+ * Style for the fixed header collection example.
+ */
+TABLE.COL {
+color      : #FFFFFF;
+	cell-spacing: 2px;
+	background-color : #000000;
+}
+TH.COL {
+	color      : #FFFFFF;
+	background-color : #274465;
+	font-weight: bold;
+	padding : 2px;
+}
+TD.COL {
+	background-color :  #336699;
+}
+
+TD.PAGER {
+	background-color :  #3366A3;
+	text-align: center;
+}
+
+.actionBar {
+	BORDER-RIGHT: #80add6 2px solid; 
+	BORDER-TOP: medium none; 
+	BORDER-LEFT: #80add6 2px solid; 
+	BORDER-BOTTOM: #80add6 2px solid; 
+	BACKGROUND-COLOR: #dce8f4;
+}
+
+.ongletMain {
+	BORDER-RIGHT: #80add6 2px solid; 
+	BORDER-TOP: medium none; 
+	BORDER-LEFT: #80add6 2px solid; 
+	BORDER-BOTTOM: #80add6 2px solid; 
+	BACKGROUND-COLOR: #dce8f4;
+}
+
+.clsAction {
+	FONT-WEIGHT: bold; 
+	FONT-SIZE: 10px; 
+	COLOR: #053c6d; 
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+}
+
+
+.ongletTextEna {
+	BORDER-RIGHT: #80add6 2px solid; 
+	BORDER-TOP: #80add6 2px solid; 
+	FONT-WEIGHT: bold; 
+	FONT-SIZE: 10px; 
+	BORDER-LEFT: #80add6 2px solid; 
+	COLOR: #005386; 
+	BORDER-BOTTOM: medium none; 
+	FONT-FAMILY: verdana; 
+	BACKGROUND-COLOR: #dce8f4; 
+	TEXT-ALIGN: center;
+}
+
+.ongletTextDis {
+	BORDER-RIGHT: #c5c5c5 1px solid; 
+	BORDER-TOP: #c5c5c5 1px solid; 
+	FONT-WEIGHT: bold; 
+	FONT-SIZE: 10px; 
+	BORDER-LEFT: #c5c5c5 1px solid; 
+	COLOR: #80add6; 
+	BORDER-BOTTOM: #80add6 2px solid; 
+	FONT-FAMILY: verdana; 
+	BACKGROUND-COLOR: #e6e6e6; 
+	TEXT-ALIGN: center;
+}
+
+.ongletTextErr {
+	BORDER-RIGHT: #c5c5c5 1px solid; 
+	BORDER-TOP: #c5c5c5 1px solid; 
+	FONT-WEIGHT: bold; 
+	FONT-SIZE: 10px; 
+	BORDER-LEFT: #c5c5c5 1px solid; 
+	COLOR: #FFFFFF; 
+	BORDER-BOTTOM: #80add6 2px solid; 
+	FONT-FAMILY: verdana; 
+	BACKGROUND-COLOR: #ED4F50;
+	TEXT-ALIGN: center;
+}
+
+.ongletMiddle {
+	BORDER-RIGHT: #80add6 2px solid; 
+	BORDER-TOP: medium none; 
+	FONT-SIZE: 1px; 
+	BORDER-LEFT: #80add6 2px solid; 
+	BORDER-BOTTOM: medium none; 
+	BACKGROUND-COLOR: #dce8f4;
+}
+
+.ongletSpace {
+	BORDER-BOTTOM: #80add6 2px solid;
+}
+
+/**
+ * Calendar classes
+ */
+
+TD.CALENDRIER {
+	background-color: #C2C2C2; 
+	font-weight: bold; 
+	text-align: center; 
+	font-size: 10px;
+}
+
+A.CALENDRIER {
+	text-decoration: none; 
+	color: #000000;
+}
+
+.CALENDARBORDER {
+color      : #FFFFFF;
+	background-color: #000000; 
+}
+
+.CALENDARTITLE {
+	background-color: #336699; //#C9252C;
+}
+
+.CALENDARWEEK {
+	background-color: #FFFFFF;
+}
+
+.CALENDARWEEKEND {
+	background-color: #FFF4E5;
+}
+
+.CALENDARSELECTED {
+	background-color: #FF8F01;
+}
+
+
+
+
+
+/*/------------------------------------------------------------------\*/
+/*|                                                                  |*/
+/*|                      SUGGEST                    				 |*/
+/*|                                                                  |*/
+/*\------------------------------------------------------------------/*/
+
+
+
+div.suggestionList {
+	z-index:500;
+	position:absolute;
+	width:150px; 
+	border:1px solid #333333; 
+	background-color:#ffffff; 
+	font-family:Tahoma; 
+	font-size:11px; 
+	cursor:default; 
+	visibility:hidden;
+}
+div.suggestionList_element_off {
+	width: 148px;
+	background: #ffffff;
+	color: #333333;
+	padding-left: 2px;
+}
+div.suggestionList_element_on {
+	width: 148px;
+	background: #6D99C6;
+	color: #ffffff;
+	padding-left: 2px;
+}
+
+/* ======================= */
+.boxred {
+	padding: 0px; /*width: 100%;*/
+	background-color: #FFF5EE;
+}
+
+.boxred td {
+	padding-left: 2px;
+}
+
+.boxred th {
+	padding-left: 2px;
+	background-color: #BC8F8F;
+	border-top: 1px solid #999999;
+	border-bottom: 1px solid #999999;
+	color: #777E82;
+	text-align: left;
+}
+
+.boxred th a {
+	text-decoration: none;
+}
+
+.boxred th a:hover {
+	text-decoration: none;
+}
+
+.boxred .active {
+	background-color: #7B9CAE;
+	color: #FFFFFF;
+}
+
+.boxred .active a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.boxred .active a:hover {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.boxblue {
+	padding: 0px; /*width: 100%;*/
+	background-color: #F0F8FF;
+}
+
+.boxblue td {
+	padding-left: 2px;
+}
+
+.boxblue th {
+	padding-left: 2px;
+	background-color: #C4D3DB;
+	border-top: 1px solid #999999;
+	border-bottom: 1px solid #999999;
+	color: #777E82;
+	text-align: left;
+}
+
+.boxblue th a {
+	text-decoration: none;
+}
+
+.boxblue th a:hover {
+	text-decoration: none;
+}
+
+.boxblue .active {
+	background-color: #7B9CAE;
+	color: #FFFFFF;
+}
+
+.boxblue .active a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.boxblue .active a:hover {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.boxgreen {
+	padding: 0px; /*width: 100%;*/
+	background-color: #F5FFFA;
+}
+
+.boxgreen td {
+	padding-left: 2px;
+}
+
+.boxgreen th {
+	padding-left: 2px;
+	background-color: #8FBC8F;
+	border-top: 1px solid #999999;
+	border-bottom: 1px solid #999999;
+	color: #777E82;
+	text-align: left;
+}
+
+.boxgreen th a {
+	text-decoration: none;
+}
+
+.boxgreen th a:hover {
+	text-decoration: none;
+}
+
+.boxgreen .active {
+	background-color: #7B9CAE;
+	color: #FFFFFF;
+}
+
+.boxgreen .active a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.boxgreen .active a:hover {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.boxpurple {
+	padding: 0px; /*width: 100%;*/
+	background-color: #E6E6FA;
+}
+
+.boxpurple td {
+	padding-left: 2px;
+}
+
+.boxpurple th {
+	padding-left: 2px;
+	background-color: #D8BFD8;
+	border-top: 1px solid #999999;
+	border-bottom: 1px solid #999999;
+	color: #777E82;
+	text-align: left;
+}
+
+.boxpurple th a {
+	text-decoration: none;
+}
+
+.boxpurple th a:hover {
+	text-decoration: none;
+}
+
+.boxpurple .active {
+	background-color: #7B9CAE;
+	color: #FFFFFF;
+}
+
+.boxpurple .active a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.boxpurple .active a:hover {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.boxyello {
+	padding: 0px; /*width: 100%;*/
+	background-color: #FFFFE0;
+}
+
+.boxyello td {
+	padding-left: 2px;
+}
+
+.boxyello th {
+	padding-left: 2px;
+	background-color: #EEE8AA;
+	border-top: 1px solid #999999;
+	border-bottom: 1px solid #999999;
+	color: #777E82;
+	text-align: left;
+}
+
+.boxyello th a {
+	text-decoration: none;
+}
+
+.boxyello th a:hover {
+	text-decoration: none;
+}
+
+.boxyello .active {
+	background-color: #7B9CAE;
+	color: #FFFFFF;
+}
+
+.boxyello .active a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.boxyello .active a:hover {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+=========
+.boxorange {
+	padding: 0px; /*width: 100%;*/
+	background-color: #FFEBCD;
+}
+
+.boxorange td {
+	padding-left: 2px;
+}
+
+.boxorange th {
+	padding-left: 2px;
+	background-color: #F4A460;
+	border-top: 1px solid #999999;
+	border-bottom: 1px solid #999999;
+	color: #777E82;
+	text-align: left;
+}
+
+.boxorange th a {
+	text-decoration: none;
+}
+
+.boxorange th a:hover {
+	text-decoration: none;
+}
+
+.boxorange .active {
+	background-color: #7B9CAE;
+	color: #FFFFFF;
+}
+
+.boxorange .active a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.boxorange .active a:hover {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+==========
+
+.boxhistory {
+	padding: 0px 1px;
+	border-top: 1px solid #999999;
+	border-bottom: 1px solid #999999;
+	padding-top: 2px;
+}
+
+.boxhistory td {
+	padding-left: 2px;
+	background-color: #FFFFF0;
+	color: Black;
+}
+
+.boxhistory th {
+	padding-left: 2px;
+	background-color: #F5F5DC;
+	color: Black;
+	text-align: left;
+	border-bottom: 1px solid #999999;
+	font-weight: normal;
+}
+
+.boxhistory th a {
+	text-decoration: none;
+}
+
+.boxhistory th a:hover {
+	text-decoration: none;
+}
+
+.boxhistory .active {
+	background-color: #7B9CAE;
+	color: #FFFFFF;
+}
+
+.boxhistory .active a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.boxhistory .active a:hover {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.boxclear {
+	padding: 0px; /*width: 100%;*/	
+}
+
+.boxclear td {
+	padding-left: 2px;
+}
+
+.boxclear th {
+	padding-left: 2px;
+	background-color: transparent;
+	border-top: 1px solid #999999;
+	border-bottom: 1px solid #999999;
+	color: #777E82;
+	text-align: left;
+}
+
+.boxclear th a {
+	text-decoration: none;
+}
+
+.boxclear th a:hover {
+	text-decoration: none;
+}
+
+.boxclear .active {
+	background-color: #7B9CAE;
+	color: #FFFFFF;
+}
+
+.boxclear .active a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.boxclear .active a:hover {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.ticketlist {
+	padding: 0px; /*width: 100%;*/	
+}
+
+.ticketlist td {
+	padding-left: 2px;
+}
+
+.ticketlist th {
+	padding-left: 2px;
+	background-color: transparent;
+	border-top: 1px solid #999999;
+	border-bottom: 1px solid #999999;
+	color: #777E82;
+	text-align: left;
+}
+
+.ticketlist th a {
+	text-decoration: none;
+}
+
+.ticketlist th a:hover {
+	text-decoration: none;
+}
+
+.ticketlist .active {
+	background-color: #7B9CAE;
+	color: #FFFFFF;
+}
+
+.ticketlist .active a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.ticketlist .active a:hover {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.contentheader {
+	padding-left: 2px;
+	background-color: transparent;
+	border-top: 1px solid #999999;
+	border-bottom: 1px solid #999999;
+	color: #777E82;
+	text-align: left;
+	font-size: larger;
+}
+
+.menubar {
+	background-color: transparent;
+}
+.menubar th {
+	padding-left: 2px;
+	background-color: #C4D3DB;
+	border-top: 1px solid #999999;
+	border-bottom: 1px solid #999999;
+	color: #777E82;
+	text-align: left;
+}
+.menubar td {
+	padding-left: 2px;
+	background-color: #C4D3DB;
+	border-top: 1px solid #999999;
+	border-bottom: 1px solid #999999;
+	color: #777E82;
+	text-align: right;
+}
+
+.row0{
+	background-color: #F0F8FF;
+}
+.row1{
+	background-color: transparent;
+}
+
+.buttonBox {
+	background-color: #B0C4DE;
+	border: 1px solid Black;
+	padding: 0 2 0 2;
+}
+
+.boxfooter {
+	padding: 0px; /*width: 100%;*/
+	background-color: #DCDCDC;
+	color: #777E82;
+	font-size: 10px;
+}
+
+.boxfooter td {
+	padding-left: 2px;
+	color: #777E82;
+		font-size: 10px;
+}
+
+.boxfooter th {
+	padding-left: 2px;
+	background-color: transparent;
+	border-top: 1px solid #999999;
+	border-bottom: 1px solid #999999;
+	color: #777E82;
+	text-align: left;
+		font-size: 10px;
+}
+
+.boxfooter th a {
+	text-decoration: none;
+	color: #5F9EA0;
+}
+
+.boxfooter th a:hover {
+	text-decoration: none;
+}
+
+.boxfooter .active {
+	background-color: #7B9CAE;
+	color: #FFFFFF;
+}
+
+.boxfooter .active a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+.boxfooter .active a:hover {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+div#ticketsOwnedBlock {
+	margin: 0px 20px 0px 20px;
+	display: none;
+}
+
+div#ticketsWatchingBlock {
+	margin: 0px 20px 0px 20px;
+	display: none;
+}
+
+div#ticketsRequestedBlock {
+	margin: 0px 20px 0px 20px;
+	display: none;
+}
+
+div#ticketsInQueueBlock {
+	margin: 0px 20px 0px 20px;
+	display: none;
+}
+
+.uiInfo_panel {
+      border: solid 1px blue;
+      padding: 5px 8px 5px 8px;
+      background-color: #ffffe1;
+      width: 200px;
+      height: 30px;
+}
+
+.uiInfo_panel_custom {
+      border: solid 1px blue;
+      padding: 5px 8px 5px 8px;
+      background-color: #ffffe1;
+      width: 300px;
+      height: 80px;
+    }
+
+.yellobackgroup{
+	background-color: #EEE8AA;
+}
+.redbackgroup{
+	background-color: #E9967A;
+}
+.greenbackgroup{
+	background-color: #98FB98;
+}

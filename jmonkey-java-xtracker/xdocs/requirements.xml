@@ -1,0 +1,21 @@
+<document>
+  <properties>
+    <author email="brill@pappin.ca">Brill Pappin</author>
+    <title>Requirements</title>
+  </properties>
+  <head>
+  </head>
+  <body>
+    <section name="System Requirements">
+      <subsection name="Java Version">
+        <p>Java 1.5 is <b>required</b> to run XTraxker. Language syntax new to JDK 1.5 has been used in the development and it will not run on an earlier version of java.</p>
+      </subsection>
+      <subsection name="Database Version">
+        <p>XTracker has been tested with HypersonicDB, MySQL 4+ and 5b but should work well with any database supported by Hibernate.</p>
+      </subsection>
+      <subsection name="Servlet Server Version">
+        <p>XTracker was developed on Tomcat 5.x but should just fine on any servlet container that supports the standards.</p>
+      </subsection>
+    </section>
+  </body>
+ </document>

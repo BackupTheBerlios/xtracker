@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 2.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-configuration-2.0.dtd">
+
+<!-- DO NOT EDIT: This is a generated file that is synchronized -->
+<!-- by MyEclipse Hibernate tool integration.                   -->
+<hibernate-configuration>
+
+    <session-factory>
+        <!-- properties -->
+        <property name="connection.username">sa</property>
+        <property name="connection.url">jdbc:hsqldb:mem:scrum</property>
+        <property name="hibernate.dialect">net.sf.hibernate.dialect.HSQLDialect</property>
+        <property name="connection.password"></property>
+        <property name="connection.driver_class">org.hsqldb.jdbcDriver</property>
+        <property name="hibernate.connection.pool_size">1</property>
+        <property name="hibernate.transaction.factory_class">net.sf.hibernate.transaction.JDBCTransactionFactory</property>
+        <!--  property name="hibernate.transaction.factory_class">net.sf.hibernate.transaction.JTATransactionFactory</property -->
+        <property name="hibernate.query.substitutions">true=1, false=0, yes=1, no=0</property>
+        <property name="hibernate.show_sql">false</property>
+        <property name="hibernate.hbm2ddl.auto">create-drop</property>
+        <property name="hibernate.cache.provider_class">net.sf.hibernate.cache.HashtableCacheProvider</property>
+		<!--  property name="hibernate.c3p0.min_size">5</property>
+		<property name="hibernate.c3p0.max_size">20</property>
+		<property name="hibernate.c3p0.timeout">1800</property>
+		<property name="hibernate.c3p0.max_statements">50</property -->
+		
+		<mapping resource="com/jmonkey/xtracker/profile/Person.hbm.xml"/>
+		<mapping resource="com/jmonkey/xtracker/profile/PersonRole.hbm.xml"/>
+		
+		<mapping resource="com/jmonkey/xtracker/issue/Queue.hbm.xml"/>
+		<mapping resource="com/jmonkey/xtracker/issue/Severity.hbm.xml"/>
+		<mapping resource="com/jmonkey/xtracker/issue/Status.hbm.xml"/>
+		<mapping resource="com/jmonkey/xtracker/issue/Ticket.hbm.xml"/>
+		<mapping resource="com/jmonkey/xtracker/issue/History.hbm.xml"/>
+		<mapping resource="com/jmonkey/xtracker/issue/Project.hbm.xml"/>
+		<mapping resource="com/jmonkey/xtracker/issue/Disposition.hbm.xml"/>
+		<mapping resource="com/jmonkey/xtracker/issue/MailReference.hbm.xml"/>
+		
+		<mapping resource="com/jmonkey/xtracker/linking/xplanner/XPlannerLink.hbm.xml"/>
+		<mapping resource="com/jmonkey/xtracker/linking/jira/JiraLink.hbm.xml"/>
+    </session-factory>
+
+</hibernate-configuration>

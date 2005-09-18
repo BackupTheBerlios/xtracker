@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<hibernate-mapping>
+	<class name="com.jmonkey.xtracker.issue.Ticket" table="issue_ticket">
+		<id name="id" column="id" type="long" unsaved-value="0">
+			<!--  should maybe use a native generator here -->
+			<generator class="native"/>
+		</id>
+		<property name="subject" column="subject" type="java.lang.String" not-null="true" access="property"/>
+		<property name="priority" column="priority" type="java.lang.Integer" not-null="true" access="property"/>
+		<property name="worked" column="worked" type="java.lang.Double" not-null="false" access="property"/>
+		<property name="createDate" column="create_date" type="java.util.Date" not-null="true" access="property"/>
+		<property name="modifyDate" column="modify_date" type="java.util.Date" not-null="true" access="property"/>
+		<property name="closedDate" column="closed_date" type="java.util.Date" not-null="false" access="property"/>
+		<property name="dueDate" column="due_date" type="java.util.Date" not-null="false" access="property"/>
+		
+		<many-to-one
+	        name="queue"
+	        column="queue_id"
+	        class="com.jmonkey.xtracker.issue.Queue"
+	        cascade="none"
+    	    access="property" />
+		<many-to-one
+	        name="status"
+	        column="status_id"
+	        class="com.jmonkey.xtracker.issue.Status"
+	        cascade="none"
+    	    access="property" />
+		<many-to-one
+	        name="severity"
+	        column="severity_id"
+	        class="com.jmonkey.xtracker.issue.Severity"
+	        cascade="none"
+    	    access="property" />
+    	<many-to-one
+	        name="disposition"
+	        column="disposition_id"
+	        class="com.jmonkey.xtracker.issue.Disposition"
+	        cascade="none"
+    	    access="property" />
+		<many-to-one
+	        name="requestor"
+	        column="requestor_id"
+	        class="com.jmonkey.xtracker.profile.Person"
+	        cascade="none"
+    	    access="property" />
+    	<many-to-one
+	        name="project"
+	        column="project_id"
+	        class="com.jmonkey.xtracker.issue.Project"
+	        cascade="none"
+    	    access="property" />
+    	<list name="history" table="issue_ticket_history" cascade="all">
+    		<key column="ticket_id" />
+    		<index column="idx" />
+    		<many-to-many column="id" class="com.jmonkey.xtracker.issue.History" />
+		</list>
+    	<list name="owners" table="issue_ticket_owners" cascade="all">
+    		<key column="ticket_id" />
+    		<index column="idx" />
+    		<many-to-many column="id" class="com.jmonkey.xtracker.profile.Person" />
+		</list>
+		<list name="watchers" table="issue_ticket_watchers" cascade="all">
+    		<key column="ticket_id" />
+    		<index column="idx" />
+    		<many-to-many column="id" class="com.jmonkey.xtracker.profile.Person" />
+		</list>
+		
+		<!-- list name="relationships" table="issue_ticket_relationship" cascade="all">
+    		<key column="ticket_id" />
+    		<index column="idx" />
+    		<many-to-many column="id" class="com.jmonkey.xtracker.issue.Relationship" />
+		</list -->
+		
+		<list name="dependsOn" table="issue_ticket_dependson" cascade="all">
+    		<key column="ticket_id" />
+    		<index column="idx" />
+    		<many-to-many column="related_ticket_id" class="com.jmonkey.xtracker.issue.Ticket" />
+		</list>
+		<list name="dependedOnBy" table="issue_ticket_dependedonby" cascade="all">
+    		<key column="ticket_id" />
+    		<index column="idx" />
+    		<many-to-many column="related_ticket_id" class="com.jmonkey.xtracker.issue.Ticket" />
+		</list>
+		
+		<list name="parents" table="issue_ticket_parents" cascade="all">
+    		<key column="ticket_id" />
+    		<index column="idx" />
+    		<many-to-many column="related_ticket_id" class="com.jmonkey.xtracker.issue.Ticket" />
+		</list>
+		<list name="children" table="issue_ticket_children" cascade="all">
+    		<key column="ticket_id" />
+    		<index column="idx" />
+    		<many-to-many column="related_ticket_id" class="com.jmonkey.xtracker.issue.Ticket" />
+		</list>
+		
+		<list name="refersTo" table="issue_ticket_refersto" cascade="all">
+    		<key column="ticket_id" />
+    		<index column="idx" />
+    		<many-to-many column="related_ticket_id" class="com.jmonkey.xtracker.issue.Ticket" />
+		</list>
+		<list name="referredToBy" table="issue_ticket_referredtoby" cascade="all">
+    		<key column="ticket_id" />
+    		<index column="idx" />
+    		<many-to-many column="related_ticket_id" class="com.jmonkey.xtracker.issue.Ticket" />
+		</list>
+		<many-to-one
+	        name="xplannerLink"
+	        column="xplanner_link_id"
+	        class="com.jmonkey.xtracker.linking.xplanner.XPlannerLink"
+	        cascade="all"
+    	    access="property" />
+    	    
+    	<many-to-one
+	        name="jiraLink"
+	        column="jira_link_id"
+	        class="com.jmonkey.xtracker.linking.jira.JiraLink"
+	        cascade="all"
+    	    access="property" />
+	</class>
+
+</hibernate-mapping>

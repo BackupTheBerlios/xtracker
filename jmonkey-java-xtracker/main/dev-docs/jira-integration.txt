@@ -1,0 +1,6 @@
+JIRA Integration
+http://confluence.atlassian.com/pages/viewpage.action;jsessionid=AOJFELAAIOEP?pageId=12859
+WSDL in standard install:
+http://jira.codehaus.org/rpc/soap/jirasoapservice-v2?wsdl
+
+

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<!-- DO NOT EDIT: This is a generated file that is synchronized -->
+<!-- by MyEclipse Hibernate tool integration.                   -->
+<!-- Created Wed Oct 06 22:57:08 EDT 2004                         -->
+<hibernate-mapping>
+	<class name="com.jmonkey.xtracker.issue.History" table="issue_history">
+		<id name="id" column="id" type="java.lang.String">
+			<generator class="uuid.hex" />
+		</id>
+		
+		<property name="importance" column="importance" type="java.lang.Integer" not-null="true" access="property"/>
+		<property name="encoding" column="encoding" type="java.lang.String" not-null="true" access="property"/>
+		<property name="subject" column="subject" type="java.lang.String" not-null="true" access="property"/>
+		<property name="content" column="content" type="text" not-null="false" access="property"/>
+		<property name="createDate" column="create_date" type="java.util.Date" not-null="true" access="property"/>
+		<many-to-one name="author" column="author_id" class="com.jmonkey.xtracker.profile.Person" cascade="none" access="property" />
+		<property name="system" column="system" type="java.lang.Boolean" not-null="true" access="property"/>
+		<property name="messageId" column="message_id" type="java.lang.String" not-null="false" access="property"/>
+		<list name="messageReferences" table="issue_history_messageref" cascade="all">
+    		<key column="history_id" />
+    		<index column="idx" />
+    		<many-to-many column="id" class="com.jmonkey.xtracker.issue.MailReference" />
+		</list>
+	</class>
+
+</hibernate-mapping>

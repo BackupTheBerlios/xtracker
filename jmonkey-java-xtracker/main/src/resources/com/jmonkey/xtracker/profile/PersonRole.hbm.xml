@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<!-- DO NOT EDIT: This is a generated file that is synchronized -->
+<!-- by MyEclipse Hibernate tool integration.                   -->
+<!-- Created Wed Oct 06 22:57:08 EDT 2004                         -->
+<hibernate-mapping>
+	<class name="com.jmonkey.xtracker.profile.PersonRole" table="profile_roles">
+		<id name="id" column="id" type="java.lang.String">
+			<generator class="uuid.hex" />
+		</id>
+
+		<property name="name" column="rolename" type="java.lang.String" not-null="true" access="property" unique="true"/>
+		<property name="description" column="description" type="java.lang.String" not-null="true" access="property"/>
+	</class>
+</hibernate-mapping>

@@ -2,9 +2,19 @@
 <project>
     <pomVersion>3</pomVersion>
     <groupId>xtracker</groupId>
-    <issueTrackingUrl>http://dev.pappin.ca/xtracker</issueTrackingUrl>
-    <siteDirectory>/home/brill/jmonkey/xtracker</siteDirectory>
+    <artifactId>xtracker</artifactId>
+    <name>XTracker (from jmonkey.com)</name>
+    <currentVersion>1.0.0.ALPHA.2</currentVersion>
+    <issueTrackingUrl>http://developer.berlios.de/bugs/?group_id=4751</issueTrackingUrl>
+    <distributionSite>http://download.berlios.de/xtracker</distributionSite>
+    <siteAddress>shell.berlios.de</siteAddress>
+    <siteDirectory>/home/groups/xtracker/htdocs</siteDirectory>
     <distributionDirectory>/home/brill/jmonkey/xtracker/dist</distributionDirectory>
+    <repository>
+        <connection>scm:cvs:pserver:anonymous@cvs.berlios.de:/cvsroot/xtracker:jmonkey-java-xtracker</connection>
+        <url>http://cvs.berlios.de/cgi-bin/viewcvs.cgi/xtracker/jmonkey-java-xtracker/</url>
+    </repository>
+    <issueTrackingUrl>http://developer.berlios.de/bugs/?group_id=4751</issueTrackingUrl>
     <versions>
         <version>
             <id>1.0.0.ALPHA.1</id>
@@ -12,9 +22,6 @@
             <tag>1_0_0_ALPHA_1-2005-08-21</tag>
         </version>
     </versions>
-    <artifactId>xtracker</artifactId>
-    <name>XTracker (from jmonkey.com)</name>
-    <currentVersion>1.0.0.ALPHA.1</currentVersion>
     <inceptionYear>2005</inceptionYear>
     <package>com.jmonkey.xtracker</package>
     <description>XTracker manages request tickets</description>
@@ -25,12 +32,6 @@
     </organization>
     <logo>http://www.jmonkey.com/logos/xtracker.gif</logo>
     <url>http://www.jmonkey.com/xtracker</url>
-    <siteAddress>www.jmonkey.com</siteAddress>
-    <distributionSite>http://www.jmonkey.com/maven/xtracker/wars</distributionSite>
-    <!-- repository>
-        <connection>scm:cvs:ext:brill@192.168.0.8:/global/cvsroot/jmonkey:jmonkey-java-xtracker</connection>
-        <developerConnection>scm:cvs:ext:brill@192.168.0.8:/global/cvsroot/jmonkey:jmonkey-java-xtracker</developerConnection>
-    </repository -->
     <mailingLists>
         <mailingList>
             <name>XTracker Signup</name>
@@ -40,11 +41,14 @@
     <developers>
         <developer>
             <name>Brill Pappin</name>
-            <id>1</id>
+            <id>brill</id>
             <email>brill@pappin.ca</email>
             <organization>jmonkey.com</organization>
-            <url>brill.pappin.ca</url>
-            <timezone>EST</timezone>
+            <roles>
+                <role>Creator</role>
+                <role>Java Developer</role>
+                <role>Release Manager</role>
+            </roles>
         </developer>
     </developers>
     <!-- jar files the project is dependent on -->
@@ -117,6 +121,7 @@
             <groupId>uitags</groupId>
             <artifactId>uitags-main</artifactId>
             <version>0.6.4</version>
+            <jar>C:\workspace\jmonkey-java-xtracker/main/libs/uitags-main-0.6.4.jar</jar>
             <type>jar</type>
             <properties>
                 <cactus.bundle>true</cactus.bundle>
@@ -157,6 +162,7 @@
             <groupId>ajaxtags</groupId>
             <artifactId>ajaxtags</artifactId>
             <version>1.0.1</version>
+            <jar>C:\workspace\jmonkey-java-xtracker/main/libs/ajaxtags-1.0.1.jar</jar>
             <type>jar</type>
             <properties>
                 <cactus.bundle>true</cactus.bundle>
@@ -246,6 +252,7 @@
             <groupId>oracle</groupId>
             <artifactId>ojdbc</artifactId>
             <version>14</version>
+            <jar>C:\workspace\jmonkey-java-xtracker/main/libs/ojdbc-14.jar</jar>
             <type>jar</type>
             <properties>
                 <war.bundle>true</war.bundle>
@@ -574,6 +581,7 @@
             <groupId>java</groupId>
             <artifactId>jaxrpc-api</artifactId>
             <version>1.6</version>
+            <jar>C:\workspace\jmonkey-java-xtracker/main/libs/jaxrpc-api-1.6.jar</jar>
             <type>jar</type>
             <properties>
                 <war.bundle>true</war.bundle>
@@ -583,6 +591,7 @@
             <groupId>java</groupId>
             <artifactId>jaxrpc-impl</artifactId>
             <version>1.6</version>
+            <jar>C:\workspace\jmonkey-java-xtracker/main/libs/jaxrpc-impl-1.6.jar</jar>
             <type>jar</type>
             <properties>
                 <war.bundle>true</war.bundle>
@@ -592,6 +601,7 @@
             <groupId>java</groupId>
             <artifactId>jaxrpc-spi</artifactId>
             <version>1.6</version>
+            <jar>C:\workspace\jmonkey-java-xtracker/main/libs/jaxrpc-spi-1.6.jar</jar>
             <type>jar</type>
             <properties>
                 <war.bundle>true</war.bundle>
@@ -601,6 +611,7 @@
             <groupId>java</groupId>
             <artifactId>saaj-api</artifactId>
             <version>1.6</version>
+            <jar>C:\workspace\jmonkey-java-xtracker/main/libs/saaj-api-1.6.jar</jar>
             <type>jar</type>
             <properties>
                 <war.bundle>true</war.bundle>
@@ -610,6 +621,7 @@
             <groupId>java</groupId>
             <artifactId>saaj-impl</artifactId>
             <version>1.6</version>
+            <jar>C:\workspace\jmonkey-java-xtracker/main/libs/saaj-impl-1.6.jar</jar>
             <type>jar</type>
             <properties>
                 <war.bundle>true</war.bundle>

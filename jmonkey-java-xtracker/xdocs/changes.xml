@@ -14,6 +14,12 @@
         <action dev="brill" type="fix">
         	Fixed footer link to point at BerliOS project and updated version string.
         </action>
+        <action dev="brill" type="add">
+        	Added screenshots to main site.
+        </action>
+        <action dev="brill" type="add">
+        	Added link back to development site.
+        </action>
         
 		<!-- action dev="brill" type="fix" issue="CACTUS-197">
  			Added support for <code>ear.bundle.name</code> and <code>ear.bundle.dir</code> properties.

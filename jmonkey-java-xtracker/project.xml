@@ -29,7 +29,7 @@
     </versions>
     <inceptionYear>2005</inceptionYear>
     <package>com.jmonkey.xtracker</package>
-    <description>XTracker manages request tickets</description>
+    <description>A request tracking system that can be used though email and allows linking of tickets to exteranl applications such as XPlanner stories.</description>
     <shortDescription>XTracker manages request tickets</shortDescription>
     <organization>
         <name>jmonkey.com</name>

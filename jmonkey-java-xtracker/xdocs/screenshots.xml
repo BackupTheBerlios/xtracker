@@ -1,0 +1,21 @@
+<document>
+  <properties>
+    <author email="brill@pappin.ca">Brill Pappin</author>
+    <title>Screenshots</title>
+  </properties>
+  <head>
+  </head>
+  <body>
+  	<section name="User Screenshots">
+	  	<img src="screenshots/my-xtracker.gif" alt="My XTracker view" border="0"/>
+    	<img src="screenshots/search-page.gif" alt="Search Page" border="0"/>
+    	<img src="screenshots/ticket-page.gif" alt="Ticket View" border="0"/>
+  	</section>
+    <section name="Admin Screenshots">
+    	<img src="screenshots/admin-general.gif" alt="Admin - General" border="0"/>
+    	<img src="screenshots/admin-queues.gif" alt="Admin - Edit Queues" border="0"/>
+    	<img src="screenshots/admin-status.gif" alt="Admin - Edit Status" border="0"/>
+    	<img src="screenshots/admin-people.gif" alt="Edit Users" border="0"/>
+    </section>
+  </body>
+ </document>

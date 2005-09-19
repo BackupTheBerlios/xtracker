@@ -14,9 +14,13 @@
     </links>
 	<menu name="Overview">
       <item href="/news.html" name="News"/>
+      <item href="/screenshots.html" name="Screenshots"/>
       <item href="/requirements.html" name="Requirements"/>
       <item href="/install.html" name="Installation"/>
-      <!-- item href="/downloads.html" name="Downloads"/ -->
+      <item href="http://developer.berlios.de/projects/xtracker/" name="Development"/>
+      <item href="http://developer.berlios.de/bugs/?group_id=4751" name="Bug Report"/>
+      <item href="http://developer.berlios.de/feature/?group_id=4751" name="Feature Request"/>      
+      <item href="http://openfacts.berlios.de/index-en.phtml?title=XTracker" name="Xtracker Wiki"/>
     </menu>
   </body>
 </project>

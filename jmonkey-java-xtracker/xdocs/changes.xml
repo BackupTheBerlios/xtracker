@@ -8,6 +8,10 @@
 		<action dev="brill" type="add" issue="5105">
         	Streamlined release publishing for development effort.
         </action>
+        <action dev="brill" type="fix">
+        	Fixed POM url element to point at <code>http://xtracker.berlios.de</code>.
+        </action>
+        
 		<!-- action dev="brill" type="fix" issue="CACTUS-197">
  			Added support for <code>ear.bundle.name</code> and <code>ear.bundle.dir</code> properties.
 		</action -->

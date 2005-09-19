@@ -17,9 +17,9 @@
     <issueTrackingUrl>http://developer.berlios.de/bugs/?group_id=4751</issueTrackingUrl>
     <versions>
         <version>
-            <id>1.0.0.ALPHA.1</id>
-            <name>1.0.0.ALPHA.1</name>
-            <tag>1_0_0_ALPHA_1-2005-08-21</tag>
+            <id>1.0.0.ALPHA.2</id>
+            <name>1.0.0.ALPHA.2</name>
+            <tag>1_0_0_ALPHA_2-2005-09-18</tag>
         </version>
     </versions>
     <inceptionYear>2005</inceptionYear>

@@ -5,22 +5,16 @@
   </properties>
   <body>
 
-    <release version="1.0.0.ALPHA.1" date="in CVS">
-      <action dev="brill" type="update">
-        Working to release first Alpha code.
-      </action>              
-    </release>
-
-    <!-- release version="1.0" date="2003-06-05">
-      <action dev="vmassol" type="add">
-        Added blah blah.
-      </action>              
-      <action dev="vmassol" type="fix" issue="JIRA-XXX">
-        Corrected bug blah blah.
-      </action>              
-      <action dev="vmassol" type="remove" due-to="John Doe" due-to-email="john@doe.com">
-        Removed blah blah.
-      </action>              
-    </release -->
+    <release version="1.0.0.ALPHA.2" date="in CVS">
+		<action dev="brill" type="update">
+        	First checkin to BerliOS.
+        </action>
+        <action dev="brill" type="update">
+        	First public release.
+        </action>
+		<!-- action dev="brill" type="fix" issue="CACTUS-197">
+ 			Added support for <code>ear.bundle.name</code> and <code>ear.bundle.dir</code> properties.
+		</action -->
+	</release>
   </body>
 </document>

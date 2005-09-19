@@ -25,7 +25,7 @@
  			Added support for <code>ear.bundle.name</code> and <code>ear.bundle.dir</code> properties.
 		</action -->
 	</release>
-    <release version="1.0.0.ALPHA.2" date="in CVS">
+    <release version="1.0.0.ALPHA.2" date="2005-09-18">
 		<action dev="brill" type="update">
         	First checkin to BerliOS.
         </action>

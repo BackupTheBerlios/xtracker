@@ -4,7 +4,14 @@
     <author email="brill@pappin.ca">Brill Pappin</author>
   </properties>
   <body>
-
+	<release version="1.0.0.ALPHA.3" date="in CVS">
+		<action dev="brill" type="add" issue="5105">
+        	Streamlined release publishing for development effort.
+        </action>
+		<!-- action dev="brill" type="fix" issue="CACTUS-197">
+ 			Added support for <code>ear.bundle.name</code> and <code>ear.bundle.dir</code> properties.
+		</action -->
+	</release>
     <release version="1.0.0.ALPHA.2" date="in CVS">
 		<action dev="brill" type="update">
         	First checkin to BerliOS.
@@ -12,9 +19,6 @@
         <action dev="brill" type="update">
         	First public release.
         </action>
-		<!-- action dev="brill" type="fix" issue="CACTUS-197">
- 			Added support for <code>ear.bundle.name</code> and <code>ear.bundle.dir</code> properties.
-		</action -->
 	</release>
   </body>
 </document>

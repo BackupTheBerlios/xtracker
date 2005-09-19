@@ -4,7 +4,7 @@
     <groupId>xtracker</groupId>
     <artifactId>xtracker</artifactId>
     <name>XTracker (from jmonkey.com)</name>
-    <currentVersion>1.0.0.ALPHA.2</currentVersion>
+    <currentVersion>1.0.0.ALPHA.3</currentVersion>
     <issueTrackingUrl>http://developer.berlios.de/bugs/?group_id=4751</issueTrackingUrl>
     <distributionSite>http://download.berlios.de/xtracker</distributionSite>
     <siteAddress>shell.berlios.de</siteAddress>
@@ -16,6 +16,11 @@
     </repository>
     <issueTrackingUrl>http://developer.berlios.de/bugs/?group_id=4751</issueTrackingUrl>
     <versions>
+        <version>
+            <id>1.0.0.ALPHA.3</id>
+            <name>1.0.0.ALPHA.3</name>
+            <tag>RELEASE-1_0_0_ALPHA_3-2005-??-??</tag>
+        </version>
         <version>
             <id>1.0.0.ALPHA.2</id>
             <name>1.0.0.ALPHA.2</name>

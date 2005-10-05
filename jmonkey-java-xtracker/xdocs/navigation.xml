@@ -11,6 +11,7 @@
     <links>
       <item name="Maven"  href="http://maven.apache.org/"/>
       <item name="XPlanner"  href="http://www.xplanner.org/"/>
+      <item name="BerliOS Developer"  href="http://developer.berlios.de"/>
     </links>
 	<menu name="Overview">
       <item href="/news.html" name="News"/>

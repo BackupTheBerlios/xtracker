@@ -3,6 +3,7 @@
  */
 package com.jmonkey.xtracker.mail.pop;
 
+import java.security.Security;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -22,16 +23,35 @@ import org.apache.log4j.Logger;
 
 /**
  * @author brill
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class POPAccountReader {
-	private final Logger	logger		= LogManager.getLogger(POPAccountReader.class);
-	private String			host		= null;
-	private String			username	= null;
-	private String			password	= null;
+	private final Logger	logger			= LogManager.getLogger(POPAccountReader.class);
+	private String			host			= null;
+	private String			username		= null;
+	private String			password		= null;
+	private boolean			popUsingSsl		= false;
+	private boolean			smtpUsingSsl	= false;
+	private int				popSslPort		= 995;
 
 	public POPAccountReader() {
 		super();
+	}
+
+	public boolean isPopUsingSsl() {
+		return popUsingSsl;
+	}
+
+	public void setPopUsingSsl(boolean popUsesSsl) {
+		this.popUsingSsl = popUsesSsl;
+	}
+
+	public boolean isSmtpUsingSsl() {
+		return smtpUsingSsl;
+	}
+
+	public void setSmtpUsingSsl(boolean smtpUsesSsl) {
+		this.smtpUsingSsl = smtpUsesSsl;
 	}
 
 	public String getHost() {
@@ -99,40 +119,6 @@ public class POPAccountReader {
 	}
 
 	/**
-	 * @param message
-	 * @param event
-	 * @throws MessagingException
-	 */
-	// private void getExtraHeaders(MimeMessage message, EventMessage event)
-	// throws MessagingException {
-	// Enumeration enum = message.getAllHeaders();
-	// while (enum.hasMoreElements()) {
-	// Header header = (Header) enum.nextElement();
-	// if (header.getName().equalsIgnoreCase("X-Priority")) {
-	// String hval = header.getValue();
-	// try {
-	// String numPart = "" + hval.trim().charAt(0);
-	// event.setPriority(numPart);
-	// if (logger.isDebugEnabled()) {
-	// logger.debug("X-Priority: " + header.getValue());
-	// }
-	// } catch (Exception e) {
-	// logger.error("Error parsing priority header: " + header.getValue(), e);
-	// }
-	// } else if (header.getName().equalsIgnoreCase("X-Accept-Language")) {
-	// event.setAcceptLanguage(header.getValue());
-	// if (logger.isDebugEnabled()) {
-	// logger.debug("X-Accept-Language: " + header.getValue());
-	// }
-	// } else if (header.getName().equalsIgnoreCase("User-Agent")) {
-	// event.setUserAgent(header.getValue());
-	// if (logger.isDebugEnabled()) {
-	// logger.debug("User-Agent: " + header.getValue());
-	// }
-	// }
-	// }
-	// }
-	/**
 	 * @param folder
 	 * @throws MessagingException
 	 */
@@ -178,6 +164,22 @@ public class POPAccountReader {
 	private Store getMailStore() throws NoSuchProviderException, MessagingException {
 		// -- Get hold of the default session --
 		Properties props = System.getProperties();
+
+		// XXX We need to set up some special stuff if we're using SSL.
+		if (popUsingSsl) {
+			Security.setProperty("ssl.SocketFactory.provider", "com.jmonkey.xtracker.mail.ssl.AcceptAllSSLSocketFactory");
+			// POP3 provider
+			props.setProperty("mail.pop3.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+			// POP3 provider
+			props.setProperty("mail.pop3.socketFactory.fallback", "false");
+			// POP3 provider
+			props.setProperty("mail.pop3.socketFactory.fallback", "false");
+			// POP3 provider
+			props.setProperty("mail.pop3.port", Integer.toString(popSslPort));
+			props.setProperty("mail.pop3.socketFactory.port", Integer.toString(popSslPort));
+
+		}
+		
 		Session session = Session.getDefaultInstance(props, null);
 
 		// -- Get hold of a POP3 message store, and connect to it --

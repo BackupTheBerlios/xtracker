@@ -20,6 +20,9 @@
         <action dev="brill" type="add">
         	Added link back to development site.
         </action>
+        <action dev="brill" type="add">
+        	Added support for POP3 via SSL.
+        </action>
         
 		<!-- action dev="brill" type="fix" issue="CACTUS-197">
  			Added support for <code>ear.bundle.name</code> and <code>ear.bundle.dir</code> properties.

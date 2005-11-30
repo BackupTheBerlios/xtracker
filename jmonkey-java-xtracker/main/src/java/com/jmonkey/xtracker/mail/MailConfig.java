@@ -87,6 +87,15 @@ public class MailConfig extends PropertiesConfig {
 	public void setPopCheckCronExpression(String expression) {
 		getConfiguration().setProperty("pop.cron.expression", expression);
 	}
+	
+	public Integer getPopCheckIntervalMinutes() {
+		Integer value = getConfiguration().getInteger("pop.check.interval.minutes", 2);
+		return value;
+	}
+
+	public void setPopCheckIntervalMinute(Integer expression) {
+		getConfiguration().setProperty("pop.check.interval.minutes", expression);
+	}
 
 	public String getPopMailHost() {
 		String host = getConfiguration().getString("pop.host.name", "localhost");

@@ -1,11 +1,10 @@
 package com.jmonkey.xtracker.mail.pop;
 
 import java.util.List;
+import java.util.TimerTask;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.quartz.Job;
-import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
 import com.jmonkey.xtracker.PreferencesConfig;
@@ -22,16 +21,17 @@ import com.jmonkey.xtracker.mail.smtp.SMTPMailSender;
 import com.jmonkey.xtracker.profile.loader.PersonLoader;
 import com.jmonkey.xtracker.profile.persistor.PersonPersistor;
 
-public class POPReaderJob implements Job {
+public class PopReaderTask extends TimerTask {
+	private Logger				logger				= LogManager.getLogger(PopReaderTask.class);
 	private PreferencesConfig	preferencesConfig	= new PreferencesConfig();
-	private Logger				logger				= LogManager.getLogger(POPReaderJob.class);
 
-	public POPReaderJob() {
+	public PopReaderTask() {
 		super();
 		logger.debug("Creating: " + getClass().getName());
 	}
 
-	public void execute(JobExecutionContext context) throws JobExecutionException {
+	@Override
+	public void run() {
 		MailConfig mailConfig = new MailConfig();
 		if (mailConfig.isPopCheckingEnabled()) {
 			POPAccountReader popReader = new POPAccountReader();
@@ -54,13 +54,14 @@ public class POPReaderJob implements Job {
 					}
 				}
 			} catch (Exception e) {
-				throw new JobExecutionException(e);
+				logger.error("POP Reader failed", e);
 			}
 		}
 	}
 
 	private ReceivedMailProcessor prepareMailProcessor(MailConfig mailConfig) {
-		// REFACTOR: Refactor this; Duplicate of MailInputStreamReceiver.prepareMailProcessor();
+		// REFACTOR: Refactor this; Duplicate of
+		// MailInputStreamReceiver.prepareMailProcessor();
 		ReceivedMailProcessor receivedMailProcessor = new ReceivedMailProcessor();
 		receivedMailProcessor.setPersonLoader(new PersonLoader());
 		receivedMailProcessor.setTicketLoader(new TicketLoader());
@@ -78,5 +79,4 @@ public class POPReaderJob implements Job {
 		receivedMailProcessor.setAttachmentHandler(attachmentHandler);
 		return receivedMailProcessor;
 	}
-
 }

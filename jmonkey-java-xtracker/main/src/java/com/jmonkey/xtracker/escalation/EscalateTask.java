@@ -3,28 +3,27 @@ package com.jmonkey.xtracker.escalation;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimerTask;
 
 import net.sf.hibernate.HibernateException;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.quartz.Job;
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 
 import com.jmonkey.xtracker.issue.Ticket;
 import com.jmonkey.xtracker.issue.loader.TicketLoader;
 import com.jmonkey.xtracker.issue.persistor.TicketPersistor;
 
-public class EscalateJob implements Job {
-	private Logger	logger	= LogManager.getLogger(EscalateJob.class);
+public class EscalateTask extends TimerTask {
+	private Logger	logger	= LogManager.getLogger(EscalateTask.class);
 
-	public EscalateJob() {
+	public EscalateTask() {
 		super();
 		logger.debug("Creating: " + getClass().getName());
 	}
 
-	public void execute(JobExecutionContext arg0) throws JobExecutionException {
+	@Override
+	public void run() {
 		TicketPersistor ticketPersistor = new TicketPersistor();
 		TicketLoader ticketLoader = new TicketLoader();
 		try {
@@ -32,7 +31,7 @@ public class EscalateJob implements Job {
 			for (Ticket ticket : ticketList) {
 				Date dueDate = ticket.getDueDate();
 				Integer priority = ticket.getPriority();
-				
+
 				long oldPriority = priority.longValue();
 
 				Calendar today = Calendar.getInstance();
@@ -51,7 +50,7 @@ public class EscalateJob implements Job {
 				ticketPersistor.updateTicket(ticket);
 			}
 		} catch (HibernateException e) {
-			throw new JobExecutionException(e);
+			logger.error("Escalation failed", e);
 		}
 	}
 

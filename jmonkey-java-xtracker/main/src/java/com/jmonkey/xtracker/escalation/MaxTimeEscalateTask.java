@@ -1,30 +1,33 @@
 package com.jmonkey.xtracker.escalation;
 
 import java.util.List;
+import java.util.TimerTask;
 
 import net.sf.hibernate.HibernateException;
 
-import org.quartz.Job;
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import com.jmonkey.xtracker.PreferencesConfig;
 import com.jmonkey.xtracker.issue.Ticket;
 import com.jmonkey.xtracker.issue.loader.TicketLoader;
 import com.jmonkey.xtracker.issue.persistor.TicketPersistor;
 
-public class MaxTimeEscalateJob implements Job {
+public class MaxTimeEscalateTask extends TimerTask {
+	private Logger	logger	= LogManager.getLogger(MaxTimeEscalateTask.class);
 
-	public MaxTimeEscalateJob() {
+	public MaxTimeEscalateTask() {
 		super();
+		logger.debug("Creating: " + this.getClass().getName());
 	}
 
-	public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+	@Override
+	public void run() {
 		PreferencesConfig preferencesConfig = new PreferencesConfig();
 		if (preferencesConfig.isMaxModifyAgeEnabled()) {
 			int modifiedDaysAgo = preferencesConfig.getMaxModifiedAgeDays();
 			int incrementBy = preferencesConfig.getMaxModifiedIncrement();
-			
+
 			TicketPersistor ticketPersistor = new TicketPersistor();
 			TicketLoader ticketLoader = new TicketLoader();
 			try {
@@ -41,7 +44,7 @@ public class MaxTimeEscalateJob implements Job {
 					ticketPersistor.updateTicket(ticket);
 				}
 			} catch (HibernateException e) {
-				throw new JobExecutionException(e);
+				logger.debug("Task failed", e);
 			}
 		}
 	}

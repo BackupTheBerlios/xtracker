@@ -1,35 +1,32 @@
 package com.jmonkey.xtracker.scheduler;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.util.Collection;
+import java.util.Date;
+import java.util.Timer;
 
 import javax.servlet.GenericServlet;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-import org.apache.commons.lang.BooleanUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.quartz.CronTrigger;
-import org.quartz.JobDetail;
-import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
-import org.quartz.SchedulerFactory;
-import org.quartz.impl.StdSchedulerFactory;
 
-import com.jmonkey.xtracker.escalation.DueDatePendingJob;
-import com.jmonkey.xtracker.escalation.EscalateJob;
-import com.jmonkey.xtracker.escalation.MaxTimeEscalateJob;
+import com.jmonkey.xtracker.escalation.DueDatePendingTask;
+import com.jmonkey.xtracker.escalation.EscalateTask;
+import com.jmonkey.xtracker.escalation.MaxTimeEscalateTask;
 import com.jmonkey.xtracker.mail.MailConfig;
-import com.jmonkey.xtracker.mail.pop.POPReaderJob;
+import com.jmonkey.xtracker.mail.pop.PopReaderTask;
 
 public class SchedulerServlet extends GenericServlet {
-	private Logger				logger				= LogManager.getLogger(SchedulerServlet.class);
-	private SchedulerFactory	schedulerFactory	= null;
-	private Scheduler			scheduler			= null;
-	private MailConfig			mailConfig			= new MailConfig();
+	private Logger				logger		= LogManager.getLogger(SchedulerServlet.class);
+
+	private final Timer			scheduler	= new Timer("Task Scheduler", true);
+	private MailConfig			mailConfig	= new MailConfig();
+	private PopReaderTask		popReaderTask;
+	private EscalateTask		escalateTask;
+	private DueDatePendingTask	dueDatePendingTask;
+	private MaxTimeEscalateTask	maxTimeEscalateTask;
 
 	public SchedulerServlet() {
 		super();
@@ -37,105 +34,60 @@ public class SchedulerServlet extends GenericServlet {
 
 	@Override
 	public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {
-		String pauseStr = request.getParameter("pause");
-		if (pauseStr != null) {
-			boolean pause = BooleanUtils.toBoolean(pauseStr);
-			try {
-				if (scheduler.isPaused() && !pause) {
-					scheduler.resumeAll();
-				} else if (!scheduler.isPaused() && pause) {
-					scheduler.pauseAll();
-				}
-				response.getWriter().write("Scheduler Paused: " + scheduler.isPaused());
-			} catch (SchedulerException e) {
-				throw new ServletException(e);
-			}
-		} else {
-			try {
-				boolean running = (!scheduler.isPaused() && !scheduler.isShutdown());
-				if (running) {
-					response.getWriter().write("Scheduler Running...");
-				} else {
-					response.getWriter().write("Scheduler Stopped...");
-				}
-			} catch (SchedulerException e) {
-				throw new ServletException(e);
-			}
-		}
+		response.getWriter().write("PopReaderTask scheduled to execute at: " + new Date(popReaderTask.scheduledExecutionTime()).toString());
+		response.getWriter().write("EscalateTask scheduled to execute at: " + new Date(escalateTask.scheduledExecutionTime()).toString());
+		response.getWriter().write("DueDatePendingTask scheduled to execute at: " + new Date(dueDatePendingTask.scheduledExecutionTime()).toString());
+		response.getWriter().write("MaxTimeEscalateTask scheduled to execute at: " + new Date(maxTimeEscalateTask.scheduledExecutionTime()).toString());
 	}
 
 	/**
 	 * @see javax.servlet.GenericServlet#destroy()
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void destroy() {
-		Collection<Scheduler> schedulerCollection = null;
-		try {
-			schedulerCollection = schedulerFactory.getAllSchedulers();
-		} catch (SchedulerException e) {
-			logger.error("Could not get all schedulers...", e);
-		}
-
-		if (schedulerCollection != null) {
-			for (Scheduler sched : schedulerCollection) {
-				try {
-					sched.shutdown();
-				} catch (SchedulerException e) {
-					try {
-						logger.error("Could not shutdown scheduler: " + sched.getSchedulerName(), e);
-					} catch (SchedulerException e1) {
-						logger.error("Could not shutdown scheduler, and could not get its name... ", e);
-					}
-				}
-			}
-		}
+		logger.debug("Stopping task timer...");
+		scheduler.cancel();
+		logger.debug("Timer stopped...");
 	}
 
 	/**
 	 * @see javax.servlet.GenericServlet#init()
 	 */
+	@SuppressWarnings("unused")
 	@Override
 	public void init() throws ServletException {
-		schedulerFactory = new StdSchedulerFactory();
-		try {
-			scheduler = schedulerFactory.getScheduler();
-			scheduler.start();
-
-			schedulePOPReaderJob();
-			scheduleEscalateJob();
-			scheduleDueDatePendingJob();
-			scheduleMaxTimeEscalate();
-
-		} catch (SchedulerException e) {
-			throw new ServletException(e);
-		} catch (ParseException e) {
-			throw new ServletException("Cron expression is invalid [" + mailConfig.getPopCheckCronExpression() + "]", e);
-		}
+		logger.debug("Starting tasks...");
+		schedulePOPReaderJob();
+		scheduleEscalateJob();
+		scheduleDueDatePendingJob();
+		scheduleMaxTimeEscalate();
+		logger.debug("Tasks started...");
 	}
 
-	private void scheduleMaxTimeEscalate() throws ParseException, SchedulerException {
-		JobDetail maxTimeEscalateJobDetail = new JobDetail("MaxTimeEscalateJob", Scheduler.DEFAULT_GROUP, MaxTimeEscalateJob.class);
-		CronTrigger maxTimeEscalateTrigger = new CronTrigger("MaxTimeEscalateTrigger", Scheduler.DEFAULT_GROUP, "0 0 5 * * ?");
-		scheduler.scheduleJob(maxTimeEscalateJobDetail, maxTimeEscalateTrigger);
+	private void scheduleMaxTimeEscalate() {
+		maxTimeEscalateTask = new MaxTimeEscalateTask();
+		logger.debug("Scheduling max time escalate task...");
+		scheduler.schedule(maxTimeEscalateTask, 60000, 3600000L); // every 1
 	}
 
-	private void scheduleDueDatePendingJob() throws ParseException, SchedulerException {
-		JobDetail dueDatePendingJobDetail = new JobDetail("DueDatePendingJob", Scheduler.DEFAULT_GROUP, DueDatePendingJob.class);
-		CronTrigger dueDatePendingTrigger = new CronTrigger("DueDatePendingTrigger", Scheduler.DEFAULT_GROUP, "0 30 4 * * ?");
-		scheduler.scheduleJob(dueDatePendingJobDetail, dueDatePendingTrigger);
+	private void scheduleDueDatePendingJob() {
+		dueDatePendingTask = new DueDatePendingTask();
+		logger.debug("Scheduling due date pending task...");
+		scheduler.schedule(dueDatePendingTask, 60000, 86400000L); // every day
 	}
 
-	private void scheduleEscalateJob() throws ParseException, SchedulerException {
-		JobDetail escalateJobDetail = new JobDetail("EscalateJob", Scheduler.DEFAULT_GROUP, EscalateJob.class);
-		CronTrigger escalateTrigger = new CronTrigger("EscalateTrigger", Scheduler.DEFAULT_GROUP, "0 0 4 * * ?");
-		scheduler.scheduleJob(escalateJobDetail, escalateTrigger);
+	private void scheduleEscalateJob() {
+		escalateTask = new EscalateTask();
+		logger.debug("Scheduling escalate task...");
+		scheduler.schedule(escalateTask, 60000, 3600000L); // every 1 hours
 	}
 
-	private void schedulePOPReaderJob() throws ParseException, SchedulerException {
-		JobDetail jobDetail = new JobDetail("POPReaderJob", Scheduler.DEFAULT_GROUP, POPReaderJob.class);
-		CronTrigger trigger = new CronTrigger("POPReaderTrigger", Scheduler.DEFAULT_GROUP, mailConfig.getPopCheckCronExpression());
-		scheduler.scheduleJob(jobDetail, trigger);
+	private void schedulePOPReaderJob() {
+		int minutes = mailConfig.getPopCheckIntervalMinutes();
+		popReaderTask = new PopReaderTask();
+		logger.debug("Scheduling POP3 reader task...");
+		scheduler.schedule(popReaderTask, 30000, (minutes + 1000)); // every
+		// minute
 	}
 
 }

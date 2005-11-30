@@ -1,2 +1,11 @@
-.project
 target
+build.properties
+.classpath
+.myhibernatedata
+.project
+*.log
+.*
+*.ser
+junit*.properties
+.settings
+*.log.*

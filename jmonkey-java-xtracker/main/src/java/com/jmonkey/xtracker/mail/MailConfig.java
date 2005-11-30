@@ -123,6 +123,15 @@ public class MailConfig extends PropertiesConfig {
 	public void setAttachmentRootDirectory(File dir) {
 		getConfiguration().setProperty("attachment.root.directory", dir.getAbsolutePath());
 	}
+	
+	public boolean isPopUsingSslEnabled() {
+		boolean value = getConfiguration().getBoolean("pop.ssl.enabled", false);
+		return value;
+	}
+
+	public void setPopUsingSslEnabled(boolean requires) {
+		getConfiguration().setProperty("pop.ssl.enabled", requires);
+	}
 
 	public boolean isPopCheckingEnabled() {
 		boolean value = getConfiguration().getBoolean("pop.checking.enabled", false);

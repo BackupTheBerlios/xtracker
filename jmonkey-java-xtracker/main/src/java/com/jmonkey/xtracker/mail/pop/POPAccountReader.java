@@ -23,7 +23,7 @@ import org.apache.log4j.Logger;
 
 /**
  * @author brill
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class POPAccountReader {
 	private final Logger	logger			= LogManager.getLogger(POPAccountReader.class);
@@ -31,7 +31,6 @@ public class POPAccountReader {
 	private String			username		= null;
 	private String			password		= null;
 	private boolean			popUsingSsl		= false;
-	private boolean			smtpUsingSsl	= false;
 	private int				popSslPort		= 995;
 	private boolean			debug			= false;
 
@@ -53,14 +52,6 @@ public class POPAccountReader {
 
 	public void setPopUsingSsl(boolean popUsesSsl) {
 		this.popUsingSsl = popUsesSsl;
-	}
-
-	public boolean isSmtpUsingSsl() {
-		return smtpUsingSsl;
-	}
-
-	public void setSmtpUsingSsl(boolean smtpUsesSsl) {
-		this.smtpUsingSsl = smtpUsesSsl;
 	}
 
 	public String getHost() {
@@ -138,12 +129,6 @@ public class POPAccountReader {
 		folder.close(true);
 	}
 
-	/**
-	 * @return
-	 * @throws NoSuchProviderException
-	 * @throws MessagingException
-	 * @throws Exception
-	 */
 	private Folder getInboxFolder(Store store) throws NoSuchProviderException, MessagingException {
 
 		// -- Try to get hold of the default folder --
@@ -165,11 +150,6 @@ public class POPAccountReader {
 		return folder;
 	}
 
-	/**
-	 * @return
-	 * @throws NoSuchProviderException
-	 * @throws MessagingException
-	 */
 	private Store getMailStore() throws NoSuchProviderException, MessagingException {
 		// -- Get hold of the default session --
 		Properties props = System.getProperties();

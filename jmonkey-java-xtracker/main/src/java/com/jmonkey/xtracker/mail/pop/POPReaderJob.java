@@ -38,6 +38,7 @@ public class POPReaderJob implements Job {
 			popReader.setHost(mailConfig.getPopMailHost());
 			popReader.setUsername(mailConfig.getPopHostUsername());
 			popReader.setPassword(mailConfig.getPopHostPassword());
+			popReader.setPopUsingSsl(mailConfig.isPopUsingSslEnabled());
 
 			try {
 				List<ReceivedMailMessage> messageList = popReader.getMessageList();

@@ -78,6 +78,7 @@
 				<layout:space/>
 				
 				<layout:checkbox name="runtimeForm" property="popCheckingEnabled" key="view.label.config.pop3.check.enabled"/>
+				<layout:checkbox name="runtimeForm" property="popUsingSslEnabled" key="view.label.config.pop3.ssl.enabled"/>
 				<layout:text name="runtimeForm" property="popMailHost" key="view.label.config.pop3.host"/>
 				<layout:text name="runtimeForm" property="popHostUsername" key="view.label.config.pop3.username"/>
 				<layout:text name="runtimeForm" property="popHostPassword" key="view.label.config.pop3.password"/>

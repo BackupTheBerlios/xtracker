@@ -24,6 +24,7 @@ public class RuntimeForm extends ActionForm {
 	private String	popMailHost						= null;
 	private String	popHostUsername					= null;
 	private String	popHostPassword					= null;
+	private boolean	popUsingSslEnabled				= false;
 	private boolean	popCheckingEnabled				= false;
 	private String	attachmentRootDirectory			= null;
 	private String	rootXTrackerUriContext			= null;
@@ -223,6 +224,14 @@ public class RuntimeForm extends ActionForm {
 
 	public void setPopMailHost(String popMailHost) {
 		this.popMailHost = popMailHost;
+	}
+
+	public boolean isPopUsingSslEnabled() {
+		return popUsingSslEnabled;
+	}
+
+	public void setPopUsingSslEnabled(boolean popUsingSsl) {
+		this.popUsingSslEnabled = popUsingSsl;
 	}
 
 	public boolean isPopCheckingEnabled() {

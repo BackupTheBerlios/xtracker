@@ -26,12 +26,6 @@ public class SMTPMail {
 	public static final int			PRIOTIRY_LOWEST				= 5;
 	public static final String		HEADER_X_PRIORITY			= "X-Priority";
 	public static final String		HEADER_X_MAILER				= "X-Mailer";
-	private static final String		SMTP						= "smtp";
-	private static final String		PROPERTY_TRANSPORT_PROTOCOL	= "mail.transport.protocol";
-	private static final String		PROPERTY_HOST				= "mail.host";
-	private static final String		PROPERTY_PORT				= "mail.smtp.port";
-	private static final String		PROPERTY_DEBUG				= "mail.debug";
-	private static final String		PROPERTY_SMTP_AUTH			= "mail.smtp.auth";
 	public static final String		TYPE_TEXT_PLAIN				= "text/plain";
 
 	private Date					sentDate					= new Date();
@@ -69,22 +63,22 @@ public class SMTPMail {
 	protected Session initlSession() {
 		if (session == null) {
 			Properties properties = new Properties(System.getProperties());
-			properties.setProperty(PROPERTY_TRANSPORT_PROTOCOL, SMTP);
+			properties.setProperty("mail.transport.protocol", "smtp");
 
 			if (!StringUtils.isNotEmpty(host)) {
-				host = properties.getProperty(PROPERTY_HOST);
+				host = properties.getProperty("mail.host");
 			}
 
 			if (!StringUtils.isNotEmpty(host)) {
 				throw new IllegalStateException("Cannot find valid hostname for mail session");
 			}
 
-			properties.setProperty(PROPERTY_PORT, Integer.toString(port));
-			properties.setProperty(PROPERTY_HOST, host);
-			properties.setProperty(PROPERTY_DEBUG, String.valueOf(debug));
+			properties.setProperty("mail.smtp.port", Integer.toString(port));
+			properties.setProperty("mail.host", host);
+			properties.setProperty("mail.debug", String.valueOf(debug));
 
 			if (smtpAuthenticator != null) {
-				properties.setProperty(PROPERTY_SMTP_AUTH, "true");
+				properties.setProperty("mail.smtp.auth", "true");
 			}
 
 			session = Session.getInstance(properties, smtpAuthenticator);

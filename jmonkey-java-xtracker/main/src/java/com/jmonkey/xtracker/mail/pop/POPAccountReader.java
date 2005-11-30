@@ -23,7 +23,7 @@ import org.apache.log4j.Logger;
 
 /**
  * @author brill
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class POPAccountReader {
 	private final Logger	logger			= LogManager.getLogger(POPAccountReader.class);
@@ -33,9 +33,18 @@ public class POPAccountReader {
 	private boolean			popUsingSsl		= false;
 	private boolean			smtpUsingSsl	= false;
 	private int				popSslPort		= 995;
+	private boolean			debug			= false;
 
 	public POPAccountReader() {
 		super();
+	}
+
+	public boolean isDebug() {
+		return debug;
+	}
+
+	public void setDebug(boolean debug) {
+		this.debug = debug;
 	}
 
 	public boolean isPopUsingSsl() {
@@ -165,8 +174,14 @@ public class POPAccountReader {
 		// -- Get hold of the default session --
 		Properties props = System.getProperties();
 
+		String protocol = "pop3";
+
+		props.setProperty("mail.debug", String.valueOf(debug));
+
 		// XXX We need to set up some special stuff if we're using SSL.
 		if (popUsingSsl) {
+			protocol = "pop3s";
+
 			Security.setProperty("ssl.SocketFactory.provider", "com.jmonkey.xtracker.mail.ssl.AcceptAllSSLSocketFactory");
 			// POP3 provider
 			props.setProperty("mail.pop3.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
@@ -179,11 +194,11 @@ public class POPAccountReader {
 			props.setProperty("mail.pop3.socketFactory.port", Integer.toString(popSslPort));
 
 		}
-		
+
 		Session session = Session.getDefaultInstance(props, null);
 
 		// -- Get hold of a POP3 message store, and connect to it --
-		Store store = session.getStore("pop3");
+		Store store = session.getStore(protocol);
 		store.connect(host, username, password);
 		return store;
 	}

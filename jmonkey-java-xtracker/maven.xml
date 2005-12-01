@@ -1,5 +1,17 @@
 <project xmlns:j="jelly:core" xmlns:util="jelly:util" xmlns:maven="jelly:maven">
 
+<goal name="readpop">
+
+	<java classname="com.jmonkey.xtracker.allotrope.ReadPop"
+        fork="yes" >
+    	<arg value="true"/>
+    	<classpath>
+           <!-- pathelement location="dist/test.jar"/ -->
+           <pathelement path="${ maven.build.dest}"/>
+           <path refid="maven.dependency.classpath"/>
+         </classpath>
+  </java>
+</goal>
 	<goal name="release">
 	<!--
 		<maven:set plugin="maven-scm-plugin" property="maven.test.skip" value="SNAPSHOT"/>

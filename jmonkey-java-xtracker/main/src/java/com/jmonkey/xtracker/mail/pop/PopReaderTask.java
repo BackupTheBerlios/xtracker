@@ -5,7 +5,6 @@ import java.util.TimerTask;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.quartz.JobExecutionException;
 
 import com.jmonkey.xtracker.PreferencesConfig;
 import com.jmonkey.xtracker.auth.RandomPasswordGenerator;
@@ -24,6 +23,7 @@ import com.jmonkey.xtracker.profile.persistor.PersonPersistor;
 public class PopReaderTask extends TimerTask {
 	private Logger				logger				= LogManager.getLogger(PopReaderTask.class);
 	private PreferencesConfig	preferencesConfig	= new PreferencesConfig();
+	private boolean debugMail = false;
 
 	public PopReaderTask() {
 		super();
@@ -35,6 +35,7 @@ public class PopReaderTask extends TimerTask {
 		MailConfig mailConfig = new MailConfig();
 		if (mailConfig.isPopCheckingEnabled()) {
 			POPAccountReader popReader = new POPAccountReader();
+			popReader.setDebug(debugMail);
 			popReader.setHost(mailConfig.getPopMailHost());
 			popReader.setUsername(mailConfig.getPopHostUsername());
 			popReader.setPassword(mailConfig.getPopHostPassword());
@@ -79,4 +80,14 @@ public class PopReaderTask extends TimerTask {
 		receivedMailProcessor.setAttachmentHandler(attachmentHandler);
 		return receivedMailProcessor;
 	}
+
+	public boolean isDebugMail() {
+		return debugMail;
+	}
+
+	public void setDebugMail(boolean debugMail) {
+		this.debugMail = debugMail;
+	}
+	
+	
 }

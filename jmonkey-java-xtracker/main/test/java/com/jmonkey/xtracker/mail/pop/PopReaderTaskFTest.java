@@ -13,6 +13,7 @@ public class PopReaderTaskFTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		task = new PopReaderTask();
+		task.setDebugMail(true);
 	}
 
 	@Override

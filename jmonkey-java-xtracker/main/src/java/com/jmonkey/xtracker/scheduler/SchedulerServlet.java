@@ -19,14 +19,15 @@ import com.jmonkey.xtracker.mail.MailConfig;
 import com.jmonkey.xtracker.mail.pop.PopReaderTask;
 
 public class SchedulerServlet extends GenericServlet {
-	private Logger				logger		= LogManager.getLogger(SchedulerServlet.class);
+	private Logger				logger				= LogManager.getLogger(SchedulerServlet.class);
 
-	private final Timer			scheduler	= new Timer("Task Scheduler", true);
-	private MailConfig			mailConfig	= new MailConfig();
+	private final Timer			scheduler			= new Timer("Task Scheduler", true);
+	private MailConfig			mailConfig			= new MailConfig();
 	private PopReaderTask		popReaderTask;
 	private EscalateTask		escalateTask;
 	private DueDatePendingTask	dueDatePendingTask;
 	private MaxTimeEscalateTask	maxTimeEscalateTask;
+	private boolean				mailDebugEnabled	= false;
 
 	public SchedulerServlet() {
 		super();
@@ -56,6 +57,11 @@ public class SchedulerServlet extends GenericServlet {
 	@SuppressWarnings("unused")
 	@Override
 	public void init() throws ServletException {
+
+		String mailDebugParam = getInitParameter("maildebug");
+		if (mailDebugParam != null && "true".equalsIgnoreCase(mailDebugParam)) {
+			mailDebugEnabled = true;
+		}
 		logger.debug("Starting tasks...");
 		schedulePOPReaderJob();
 		scheduleEscalateJob();
@@ -85,6 +91,7 @@ public class SchedulerServlet extends GenericServlet {
 	private void schedulePOPReaderJob() {
 		int minutes = mailConfig.getPopCheckIntervalMinutes();
 		popReaderTask = new PopReaderTask();
+		popReaderTask.setDebugMail(mailDebugEnabled);
 		logger.debug("Scheduling POP3 reader task...");
 		scheduler.schedule(popReaderTask, 30000, (minutes + 1000)); // every
 		// minute

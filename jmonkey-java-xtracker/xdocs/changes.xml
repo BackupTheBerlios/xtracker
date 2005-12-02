@@ -4,6 +4,20 @@
     <author email="brill@pappin.ca">Brill Pappin</author>
   </properties>
   <body>
+  <release version="1.0.0.ALPHA.4" date="in CVS">
+		<action dev="brill" type="add">
+        	Fixed and enabled support for TLS/SSL enabled POP servers.
+        </action>
+        <action dev="brill" type="add">
+        	Added raw socket reception of mail for injection of messages into XTracker from an external MTA.
+        </action>
+        <action dev="brill" type="fix">
+        	Changed mail check interval to seconds (integer) instead of a Quartz cron expression.
+        </action>
+        <action dev="brill" type="fix">
+        	Removed Quartz from the code. It was too unstable and would failed often for reasons outside its own scope. The scheduled tasks are not TimerTasks.
+        </action>
+	</release>
 	<release version="1.0.0.ALPHA.3" date="in CVS">
 		<action dev="brill" type="add" issue="5105">
         	Streamlined release publishing for development effort.

@@ -32,6 +32,25 @@
 			<param-value>administrator</param-value>
 		</init-param>
 	</filter>
+	
+	<!--  filter-mapping> 
+		<filter-name>localeSwitch</filter-name>
+		<url-pattern>/*</url-pattern> 
+	</filter-mapping -->
+
+	<filter-mapping>
+		<filter-name>simpleAuthFilter</filter-name>
+		<!--  url-pattern>/*</url-pattern -->
+		<url-pattern>/auth/*</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>simpleAuthResourceFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<url-pattern>/my/*</url-pattern>
+		<url-pattern>/anon/*</url-pattern>
+		<url-pattern>/admin/*</url-pattern>
+	</filter-mapping>
 
 	<servlet>
 		<servlet-name>systemServlet</servlet-name>
@@ -96,25 +115,18 @@
 		</init-param>
 		<load-on-startup>3</load-on-startup>
 	</servlet>
-
-	<!--  filter-mapping> 
-		<filter-name>localeSwitch</filter-name>
-		<url-pattern>/*</url-pattern> 
-		</filter-mapping -->
-
-	<filter-mapping>
-		<filter-name>simpleAuthFilter</filter-name>
-		<!--  url-pattern>/*</url-pattern -->
-		<url-pattern>/auth/*</url-pattern>
-	</filter-mapping>
 	
-	<filter-mapping>
-		<filter-name>simpleAuthResourceFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-		<url-pattern>/my/*</url-pattern>
-		<url-pattern>/anon/*</url-pattern>
-		<url-pattern>/admin/*</url-pattern>
-	</filter-mapping>
+	<servlet>
+		<servlet-name>tooltipCallout</servlet-name>
+		<servlet-class>com.jmonkey.xtracker.ajax.ToolTipsCalloutServlet</servlet-class>
+		<load-on-startup>3</load-on-startup>
+	</servlet>
+	<!-- callout.view -->
+	
+	<servlet-mapping>
+		<servlet-name>tooltipCallout</servlet-name>
+		<url-pattern>/tooltip</url-pattern>
+	</servlet-mapping>
 	
 	<servlet-mapping>
 		<servlet-name>action</servlet-name>
@@ -165,10 +177,12 @@
 		<location>/errors/404.jsp</location>
 		</error-page -->
 		
+		<!--
 		<error-page>
 			<error-code>500</error-code>
 			<location>/error/collect.do</location>
 		</error-page>
+		-->
 
 	<!--  security-constraint>
 		<web-resource-collection>

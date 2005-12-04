@@ -3,9 +3,11 @@ package com.jmonkey.xtracker.ajax;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import net.sf.hibernate.HibernateException;
 
+import org.ajaxtags.servlets.BaseAjaxServlet;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -16,10 +18,10 @@ public class AjaxAutocompleteServlet extends BaseAjaxServlet {
 	private Logger	logger	= LogManager.getLogger(AjaxAutocompleteServlet.class);
 
 	@Override
-	public String getXmlContent(HttpServletRequest request) {
+	public String getXmlContent(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		StringBuffer xmlBuffer = new StringBuffer().append("<?xml version=\"1.0\"?>");
 		xmlBuffer.append("<list>");
-		
+
 		String view = request.getParameter("view");
 		if ((view != null) && view.toLowerCase().startsWith("Envelope-To".toLowerCase())) {
 			xmlBuffer.append("<item value=\"Envelope-To\">Envelope-To</item>");
@@ -28,7 +30,7 @@ public class AjaxAutocompleteServlet extends BaseAjaxServlet {
 		if ((ticketId != null) && (ticketId.length() > 0)) {
 			TicketLoader ticketLoader = new TicketLoader();
 			try {
-				List<Ticket> ticketList = ticketLoader.loadTicketListPartialId(Long.parseLong(ticketId),11);
+				List<Ticket> ticketList = ticketLoader.loadTicketListPartialId(Long.parseLong(ticketId), 11);
 				for (Ticket ticket : ticketList) {
 					xmlBuffer.append("<item value=\"" + ticket.getId() + "\">[" + ticket.getId() + "] " + ticket.getSubject() + "</item>");
 				}

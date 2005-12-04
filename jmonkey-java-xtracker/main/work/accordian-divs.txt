@@ -1,0 +1,14 @@
+<div id="accordionExample" style="margin-top: 6px; border-top-width: 1px; border-top-style: solid;">
+   						<div id="panel1">
+     						<div id="panel1Header" class="accordionTabTitleBar"><bean:message key="view.panel.label.ticket.messages" /></div>
+      						<div id="panel1Content" class="accordionTabContentBox" style="overflow: scroll;">
+       							old message stuff
+      						</div>
+   						</div>
+						<div id="panel2">
+     						<div id="panel2Header" class="accordionTabTitleBar"><bean:message key="view.panel.label.ticket.history" /></div>
+      						<div id="panel2Content" class="accordionTabContentBox" style="overflow: scroll;">
+								ui change in progress
+      						</div>
+   						</div>
+					</div>

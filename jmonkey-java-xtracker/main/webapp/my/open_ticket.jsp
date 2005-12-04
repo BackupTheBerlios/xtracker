@@ -1,17 +1,14 @@
 <%@ page language="java" import="java.util.*" %>
-<%@ taglib uri="http://struts.application-servers.com/layout" prefix="layout" %>
-<%@ taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
-<%@ taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
-<%@ taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
-<%@ taglib uri="http://jakarta.apache.org/struts/tags-tiles" prefix="tiles"%>
-<%@ taglib uri="http://jakarta.apache.org/struts/tags-template" prefix="template"%>
-<%@ taglib uri="http://jakarta.apache.org/struts/tags-nested" prefix="nested"%>
-<%@ taglib uri="http://www.jmonkey.com/xtracker/tags-xtracker" prefix="xtracker"%>
-<%@ taglib uri="http://uitags.sf.net/uitags" prefix="ui"%>
-
-
-<layout:html layout="false" key="page.title.my">
+<%@ include file="/taglibs.jsp"%>
+<html:html>
+<head>
+<title><bean:message key="page.title.my" /></title>
+<%@ include file="/styles.jsp"%>
+<%@ include file="/scripts.jsp"%>
+</head>
+<body>
 	<%@ include file="basic_header.jsp"%>
+	<div>
 	<html:form action="/my/openTicket">
 	<table width="100%" cellspacing="2" cellpadding="2" border="0">
 	<tr>
@@ -23,10 +20,7 @@
 	    <td valign="top">
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="boxred">
 					<tr>
-					<th colspan="2"><html:link action="/my/details" paramName="openTicketForm" paramProperty="id" paramId="id"><html:img page="/images/edit.gif" width="23" height="18" border="0"/> <bean:message key="view.panel.label.ticket.details" /></html:link></th>
-					<th width="5" align="right"><ui:info image="/images/help.png" alwaysVisible="true" panelClass="uiInfo_panel_custom">
-						<bean:message key="view.help.action.details"  />
-      				</ui:info></th>
+					<th colspan="3"><html:link action="/my/details" styleClass="stickyToolTip" paramName="openTicketForm" paramProperty="id" paramId="id"><html:img page="/images/edit.gif" width="23" height="18" border="0"/> <bean:message key="view.panel.label.ticket.details" /></html:link></th>
 					</tr>
 					<tr>
 					<td width="100" nowrap><bean:message key="view.label.ticket.number" />:</td>
@@ -73,10 +67,7 @@
 				</table>
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="boxblue">
 					<tr>
-					<th colspan="2"><html:link action="/my/people" paramName="openTicketForm" paramProperty="id" paramId="id"><html:img page="/images/edit.gif" width="23" height="18" border="0"/> <bean:message key="view.panel.label.ticket.people" /></html:link></th>
-					<th width="5" align="right"><ui:info image="/images/help.png" alwaysVisible="true" panelClass="uiInfo_panel_custom">
-						<bean:message key="view.help.action.people"  />
-      				</ui:info></th>
+					<th colspan="3"><html:link action="/my/people" styleClass="stickyToolTip" paramName="openTicketForm" paramProperty="id" paramId="id"><html:img page="/images/edit.gif" width="23" height="18" border="0"/> <bean:message key="view.panel.label.ticket.people" /></html:link></th>
 					</tr>
 					<tr>
 					<td width="100" nowrap><bean:message key="view.label.requestor"  />:</td>
@@ -102,10 +93,7 @@
 		<td valign="top">
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="boxgreen">
 					<tr>
-					<th colspan="2"><html:link action="/my/relationships" paramName="openTicketForm" paramProperty="id" paramId="id"><html:img page="/images/edit.gif" width="23" height="18" border="0"/> <bean:message key="view.panel.label.ticket.relationships" /></html:link></th>
-					<th width="5" align="right"><ui:info image="/images/help.png" alwaysVisible="true" panelClass="uiInfo_panel_custom">
-						<bean:message key="view.help.action.relationships"  />
-      				</ui:info></th>
+					<th colspan="3"><html:link action="/my/relationships" styleClass="stickyToolTip" paramName="openTicketForm" paramProperty="id" paramId="id"><html:img page="/images/edit.gif" width="23" height="18" border="0"/> <bean:message key="view.panel.label.ticket.relationships" /></html:link></th>
 					</tr>
 					<tr>
 					<td width="50%" nowrap><bean:message key="view.label.depends.on"  />: <logic:iterate name="openTicketForm" property="dependsOn" id="tid">
@@ -137,10 +125,7 @@
 				</table>
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="boxpurple">
 					<tr>
-					<th colspan="4"><html:link action="/my/dates" paramName="openTicketForm" paramProperty="id" paramId="id"><html:img page="/images/edit.gif" width="23" height="18" border="0"/> <bean:message key="view.panel.label.ticket.dates" /></html:link></th>
-					<th width="5" align="right"><ui:info image="/images/help.png" alwaysVisible="true" panelClass="uiInfo_panel_custom">
-						<bean:message key="view.help.action.dates"  />
-      				</ui:info></th>
+					<th colspan="5"><html:link action="/my/dates" styleClass="stickyToolTip" paramName="openTicketForm" paramProperty="id" paramId="id"><html:img page="/images/edit.gif" width="23" height="18" border="0"/> <bean:message key="view.panel.label.ticket.dates" /></html:link></th>
 					</tr>
 					<tr>
 					<td width="100" nowrap><bean:message key="view.label.create.date"  />:</td>
@@ -158,12 +143,7 @@
 				</table>
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="boxorange">
 					<tr>
-					<th colspan="2"><bean:message key="view.label.external.linking" /></th>
-					<th width="5" align="right"><ui:info image="/images/help.png" alwaysVisible="true" panelClass="uiInfo_panel_custom">
-						<html:img page="/images/xplanner-16x16.gif" width="16" height="16" border="0"/>
-						<hr size="1" noshade>
-						<bean:message key="view.help.action.external.linking"  />
-      				</ui:info></th>
+					<th colspan="3"><bean:message key="view.label.external.linking" /></th>
 					</tr>
 					<tr>
 					<td colspan="2" nowrap>
@@ -193,22 +173,16 @@
 	</tr>
 	<tr>
 	    <td colspan="2" valign="top">
-				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="boxyello">
-					<tr>
-						<th width="85%"><bean:message key="view.panel.label.ticket.history" /></th>
-						<th align="right">[<html:link action="/my/comment" paramName="openTicketForm" paramProperty="id" paramId="id"><bean:message key="view.label.comment" /></html:link>]</th>
-					</tr>
-					<tr>
-					<layout:tabs styleClass="FORM" width="100%">
-						<layout:tab key="view.panel.label.ticket.messages" width="50%">
-					
-							<logic:iterate name="openTicketForm" property="history" id="hist" indexId="idx">
+				<div style="border: 1px dashed Olive; margin-top: 10px;">
+				<div style="background-color: #F0E68C; width: 100%; font-weight: bold;"><bean:message key="view.panel.label.ticket.messages" /></div>
+				<logic:iterate name="openTicketForm" property="history" id="hist" indexId="idx">
 						
 								<logic:equal name="hist" property="system" value="false">
-								<table width="100%" border="0" cellspacing="0" cellpadding="0" class="boxhistory">
+								<!-- table width="100%" border="0" cellspacing="0" cellpadding="0" class="boxhistory" -->
+								<table width="100%" border="0" cellspacing="0" cellpadding="0">
 								<tr>
 									<td nowrap>
-									            <table cellspacing="1" ><tr>
+									            <table cellspacing="1" style="border-bottom: 1px dashed Black; margin-top: 5px; border-top-color: Black; border-top-style: solid; border-top-width: 1px;"><tr>
 													<th><a href="javascript:toggleLayer('ticketsHistoryBlock<bean:write name="idx" />');" title="Open/Close"><html:img page="/images/down.gif" imageName="toggle" border="0"/></a>
 				                					<b><bean:message key="view.label.subject" />: </b> <bean:write name="hist" property="subject" /></a></th>
 													<logic:notEmpty name="hist" property="author">
@@ -253,27 +227,43 @@
 								</logic:notEmpty>
 								</table>
 								</logic:equal>
+								</logic:iterate>
+				</div>
+					
+					<div style="border: 1px dashed Olive; margin-top: 10px;">
+					<div style="background-color: Silver; width: 100%; font-weight: bold;"><bean:message key="view.panel.label.ticket.history" /></div>
+						<ul>
+     						<logic:iterate name="openTicketForm" property="history" id="hist" indexId="idx">
+								<logic:equal name="hist" property="system" value="true">
+									<li><bean:write name="hist" property="createDate" /> - <bean:write name="hist" property="subject" /></li>
+								</logic:equal>
 							</logic:iterate>
-							</layout:tab>
-							<layout:tab key="view.panel.label.ticket.history" width="50%">
-								<logic:iterate name="openTicketForm" property="history" id="hist" indexId="idx">
-									<logic:equal name="hist" property="system" value="true">
-									<table width="100%" border="0" cellspacing="0" cellpadding="0">
-									<tr>
-										<td nowrap>
-											<bean:write name="hist" property="createDate" />, <bean:write name="hist" property="subject" />
-										</td>
-									</table>
-									</logic:equal>
-							</logic:iterate>
-						</layout:tab>
-					</layout:tabs>
-					</tr>
-				</table>
+						</ul>
+					</div>
+					<!-- /tr>
+				</table -->
 		</td>
 	</tr>
 	</table>
 	</html:form>
+	</div>
+	<!-- baseUrl="${contextPath}/tooltip" -->
+	<ajax:callout
+  		baseUrl="/xtracker/tooltip"
+ 		sourceClass="stickyToolTip"
+		parameters="q={ajaxParameter}"
+		useTitleBar="false" 
+  		classNamePrefix="callout"
+  		boxPosition="bottom right"
+  		title="Definition"
+  		timeout="5000" />
+		
+<script> 
+	new Rico.Accordion( 'accordionExample', {panelHeight:227} );
+</script>
+
+  
 	<%@ include file="footer.jsp"%>
-</layout:html>
+</body>
+</html:html>
 

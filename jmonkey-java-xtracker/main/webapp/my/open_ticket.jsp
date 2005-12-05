@@ -5,6 +5,7 @@
 <title><bean:message key="page.title.my" /></title>
 <%@ include file="/styles.jsp"%>
 <%@ include file="/scripts.jsp"%>
+<%@ include file="/theme.jsp"%>
 </head>
 <body>
 	<%@ include file="basic_header.jsp"%>
@@ -13,14 +14,14 @@
 	<table width="100%" cellspacing="2" cellpadding="2" border="0">
 	<tr>
 	    <td colspan="2" class="contentheader">
-		#<bean:write name="openTicketForm" property="id" />: <bean:write name="openTicketForm" property="subject" />
+		<stx:themeImg srcKey="File"/> #<bean:write name="openTicketForm" property="id" />: <bean:write name="openTicketForm" property="subject" />
 		</td>
 	</tr>
 	<tr>
 	    <td valign="top">
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="boxred">
 					<tr>
-					<th colspan="3"><html:link action="/my/details" styleClass="stickyToolTip" paramName="openTicketForm" paramProperty="id" paramId="id"><html:img page="/images/edit.gif" width="23" height="18" border="0"/> <bean:message key="view.panel.label.ticket.details" /></html:link></th>
+					<th colspan="3"><html:link action="/my/details" styleClass="stickyToolTip" paramName="openTicketForm" paramProperty="id" paramId="id"><stx:themeImg srcKey="Edit" width="23" height="18" border="0"/> <bean:message key="view.panel.label.ticket.details" /></html:link></th>
 					</tr>
 					<tr>
 					<td width="100" nowrap><bean:message key="view.label.ticket.number" />:</td>
@@ -67,7 +68,7 @@
 				</table>
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="boxblue">
 					<tr>
-					<th colspan="3"><html:link action="/my/people" styleClass="stickyToolTip" paramName="openTicketForm" paramProperty="id" paramId="id"><html:img page="/images/edit.gif" width="23" height="18" border="0"/> <bean:message key="view.panel.label.ticket.people" /></html:link></th>
+					<th colspan="3"><html:link action="/my/people" styleClass="stickyToolTip" paramName="openTicketForm" paramProperty="id" paramId="id"><stx:themeImg srcKey="Edit" width="23" height="18" border="0"/> <bean:message key="view.panel.label.ticket.people" /></html:link></th>
 					</tr>
 					<tr>
 					<td width="100" nowrap><bean:message key="view.label.requestor"  />:</td>
@@ -93,7 +94,7 @@
 		<td valign="top">
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="boxgreen">
 					<tr>
-					<th colspan="3"><html:link action="/my/relationships" styleClass="stickyToolTip" paramName="openTicketForm" paramProperty="id" paramId="id"><html:img page="/images/edit.gif" width="23" height="18" border="0"/> <bean:message key="view.panel.label.ticket.relationships" /></html:link></th>
+					<th colspan="3"><html:link action="/my/relationships" styleClass="stickyToolTip" paramName="openTicketForm" paramProperty="id" paramId="id"><stx:themeImg srcKey="Edit" width="23" height="18" border="0"/> <bean:message key="view.panel.label.ticket.relationships" /></html:link></th>
 					</tr>
 					<tr>
 					<td width="50%" nowrap><bean:message key="view.label.depends.on"  />: <logic:iterate name="openTicketForm" property="dependsOn" id="tid">
@@ -125,7 +126,7 @@
 				</table>
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="boxpurple">
 					<tr>
-					<th colspan="5"><html:link action="/my/dates" styleClass="stickyToolTip" paramName="openTicketForm" paramProperty="id" paramId="id"><html:img page="/images/edit.gif" width="23" height="18" border="0"/> <bean:message key="view.panel.label.ticket.dates" /></html:link></th>
+					<th colspan="5"><html:link action="/my/dates" styleClass="stickyToolTip" paramName="openTicketForm" paramProperty="id" paramId="id"><stx:themeImg srcKey="Edit" width="23" height="18" border="0"/> <bean:message key="view.panel.label.ticket.dates" /></html:link></th>
 					</tr>
 					<tr>
 					<td width="100" nowrap><bean:message key="view.label.create.date"  />:</td>

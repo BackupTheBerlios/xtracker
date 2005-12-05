@@ -1,7 +1,7 @@
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
 		<td align="left" colspan="2">
-		<html:img page="/images/xtracker.gif" width="196" height="42" border="0" align="left" />
+		<stx:themeImg srcKey="XtrackerLarge" width="196" height="42" border="0" align="left"/>
 		</td>
 	</tr>
 </table>

@@ -18,7 +18,10 @@
 		<form-bean name="ticketMessageForm" type="com.jmonkey.xtracker.my.tickets.TicketMessageForm"/>
 		<form-bean name="ticketDetailsForm" type="com.jmonkey.xtracker.my.tickets.TicketDetailsForm"/>
 		<form-bean name="ticketRelationshipsForm" type="com.jmonkey.xtracker.my.tickets.TicketRelationshipsForm"/>
-		<form-bean name="ticketPeopleForm" type="com.jmonkey.xtracker.my.tickets.TicketPeopleForm"/>
+		<form-bean name="ticketPeopleForm" type="com.jmonkey.xtracker.my.tickets.TicketPeopleForm">
+			<form-property name="selectedOwners" type="java.lang.String[]"/>
+			<form-property name="selectedWatchers" type="java.lang.String[]"/>
+		</form-bean>
 		<form-bean name="displayPersonForm" type="com.jmonkey.xtracker.my.tickets.DisplayPersonForm"/>
 		<form-bean name="displayQueueForm" type="com.jmonkey.xtracker.queueview.DisplayQueueForm"/>
 		<form-bean name="displayProjectForm" type="com.jmonkey.xtracker.projectview.DisplayProjectForm"/>

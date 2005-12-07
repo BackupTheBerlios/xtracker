@@ -1,13 +1,13 @@
 <%@ page language="java" import="java.util.*" %>
-<%@ taglib uri="http://struts.application-servers.com/layout" prefix="layout" %>
-<%@ taglib uri="http://jakarta.apache.org/struts/tags-bean" prefix="bean"%>
-<%@ taglib uri="http://jakarta.apache.org/struts/tags-html" prefix="html"%>
-<%@ taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
-<%@ taglib uri="http://jakarta.apache.org/struts/tags-tiles" prefix="tiles"%>
-<%@ taglib uri="http://jakarta.apache.org/struts/tags-template" prefix="template"%>
-<%@ taglib uri="http://jakarta.apache.org/struts/tags-nested" prefix="nested"%>
-
-<layout:html layout="false" key="page.title.admin">
+<%@ include file="/taglibs.jsp"%>
+<html:html>
+<head>
+<title><bean:message key="page.title.admin" /></title>
+<%@ include file="/styles.jsp"%>
+<%@ include file="/scripts.jsp"%>
+<%@ include file="/theme.jsp"%>
+</head>
+<body>
 	<%@ include file="basic_header.jsp"%>
 	<h2>XPTracker Administrators Guide</h2>
 	
@@ -50,6 +50,8 @@
 			<p/>
 	<strong>POP3 Check Cron</strong><br/>
 			This defines how often XTracker should check for mail. THe Cron syntax is a bit different from the standard cron syntax. To find out more about the cron syntax used, see <a href="http://www.opensymphony.com/quartz/">Quartz</a> site.
-</layout:html>
-
+	
+	<%@ include file="/footer.jsp"%>
+</body>
+</html:html>
 

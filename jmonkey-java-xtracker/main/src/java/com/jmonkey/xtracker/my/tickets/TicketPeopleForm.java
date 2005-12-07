@@ -12,18 +12,19 @@ import org.apache.struts.action.ActionMapping;
 import com.jmonkey.xtracker.profile.Person;
 
 public class TicketPeopleForm extends ActionForm {
-	private Long			id				= null;
-	private Person			requestor		= null;
-	private List<Person>	ownerList		= null;
-	private List<Person>	watcherList		= null;
-	private List<Person>	allPeopleList	= null;
-	private String			newOwnerId		= null;
-	private String			newWatcherId	= null;
-	private String[]		deletedOwners	= new String[0];
-	private String[]		deletedWatchers	= new String[0];
-	
-	private Map<String, String> ownerSource = new TreeMap<String, String>();
-	private String[] selectedOwners = null;
+	private Long				id					= null;
+	private Person				requestor			= null;
+	private List<Person>		ownerList			= null;
+	private List<Person>		watcherList			= null;
+	private List<Person>		allPeopleList		= null;
+	private String				newOwnerId			= null;
+	private String				newWatcherId		= null;
+	private String[]			deletedOwners		= new String[0];
+	private String[]			deletedWatchers		= new String[0];
+
+	private Map<String, String>	ownerSource			= new TreeMap<String, String>();
+	private String[]			selectedOwners		= new String[0];
+	private String[]			selectedWatchers	= new String[0];
 
 	public TicketPeopleForm() {
 		super();
@@ -35,6 +36,14 @@ public class TicketPeopleForm extends ActionForm {
 
 	public void setOwnerSource(Map<String, String> ownerMap) {
 		this.ownerSource = ownerMap;
+	}
+
+	public String[] getSelectedWatchers() {
+		return selectedWatchers;
+	}
+
+	public void setSelectedWatchers(String[] selectedWatchers) {
+		this.selectedWatchers = selectedWatchers;
 	}
 
 	public String[] getSelectedOwners() {

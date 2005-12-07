@@ -1,6 +1,7 @@
 package com.jmonkey.xtracker.profile.loader;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.hibernate.Criteria;
@@ -68,7 +69,7 @@ public class PersonLoader {
 		Session session = HibernateSessionFactory.currentSession();
 		Transaction transaction = session.beginTransaction();
 		Criteria criteria = session.createCriteria(Person.class);
-//		criteria.createAlias("emailAddesses", "email");
+		// criteria.createAlias("emailAddesses", "email");
 		criteria.add(Expression.eq("emailAddress", emailAddress));
 		// criteria.add(Expression.like("realname", personalName,
 		// MatchMode.ANYWHERE));
@@ -93,5 +94,22 @@ public class PersonLoader {
 			return person;
 		}
 		return null;
+	}
+
+	public List<Person> loadExcludedPersonList(List<String> excludeList, boolean selectable) throws HibernateException {
+		Session session = HibernateSessionFactory.currentSession();
+		Transaction transaction = session.beginTransaction();
+		Criteria criteria = session.createCriteria(Person.class);
+		criteria.add(Expression.eq("active", true));
+		if (selectable) {
+			criteria.add(Expression.eq("selectable", true));
+		}
+		if (excludeList != null && !excludeList.isEmpty()) {
+			criteria.add(Expression.not(Expression.in("id", excludeList)));
+		}
+		List<Person> list = criteria.list();
+		transaction.commit();
+		HibernateSessionFactory.closeSession();
+		return list;
 	}
 }

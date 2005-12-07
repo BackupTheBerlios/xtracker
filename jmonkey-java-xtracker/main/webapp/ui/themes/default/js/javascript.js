@@ -1,19 +1,3 @@
-function transferSelectItem(sourceName, destName) {
-	var sourceSelect = document.getElementById(sourceName);
-	var destSelect = document.getElementById(destName);
-
-	var index = sourceSelect.selectedIndex;
-	var inc = destSelect.options.length;
-	destSelect[inc]= new Option(sourceSelect.options[index].text, sourceSelect.options[index].value, false);
-	sourceSelect.options[index] = null;
-}
-
-function selectAll(selectName){
-	var selectBox = document.getElementById(selectName);
-	 for ( var i = 0 ; i < selectBox.options.length ; i++ ){
-      selectBox.options[i].selected = true;
-   }
-}
 
 function registerSelectDraggables(selectName) {
 //.style.display = "none"

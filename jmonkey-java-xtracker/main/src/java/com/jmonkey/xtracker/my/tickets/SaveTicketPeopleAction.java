@@ -1,7 +1,6 @@
 package com.jmonkey.xtracker.my.tickets;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -42,7 +41,7 @@ public class SaveTicketPeopleAction extends BaseAction {
 		
 		AuthEnvironment authEnv = new AuthEnvironment(request);
 		PersonLoader loader = new PersonLoader();
-		Person person = loader.loadPersonForPrincipal(authEnv.getPrincipal());
+		Person authenticatedPerson = loader.loadPersonForPrincipal(authEnv.getPrincipal());
 		Date messageDate = new Date();
 
 		Long ticketId = ticketPeopleForm.getId();
@@ -51,78 +50,45 @@ public class SaveTicketPeopleAction extends BaseAction {
 		Ticket ticket = ticketLoader.loadTicket(ticketId);
 
 		TicketPersistor ticketSaver = new TicketPersistor();
-
-		addOwner(ticketPeopleForm, person, messageDate, ticket);
+		PersonLoader personLoader = new PersonLoader();
+		
+		addOwners(ticketPeopleForm, authenticatedPerson, messageDate, ticket, personLoader);
+//		ticketSaver.updateTicket(ticket);
+		
+		addWatchers(ticketPeopleForm, authenticatedPerson, messageDate, ticket, personLoader);
+		
 		ticketSaver.updateTicket(ticket);
-
-		addWatcher(ticketPeopleForm, person, messageDate, ticket);
-		ticketSaver.updateTicket(ticket);
-
-		String[] deletedOwners = ticketPeopleForm.getDeletedOwners();
-		deleteOwners(person, messageDate, ticket, deletedOwners);
-		ticketSaver.updateTicket(ticket);
-
-		String[] deletedWatchers = ticketPeopleForm.getDeletedWatchers();
-		deleteWatchers(person, messageDate, ticket, deletedWatchers);
-		ticketSaver.updateTicket(ticket);
-
-		// ticketSaver.updateTicket(ticket);
 
 		ActionForwardFactory forwardFactory = new ActionForwardFactory();
 		return forwardFactory.getOpenTicketForward(ticketId);
 		// return mapping.findForward("mytickets");
 	}
 
-	private void addOwner(TicketPeopleForm ticketPeopleForm, Person person, Date messageDate, Ticket ticket) throws HibernateException {
-		String newOwnerId = ticketPeopleForm.getNewOwnerId();
-		if (newOwnerId != null && newOwnerId.length() > 0) {
-			PersonLoader loader = new PersonLoader();
-			Person newPerson = loader.loadPerson(newOwnerId);
-			ticket.getOwners().add(newPerson);
-			String historySubject = "System: Owner " + newPerson.getRealname() + " added by " + person.getRealname();
-			addHistoryToTicket(ticket, messageDate, historySubject, null, new Integer(3));
-		}
-	}
-
-	private void addWatcher(TicketPeopleForm ticketPeopleForm, Person person, Date messageDate, Ticket ticket) throws HibernateException {
-		String newWatcherId = ticketPeopleForm.getNewWatcherId();
-		if (newWatcherId != null && newWatcherId.length() > 0) {
-			PersonLoader loader = new PersonLoader();
-			Person newPerson = loader.loadPerson(newWatcherId);
+	private void addWatchers(TicketPeopleForm ticketPeopleForm, Person person, Date messageDate, Ticket ticket, PersonLoader personLoader) throws HibernateException {
+		logger.debug("Clearing watcher list...");
+		ticket.getWatchers().clear();
+		logger.debug("Adding selected watchers...");
+		String[] selectedWatchers = ticketPeopleForm.getSelectedWatchers();
+		for (String watcherId : selectedWatchers) {
+			Person newPerson = personLoader.loadPerson(watcherId);
 			ticket.getWatchers().add(newPerson);
-			String historySubject = "System: Watcher " + newPerson.getRealname() + " added by " + person.getRealname();
+			logger.debug("Added watcher: " + newPerson.getInitials());
+			String historySubject = person.getRealname() + " added watcher " + newPerson.getRealname();
 			addHistoryToTicket(ticket, messageDate, historySubject, null, new Integer(3));
 		}
 	}
 
-	private void deleteOwners(Person person, Date messageDate, Ticket ticket, String[] deletedOwners) {
-		for (String ownerId : deletedOwners) {
-			List<Person> owners = ticket.getOwners();
-			for (int i = 0; i < owners.size(); i++) {
-				Person curOwner = owners.get(i);
-				if (curOwner.getId().equals(ownerId)) {
-					owners.remove(i);
-					String historySubject = "System: Owner " + curOwner.getRealname() + " removed by " + person.getRealname();
-					addHistoryToTicket(ticket, messageDate, historySubject, null, new Integer(3));
-					break;
-				}
-			}
+	private void addOwners(TicketPeopleForm ticketPeopleForm, Person person, Date messageDate, Ticket ticket, PersonLoader personLoader) throws HibernateException {
+		logger.debug("Clearing owner list...");
+		ticket.getOwners().clear();
+		logger.debug("Adding selected owners...");
+		String[] selectedOwners = ticketPeopleForm.getSelectedOwners();
+		for (String ownerId : selectedOwners) {
+			Person newPerson = personLoader.loadPerson(ownerId);
+			ticket.getOwners().add(newPerson);
+			logger.debug("Added owner: " + newPerson.getInitials());
+			String historySubject = person.getRealname() + " added owner " + newPerson.getRealname();
+			addHistoryToTicket(ticket, messageDate, historySubject, null, new Integer(3));
 		}
 	}
-
-	private void deleteWatchers(Person person, Date messageDate, Ticket ticket, String[] deleted) {
-		for (String personId : deleted) {
-			List<Person> watchers = ticket.getWatchers();
-			for (int i = 0; i < watchers.size(); i++) {
-				Person curWatcher = watchers.get(i);
-				if (curWatcher.getId().equals(personId)) {
-					watchers.remove(i);
-					String historySubject = "System: Watcher " + curWatcher.getRealname() + " removed by " + person.getRealname();
-					addHistoryToTicket(ticket, messageDate, historySubject, null, new Integer(3));
-					break;
-				}
-			}
-		}
-	}
-
 }

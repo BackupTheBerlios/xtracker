@@ -21,7 +21,7 @@ public class RuntimeForm extends ActionForm {
 	private String	smtpHostPassword				= null;
 	private String	fromEmailAddress				= null;
 	private String	popCheckCronExpression			= null;
-	private Integer popCheckIntervalMinutes = null;
+	private Integer	popCheckIntervalMinutes			= null;
 	private String	popMailHost						= null;
 	private String	popHostUsername					= null;
 	private String	popHostPassword					= null;

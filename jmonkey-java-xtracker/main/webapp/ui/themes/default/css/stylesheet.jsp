@@ -421,3 +421,15 @@ input {
 	border: 1px solid Gray; 
 	padding: 4px 4px 4px 4px;
 }
+
+.warningbox {
+	padding: 0px; /*width: 100%;*/
+	background-color: #FFFFE0;
+	border-top: 2px solid Gray;
+	border-bottom: 2px solid Gray;
+	margin: 4px 4px 4px 4px;
+	padding-top: 4px;
+	padding-right: 4px;
+	padding-left: 4px;
+	padding-bottom: 4px;
+}

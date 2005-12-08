@@ -31,7 +31,7 @@
 					<tr>
 					<td width="100" nowrap><bean:message key="view.label.due.date"  />:</td>
 					<td>
-					<html:text name="ticketDatesForm" property="dueDate" /><a href="javascript://" onclick="showCalendar(2005,6,30,'yyyy-MM-dd','ticketDatesForm','dueDate',event,2005,2007);"><img alt="Set Due Date..." border="0" src="/xtracker/config/calendar.gif"></a><div id="slcalcod" style="position:absolute; left:100px; top:100px; z-index:10; visibility:hidden;"><script>printCalendar("Sun","Mon","Tue","Wed","Thu","Fri","Sat",1,"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",30,6,2005);</script></div>
+					<html:text name="ticketDatesForm" property="dueDate" styleId="dueDate" /><stx:themeImg srcKey="CalendarButton" styleId="dueDateTrigger" width="15" height="18" border="0"/>
 					</td>
 					</tr>
 					<tr>
@@ -45,6 +45,15 @@
 					</tr>
 				</table>
 	</html:form>
+	<script type="text/javascript">
+  		Calendar.setup( {
+		      inputField  : "dueDate",
+		      ifFormat    : "%Y-%m-%d",
+		      daFormat    : "%Y-%m-%d",
+		      button      : "dueDateTrigger",
+		      showOthers  : "true"
+	    });
+	</script>
 	<%@ include file="footer.jsp"%>
 </body>
 </html:html>

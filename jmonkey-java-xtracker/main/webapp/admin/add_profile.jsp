@@ -10,7 +10,7 @@
 <body>
 	<%@ include file="basic_header.jsp"%>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ticketlist">
-	<layout:form action="/admin/saveProfile">
+	<html:form action="/admin/saveProfile">
 	
 	<tr>
 	<td colspan="6">
@@ -71,7 +71,7 @@
 	
 	</td>
 	</tr>
-	</layout:form>
+	</html:form>
 	</table>
 	
 	<%@ include file="/footer.jsp"%>

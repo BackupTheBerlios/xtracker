@@ -31,7 +31,7 @@
 			<div id="tabpane0panels0" class="tabpanel">
 				<div id="tabpane0panels0view0" style=""display: block;>
 				<div class="groupbox">
-						<div class="title">System Defaults</div>
+						<div class="title"><bean:message key="view.label.config.runtime.defaults.title"/></div>
 						<div class="panel">
 							<table>
 							<tr>
@@ -47,7 +47,7 @@
 						</div>
 					</div>
 					<div class="groupbox">
-						<div class="title">Ticket escalation checks</div>
+						<div class="title"><bean:message key="view.label.config.runtime.escalation.title"/></div>
 						<div class="panel">
 							<table>
 							<tr>
@@ -65,11 +65,11 @@
 				</div>
 				<div id="tabpane0panels0view1" style="display: none;">
 				<div class="groupbox">
-					<div class="title">Database Connection</div>
+					<div class="title"><bean:message key="view.label.config.runtime.database.title"/></div>
 					<div class="panel">
 						<table>
 							<tr>
-							<td colspan="2"><bean:message key="view.label.option.requires.restart"/></td>
+							<td colspan="2"><div class="warningbox"><stx:themeImg srcKey="WarningIconSmall" width="15" height="15" border="0"/> <bean:message key="view.label.option.requires.restart"/></div></td>
 							</tr>
 							<tr>
 							<td><bean:message key="view.label.config.connection.dialect"/></td><td><html:select name="runtimeForm" property="hibernateDialect">
@@ -111,7 +111,7 @@
 						</div>
 					</div>
 					<div class="groupbox">
-						<div class="title">Database Tuning</div>
+						<div class="title"><bean:message key="view.label.config.runtime.dbtuning.title"/></div>
 						<div class="panel">
 							<table>
 							<tr>
@@ -138,7 +138,7 @@
 				</div>
 				<div id="tabpane0panels0view2" style="display: none;">
 					<div class="groupbox">
-						<div class="title">SMTP Server</div>
+						<div class="title"><bean:message key="view.label.config.runtime.smtp.title"/></div>
 						<div class="panel">
 							<table>
 							<tr>
@@ -160,7 +160,7 @@
 						</div>
 					</div>
 					<div class="groupbox">
-						<div class="title">POP3 Server</div>
+						<div class="title"><bean:message key="view.label.config.runtime.pop3.title"/></div>
 						<div class="panel">
 							<table>
 							<tr>
@@ -179,13 +179,13 @@
 							<td><bean:message key="view.label.config.pop3.password"/></td><td><html:text name="runtimeForm" property="popHostPassword" size="40"/></td>
 							</tr>
 							<tr>
-							<td><bean:message key="view.label.config.pop3.cron"/></td><td><html:text name="runtimeForm" property="popCheckCronExpression" size="40"/></td>
+							<td><bean:message key="view.label.config.pop3.check.interval"/></td><td><html:text name="runtimeForm" property="popCheckIntervalMinutes" size="40"/></td>
 							</tr>
 							</table>
 						</div>
 					</div>
 					<div class="groupbox">
-						<div class="title">Mail Headers</div>
+						<div class="title"><bean:message key="view.label.config.runtime.mailheader.title"/></div>
 						<div class="panel">
 							<table>
 							<tr>
@@ -198,11 +198,11 @@
 						</div>
 					</div>
 					<div class="groupbox">
-						<div class="title">Raw Mail Service</div>
+						<div class="title"><bean:message key="view.label.config.runtime.rms.title"/></div>
 						<div class="panel">
 							<table>
 							<tr>
-							<td colspan="2"><bean:message key="view.label.option.requires.restart"/></td>
+							<td colspan="2"><div class="warningbox"><stx:themeImg srcKey="WarningIconSmall" width="15" height="15" border="0"/> <bean:message key="view.label.option.requires.restart"/></div></td>
 							</tr>
 							<tr>
 							<td><bean:message key="view.label.mail.inputstream.enabled"/></td><td><html:checkbox name="runtimeForm" property="mailInputStreamServiceEnabled"/></td>
@@ -222,7 +222,7 @@
 				</div>
 				<div id="tabpane0panels0view3" style="display: none;">
 					<div class="groupbox">
-						<div class="title">XPlanner Linking</div>
+						<div class="title"><bean:message key="view.label.config.runtime.xplanner.title"/></div>
 						<div class="panel">
 							<table>
 							<tr>
@@ -235,7 +235,7 @@
 						</div>
 					</div>
 					<div class="groupbox">
-						<div class="title">JIRA Linking</div>
+						<div class="title"><bean:message key="view.label.config.runtime.jira.title"/></div>
 						<div class="panel">
 							<table>
 							<tr>

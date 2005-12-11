@@ -50,7 +50,6 @@ public class Installer {
 		session.save(ticketAssigned);
 
 		TemplateData ticketDue = new TemplateData("Ticket Due In Days", "xtracker.required.ticket.dueindays", Parser.XTRACKER, true, "Ticket @@TICKET_ID@@ is due @@DAYS@@\n\n"
-				+ "Due Date: @@TICKET_DUEDATE@@\n" + "Suject: @@TICKET_SUBJECT@@\n\n" + "View the ticket at:\n" + "@@TICKET_URI@@" + "Ticket @@TICKET_ID@@ is due @@DAYS@@\n\n"
 				+ "Due Date: @@TICKET_DUEDATE@@\n" + "Suject: @@TICKET_SUBJECT@@\n\n" + "View the ticket at:\n" + "@@TICKET_URI@@");
 		session.save(ticketDue);
 

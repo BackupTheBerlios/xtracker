@@ -134,10 +134,8 @@
             <groupId>uitags</groupId>
             <artifactId>uitags-main</artifactId>
             <version>0.6.4</version>
-            <jar>C:\workspace\jmonkey-java-xtracker/main/libs/uitags-main-0.6.4.jar</jar>
             <type>jar</type>
             <properties>
-                
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
@@ -147,7 +145,6 @@
             <version>1.4</version>
             <type>jar</type>
             <properties>
-                
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
@@ -200,16 +197,6 @@
                 <war.bundle>true</war.bundle>
             </properties>
         </dependency>
-        <!-- dependency>
-            <groupId>struts-layout</groupId>
-            <artifactId>menu</artifactId>
-            <version>1.1-DEV</version>
-            <type>jar</type>
-            <properties>
-                
-                <war.bundle>true</war.bundle>
-            </properties>
-        </dependency -->
         <dependency>
             <groupId>struts-menu</groupId>
             <artifactId>struts-menu</artifactId>
@@ -263,7 +250,6 @@
             <groupId>oracle</groupId>
             <artifactId>ojdbc</artifactId>
             <version>14</version>
-            <jar>C:\workspace\jmonkey-java-xtracker/main/libs/ojdbc-14.jar</jar>
             <type>jar</type>
             <properties>
                 <war.bundle>true</war.bundle>
@@ -591,7 +577,6 @@
             <groupId>java</groupId>
             <artifactId>jaxrpc-api</artifactId>
             <version>1.6</version>
-            <jar>C:\workspace\jmonkey-java-xtracker/main/libs/jaxrpc-api-1.6.jar</jar>
             <type>jar</type>
             <properties>
                 <war.bundle>true</war.bundle>
@@ -601,7 +586,6 @@
             <groupId>java</groupId>
             <artifactId>jaxrpc-impl</artifactId>
             <version>1.6</version>
-            <jar>C:\workspace\jmonkey-java-xtracker/main/libs/jaxrpc-impl-1.6.jar</jar>
             <type>jar</type>
             <properties>
                 <war.bundle>true</war.bundle>
@@ -611,7 +595,6 @@
             <groupId>java</groupId>
             <artifactId>jaxrpc-spi</artifactId>
             <version>1.6</version>
-            <jar>C:\workspace\jmonkey-java-xtracker/main/libs/jaxrpc-spi-1.6.jar</jar>
             <type>jar</type>
             <properties>
                 <war.bundle>true</war.bundle>
@@ -621,7 +604,6 @@
             <groupId>java</groupId>
             <artifactId>saaj-api</artifactId>
             <version>1.6</version>
-            <jar>C:\workspace\jmonkey-java-xtracker/main/libs/saaj-api-1.6.jar</jar>
             <type>jar</type>
             <properties>
                 <war.bundle>true</war.bundle>
@@ -631,7 +613,6 @@
             <groupId>java</groupId>
             <artifactId>saaj-impl</artifactId>
             <version>1.6</version>
-            <jar>C:\workspace\jmonkey-java-xtracker/main/libs/saaj-impl-1.6.jar</jar>
             <type>jar</type>
             <properties>
                 <war.bundle>true</war.bundle>
@@ -686,6 +667,15 @@
             <groupId>displaytag</groupId>
             <artifactId>displaytag</artifactId>
             <version>1.0</version>
+            <type>jar</type>
+            <properties>
+                <war.bundle>true</war.bundle>
+            </properties>
+        </dependency>
+        <dependency>
+            <groupId>freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.4</version>
             <type>jar</type>
             <properties>
                 <war.bundle>true</war.bundle>

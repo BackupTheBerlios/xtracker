@@ -22,6 +22,7 @@ import com.jmonkey.xtracker.linking.jira.JiraLink;
 import com.jmonkey.xtracker.linking.xplanner.XPlannerLink;
 import com.jmonkey.xtracker.profile.Person;
 import com.jmonkey.xtracker.profile.PersonRole;
+import com.jmonkey.xtracker.template.TemplateData;
 
 public class HibernateSessionFactory {
 	private static Logger						logger				= LogManager.getLogger(HibernateSessionFactory.class);
@@ -155,6 +156,7 @@ public class HibernateSessionFactory {
 			cfg.addClass(Project.class);
 			cfg.addClass(Disposition.class);
 			cfg.addClass(PersonRole.class);
+			cfg.addClass(TemplateData.class);
 			cfg.setProperties(properties);
 		}
 	}

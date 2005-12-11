@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+
+<!-- DO NOT EDIT: This is a generated file that is synchronized -->
+<!-- by MyEclipse Hibernate tool integration.                   -->
+<!-- Created Wed Oct 06 22:57:08 EDT 2004                         -->
+<hibernate-mapping>
+	<class name="com.jmonkey.xtracker.template.TemplateData"
+		table="templates">
+		<id name="id" column="id" type="java.lang.String">
+			<generator class="uuid.hex" />
+		</id>
+
+		<property name="name" column="name" type="string" not-null="true" access="property" unique="true" />
+		<property name="resourceKey" column="resource_key" type="string" not-null="true" access="property" unique="true" />
+		<property name="parser" column="parser" type="com.jmonkey.xtracker.hibernate.ParserType" not-null="true" access="property" />
+		<property name="required" column="required" type="boolean" not-null="true" access="property" />
+		<property name="content" column="content" type="text" not-null="true" access="property" />
+	</class>
+
+</hibernate-mapping>

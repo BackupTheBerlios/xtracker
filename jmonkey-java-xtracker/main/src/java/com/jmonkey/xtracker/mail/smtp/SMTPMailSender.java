@@ -474,11 +474,8 @@ public class SMTPMailSender {
 		logger.debug("From: " + fromEmail);
 		smtpMail.setFrom(fromEmail, queue.getName());
 
-		List<Person> owners = ticket.getOwners();
-		for (Person owner : owners) {
-			logger.debug("Adding To: " + owner.getEmailAddress());
-			smtpMail.addTo(owner.getEmailAddress(), owner.getRealname());
-		}
+		Person manager = queue.getManager();
+		smtpMail.addTo(manager.getEmailAddress(), manager.getRealname());
 
 		smtpMail.send();
 	}

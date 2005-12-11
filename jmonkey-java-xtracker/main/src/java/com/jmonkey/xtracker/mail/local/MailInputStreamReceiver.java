@@ -34,7 +34,7 @@ public class MailInputStreamReceiver extends Thread {
 	private Socket	socket	= null;
 
 	public MailInputStreamReceiver(ThreadGroup group, Socket socket) {
-		super(group, "MIS-Receiver");
+		super(group, "RAW-Receiver");
 		this.socket = socket;
 	}
 

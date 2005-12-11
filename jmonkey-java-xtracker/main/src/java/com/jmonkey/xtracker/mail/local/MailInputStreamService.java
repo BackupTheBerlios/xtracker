@@ -15,7 +15,7 @@ public class MailInputStreamService extends Thread {
 	private Logger			logger			= LogManager.getLogger(MailInputStreamService.class);
 	private boolean			running			= true;
 	private ServerSocket	serverSocket	= null;
-	private ThreadGroup		receiverGroup	= new ThreadGroup("MIS-Receiver-Group");
+	private ThreadGroup		receiverGroup	= new ThreadGroup("RAW-Receiver-Group");
 
 	public MailInputStreamService() {
 		super("MIS-Service");
@@ -23,6 +23,7 @@ public class MailInputStreamService extends Thread {
 
 	@Override
 	public void run() {
+		logger.warn("RAW Mail input service waiting...");
 		int resetCount = 0;
 		while (running) {
 			try {
@@ -35,12 +36,15 @@ public class MailInputStreamService extends Thread {
 				resetCount = handleRecoverableException(resetCount, e);
 			}
 		}
+
+		logger.warn("RAW Mail input service shutdown...");
 	}
 
 	private int listenForConnections(int resetCount) throws IOException {
 		Socket socket = null;
 		while ((socket = serverSocket.accept()) != null) {
 			resetCount = 0;
+			logger.debug("Reset Count: " + resetCount + ", Connection from: " + socket.getInetAddress().toString());
 			MailInputStreamReceiver receiver = new MailInputStreamReceiver(receiverGroup, socket);
 			receiver.start();
 		}
@@ -85,6 +89,7 @@ public class MailInputStreamService extends Thread {
 		serverSocket.setSoTimeout(0);
 		serverSocket.setReuseAddress(true);
 		serverSocket.bind(socketAddress, backlog);
+		logger.debug("RAW Mail service listening on :" + host + ":" + port);
 	}
 
 	public boolean isRunning() {

@@ -4,7 +4,7 @@
     <author email="brill@pappin.ca">Brill Pappin</author>
   </properties>
   <body>
-  <release version="1.0.0.ALPHA.4" date="in CVS">
+  <release version="1.0.0.ALPHA.4" date="In CVS">
 		<action dev="brill" type="add">
         	Fixed and enabled support for TLS/SSL enabled POP servers.
         </action>
@@ -15,7 +15,13 @@
         	Changed mail check interval to seconds (integer) instead of a Quartz cron expression.
         </action>
         <action dev="brill" type="fix">
-        	Removed Quartz from the code. It was too unstable and would failed often for reasons outside its own scope. The scheduled tasks are not TimerTasks.
+        	Removed Quartz from the code. It was too unstable and would fail often for reasons outside its own scope. The scheduled tasks are now TimerTasks.
+        </action>
+        <action dev="brill" type="fix">
+        	New Tickets that have an owner assigned will now send email to the owner and not the queue manager.
+        </action>
+        <action dev="brill" type="add">
+        	Mail templates now stored in the database.
         </action>
 	</release>
 	<release version="1.0.0.ALPHA.3" date="in CVS">

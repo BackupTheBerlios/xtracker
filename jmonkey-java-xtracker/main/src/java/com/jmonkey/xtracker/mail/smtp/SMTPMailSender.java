@@ -356,7 +356,7 @@ public class SMTPMailSender {
 		buffer.append("-- ");
 		buffer.append("\n");
 		buffer.append("Sent by jmonkey.com XTracker\n");
-		buffer.append("http://www.jmonkey.com/xtracker\n");
+		buffer.append("http://xtracker.berlios.de\n");
 	}
 
 	public static StringBuffer getDefaultNewPersonTemplate() {
@@ -526,4 +526,77 @@ public class SMTPMailSender {
 		smtpMail.send();
 	}
 
+	public void sendNewTicketAssigned(Ticket ticket, History history, Queue queue) throws Exception {
+		logger.debug("Sending New Ticket for Queue " + queue.getName());
+		StringBuffer message = generateNewTicketAssignedTemplate(ticket, history, queue);
+		Hashtable<String, String> mailHeaders = getMailHeaders();
+
+		SMTPMail smtpMail = new SMTPMail();
+		smtpMail.setHost(hostName);
+
+		Person author = history.getAuthor();
+		logger.debug("Author: " + author.getRealname());
+
+		smtpMail.setSubject("A New ticket was assigned to you in Queue " + queue.getName());
+		smtpMail.setMessage(message.toString());
+		smtpMail.setHeaders(mailHeaders);
+
+		smtpMail.setSentDate(new Date());
+
+		String fromEmail = QueueUtil.getQueueEmailAddress(mailConfig, ticket.getQueue());
+		logger.debug("From: " + fromEmail);
+		smtpMail.setFrom(fromEmail, queue.getName());
+
+		Person manager = queue.getManager();
+		smtpMail.addTo(manager.getEmailAddress(), manager.getRealname());
+
+		smtpMail.send();
+	}
+
+	private StringBuffer generateNewTicketAssignedTemplate(Ticket ticket, History history, Queue queue) {
+		Template templateParser = new Template();
+		templateParser.setTag("@@QUEUE_NAME@@", queue.getName());
+		templateParser.setTag("@@QUEUE_EMAIL@@", queue.getEmailAlias() + getEmailDomain());
+		templateParser.setTag("@@TICKET_ID@@", ticket.getId().toString());
+		templateParser.setTag("@@TICKET_SUBJECT@@", ticket.getSubject());
+		String context = preferencesConfig.getRootXTrackerUriContext();
+		if (context.endsWith("/")) {
+			context = context.substring(0, context.length() - 1);
+		}
+		templateParser.setTag("@@TICKET_URI@@", context + "/open.do?id=" + ticket.getId());
+
+		Person author = history.getAuthor();
+		Date historyDate = history.getCreateDate();
+		Integer historyImportance = history.getImportance();
+		String historySubject = history.getSubject();
+		String historyContent = history.getContent();
+		templateParser.setTag("@@HISTORY_AUTHOR@@", author.getRealname());
+		// XXX Need to format the date
+		templateParser.setTag("@@HISTORY_DATE@@", historyDate.toString());
+		templateParser.setTag("@@HISTORY_SUBJECT@@", historySubject);
+		templateParser.setTag("@@HISTORY_MESSAGE@@", historyContent);
+		templateParser.setTag("@@HISTORY_IMPORTANCE@@", historyImportance.toString());
+
+		if (tokenTemplate == null) {
+			tokenTemplate = getDefaultTicketAssignedTemplate();
+		}
+		templateParser.setBuffer(tokenTemplate);
+		StringBuffer message = templateParser.parseBuffer();
+		return message;
+	}
+
+	private StringBuffer getDefaultTicketAssignedTemplate() {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("A new Ticket [#@@TICKET_ID@@] was assigned to you.\n");
+		buffer.append("\n");
+		buffer.append("@@TICKET_URI@@\n");
+		buffer.append("\n");
+		buffer.append("\n");
+		buffer.append("Date   : @@HISTORY_DATE@@\n");
+		buffer.append("Author : @@HISTORY_AUTHOR@@\n");
+		buffer.append("Subject: @@HISTORY_SUBJECT@@\n");
+		appendSentByTagLine(buffer);
+
+		return buffer;
+	}
 }

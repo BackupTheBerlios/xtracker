@@ -107,12 +107,16 @@ public class SaveTicketAction extends BaseAction {
 
 		TicketPersistor ticketSaver = new TicketPersistor();
 		ticketSaver.saveTicket(ticket);
-
+		
 		SMTPMailSender mailSender = new SMTPMailSender();
 		mailSender.setHostName(mailConfig.getSmtpMailHost());
 		mailSender.setUsername(mailConfig.getSmtpHostUsername());
 		mailSender.setPassword(mailConfig.getSmtpHostPassword());
+		if(ticket.getOwners().size() > 0) {
+			mailSender.sendNewTicketAssigned(ticket, history, queue);
+		}else {
 		mailSender.sendNewTicketInQueueMail(ticket, history, queue);
+		}
 
 		return mapping.findForward("display");
 	}

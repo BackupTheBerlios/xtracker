@@ -1,3 +1,5 @@
 mysql-hibernate.properties
 oracle-hibernate.properties
 hibernate.properties
+airdebit-hibernate.properties
+test-hibernate.properties

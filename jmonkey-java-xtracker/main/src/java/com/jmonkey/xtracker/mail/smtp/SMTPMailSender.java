@@ -6,6 +6,8 @@ import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.hibernate.HibernateException;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -19,6 +21,8 @@ import com.jmonkey.xtracker.mail.Template;
 import com.jmonkey.xtracker.mail.TokenManipulator;
 import com.jmonkey.xtracker.mail.pop.ReceivedMailMessage;
 import com.jmonkey.xtracker.profile.Person;
+import com.jmonkey.xtracker.template.TemplateData;
+import com.jmonkey.xtracker.template.loader.TemplateDataLoader;
 import com.jmonkey.xtracker.util.DateFormatter;
 import com.jmonkey.xtracker.util.QueueUtil;
 
@@ -313,83 +317,6 @@ public class SMTPMailSender {
 		}
 	}
 
-	public static StringBuffer getDefaultTicketInQueueTemplate() {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append("A new Ticket [#@@TICKET_ID@@] was added to the Queue\n");
-		buffer.append("@@QUEUE_NAME@@ (You are the manager of that Queue)\n");
-		buffer.append("\n");
-		buffer.append("\n");
-		buffer.append("You must assign this ticket to someone in order for it\n");
-		buffer.append("to be resolved.\n");
-		buffer.append("@@TICKET_URI@@\n");
-		buffer.append("\n");
-		buffer.append("\n");
-		buffer.append("Date   : @@HISTORY_DATE@@\n");
-		buffer.append("Author : @@HISTORY_AUTHOR@@\n");
-		buffer.append("Subject: @@HISTORY_SUBJECT@@\n");
-		appendSentByTagLine(buffer);
-
-		return buffer;
-	}
-
-	public static StringBuffer getDefaultReplyTemplate() {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append("@@HISTORY_MESSAGE@@\n");
-		buffer.append("\n");
-		buffer.append("-- ");
-		buffer.append("\n");
-		buffer.append("===============================\n");
-		buffer.append("A new message was added to Ticket #@@TICKET_ID@@\n");
-		buffer.append("Date   : @@HISTORY_DATE@@\n");
-		buffer.append("Author : @@HISTORY_AUTHOR@@\n");
-		buffer.append("Subject: @@HISTORY_SUBJECT@@\n");
-		buffer.append("You can view the entire ticket at:\n");
-		buffer.append("@@TICKET_URI@@\n");
-		appendSentByTagLine(buffer);
-
-		return buffer;
-	}
-
-	private static void appendSentByTagLine(StringBuffer buffer) {
-		buffer.append("\n");
-		buffer.append("\n");
-		buffer.append("-- ");
-		buffer.append("\n");
-		buffer.append("Sent by jmonkey.com XTracker\n");
-		buffer.append("http://xtracker.berlios.de\n");
-	}
-
-	public static StringBuffer getDefaultNewPersonTemplate() {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append("New Login Created\n");
-		buffer.append("\n");
-		buffer.append("Welcome to XTracker  @@PERSON_REALNAME@@,\n\n");
-		buffer.append("A new account has been created for you:\n");
-		buffer.append("Username:\t @@PERSON_USERNAME@@\n");
-		buffer.append("Password:\t @@PERSON_PASSWORD@@\n");
-		buffer.append("\n");
-		buffer.append("You can view the status of the tickets you submit at:\n");
-		buffer.append("@@CONTEXT_URI@@\n");
-		buffer.append("\n");
-		buffer.append("You can send tickets to the @@QUEUE_NAME@@ queue at any time by sending mail to @@QUEUE_EMAIL@@\n");
-		appendSentByTagLine(buffer);
-		return buffer;
-	}
-
-	public static StringBuffer getDefaultTicketDueTemplate() {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append("Ticket @@TICKET_ID@@ is due @@DAYS@@\n");
-		buffer.append("\n");
-		buffer.append("Due Date: @@TICKET_DUEDATE@@\n");
-		buffer.append("Suject: @@TICKET_SUBJECT@@\n");
-		buffer.append("\n");
-		buffer.append("View the ticket at:\n");
-		buffer.append("@@TICKET_URI@@");
-		appendSentByTagLine(buffer);
-
-		return buffer;
-	}
-
 	public void addHeader(String key, String value) {
 		headers.put(key, value);
 	}
@@ -547,8 +474,11 @@ public class SMTPMailSender {
 		logger.debug("From: " + fromEmail);
 		smtpMail.setFrom(fromEmail, queue.getName());
 
-		Person manager = queue.getManager();
-		smtpMail.addTo(manager.getEmailAddress(), manager.getRealname());
+		List<Person> owners = ticket.getOwners();
+		for (Person owner : owners) {
+			logger.debug("Adding To: " + owner.getEmailAddress());
+			smtpMail.addTo(owner.getEmailAddress(), owner.getRealname());
+		}
 
 		smtpMail.send();
 	}
@@ -586,17 +516,54 @@ public class SMTPMailSender {
 	}
 
 	private StringBuffer getDefaultTicketAssignedTemplate() {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append("A new Ticket [#@@TICKET_ID@@] was assigned to you.\n");
-		buffer.append("\n");
-		buffer.append("@@TICKET_URI@@\n");
-		buffer.append("\n");
-		buffer.append("\n");
-		buffer.append("Date   : @@HISTORY_DATE@@\n");
-		buffer.append("Author : @@HISTORY_AUTHOR@@\n");
-		buffer.append("Subject: @@HISTORY_SUBJECT@@\n");
-		appendSentByTagLine(buffer);
-
+		// XXX partially refactored to load from DB.
+		StringBuffer buffer = loadTemplate("xtracker.required.ticket.assigned");
 		return buffer;
 	}
+
+	private static void appendSentByTagLine(StringBuffer buffer) {
+		buffer.append("\n\n-- \n");
+		buffer.append("Sent by jmonkey.com XTracker\n");
+		buffer.append("http://xtracker.berlios.de\n");
+	}
+
+	public static StringBuffer getDefaultTicketInQueueTemplate() {
+		// XXX partially refactored to load from DB.
+		StringBuffer buffer = loadTemplate("xtracker.required.ticket.inqueue");
+		return buffer;
+	}
+
+	public static StringBuffer getDefaultReplyTemplate() {
+		// XXX partially refactored to load from DB.
+		StringBuffer buffer = loadTemplate("xtracker.required.ticket.reply");
+		return buffer;
+	}
+
+	public static StringBuffer getDefaultNewPersonTemplate() {
+		// XXX partially refactored to load from DB.
+		StringBuffer buffer = loadTemplate("xtracker.required.new.person");
+		return buffer;
+	}
+
+	private static StringBuffer loadTemplate(String key) {
+		StringBuffer buffer = new StringBuffer();
+
+		TemplateDataLoader loader = new TemplateDataLoader();
+		TemplateData data;
+		try {
+			data = loader.loadByResourceKey(key);
+			buffer.append(data.getContent());
+		} catch (HibernateException e) {
+			Logger.getLogger(SMTPMailSender.class).error("failed to load: " + key, e);
+			buffer.append(e.getMessage());
+		}
+		appendSentByTagLine(buffer);
+		return buffer;
+	}
+
+	public static StringBuffer getDefaultTicketDueTemplate() {
+		StringBuffer buffer = loadTemplate("xtracker.required.ticket.dueindays");
+		return buffer;
+	}
+
 }

@@ -40,12 +40,12 @@ public class MailInputStreamReceiver extends Thread {
 
 	@Override
 	public void run() {
-		try {
-			logger.debug("Setting socket timeout to 2sec.");
-			socket.setSoTimeout(2000);
-		} catch (SocketException e) {
-			logger.warn("Error setting socket timeout", e);
-		}
+		// try {
+		// logger.debug("Setting socket timeout to 30 sec.");
+		// socket.setSoTimeout(30000);
+		// } catch (SocketException e) {
+		// logger.warn("Error setting socket timeout", e);
+		// }
 		try {
 			logger.debug("Reading message from stream...");
 			ReceivedMailMessage mailMessage = readIncomingMessage();

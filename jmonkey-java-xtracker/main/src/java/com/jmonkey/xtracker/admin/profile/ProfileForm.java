@@ -19,8 +19,8 @@ public class ProfileForm extends ActionForm {
 	private String	verifyPassword		= null;
 	private String	signature			= null;
 
-	private boolean	active				= true;
-	private boolean	selectable			= true;
+	private boolean	active				= false;
+	private boolean	selectable			= false;
 	private boolean	anonymous			= false;
 	private boolean	administrator		= false;
 

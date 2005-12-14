@@ -38,6 +38,8 @@ public class AddProfileAction extends BaseAction {
 		QueueLoader queueLoader = new QueueLoader();
 		List<Queue> queueList = queueLoader.loadQueueList(false,false);
 		profileForm.setQueueList(queueList);
+		profileForm.setActive(true);
+		profileForm.setSelectable(true);
 		request.getSession().setAttribute("profileForm", profileForm);
 
 		return mapping.findForward("input");

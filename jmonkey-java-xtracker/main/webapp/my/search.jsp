@@ -142,7 +142,7 @@
 					<html:option value="gt">After</html:option>
 					<html:option value="lt">Before</html:option>
 				</html:select></td>
-		    <td valign="top"><html:text name="searchForm" property="createDate" /><a href="javascript://" onclick="showCalendar(<bean:write name="searchForm" property="yearMonthDayString"/>,'yyyy-MM-dd','searchForm','createDate',event,2005,2007);"><img border="0" src="/xtracker/config/calendar.gif"></a><div id="slcalcod" style="position:absolute; left:100px; top:100px; z-index:10; visibility:hidden;"><script>printCalendar("Sun","Mon","Tue","Wed","Thu","Fri","Sat",1,"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",<bean:write name="searchForm" property="yearMonthDayString"/>);</script></div></td>
+		    <td valign="top"><html:text name="searchForm" property="createDate" styleId="createDate" /><stx:themeImg srcKey="CalendarButton" styleId="createDateTrigger" width="15" height="18" border="0"/></td>
 		</tr>
 		<tr>
 		    <td align="right" valign="top"><strong><bean:message key="view.label.modify.date"/></strong></td>
@@ -151,7 +151,7 @@
 					<html:option value="gt">After</html:option>
 					<html:option value="lt">Before</html:option>
 				</html:select></td>
-		    <td valign="top"><html:text name="searchForm" property="modifyDate" /><a href="javascript://" onclick="showCalendar(<bean:write name="searchForm" property="yearMonthDayString"/>,'yyyy-MM-dd','searchForm','modifyDate',event,2005,2007);"><img border="0" src="/xtracker/config/calendar.gif"></a><div id="slcalcod" style="position:absolute; left:100px; top:100px; z-index:10; visibility:hidden;"><script>printCalendar("Sun","Mon","Tue","Wed","Thu","Fri","Sat",1,"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",<bean:write name="searchForm" property="yearMonthDayString"/>);</script></div></td>
+		    <td valign="top"><html:text name="searchForm" property="modifyDate" styleId="modifyDate" /><stx:themeImg srcKey="CalendarButton" styleId="modifyDateTrigger" width="15" height="18" border="0"/></td>
 		</tr>
 		<tr>
 		    <td align="right" valign="top"><strong><bean:message key="view.label.due.date"/></strong></td>
@@ -160,7 +160,7 @@
 					<html:option value="gt">After</html:option>
 					<html:option value="lt">Before</html:option>
 				</html:select></td>
-		    <td valign="top"><html:text name="searchForm" property="dueDate" /><a href="javascript://" onclick="showCalendar(<bean:write name="searchForm" property="yearMonthDayString"/>,'yyyy-MM-dd','searchForm','dueDate',event,2005,2007);"><img border="0" src="/xtracker/config/calendar.gif"></a><div id="slcalcod" style="position:absolute; left:100px; top:100px; z-index:10; visibility:hidden;"><script>printCalendar("Sun","Mon","Tue","Wed","Thu","Fri","Sat",1,"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",<bean:write name="searchForm" property="yearMonthDayString"/>);</script></div></td>
+		    <td valign="top"><html:text name="searchForm" property="dueDate" styleId="dueDate" /><stx:themeImg srcKey="CalendarButton" styleId="dueDateTrigger" width="15" height="18" border="0"/></td>
 		</tr>
 		<tr>
 		    <td align="right" valign="top"><strong><bean:message key="view.label.closed.date"/></strong></td>
@@ -169,12 +169,44 @@
 					<html:option value="gt">After</html:option>
 					<html:option value="lt">Before</html:option>
 				</html:select></td>
-		    <td valign="top"><html:text name="searchForm" property="closedDate" /><a href="javascript://" onclick="showCalendar(<bean:write name="searchForm" property="yearMonthDayString"/>,'yyyy-MM-dd','searchForm','closedDate',event,2005,2007);"><img border="0" src="/xtracker/config/calendar.gif"></a><div id="slcalcod" style="position:absolute; left:100px; top:100px; z-index:10; visibility:hidden;"><script>printCalendar("Sun","Mon","Tue","Wed","Thu","Fri","Sat",1,"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",<bean:write name="searchForm" property="yearMonthDayString"/>);</script></div></td>
+		    <td valign="top"><html:text name="searchForm" property="closedDate" styleId="closedDate" /><stx:themeImg srcKey="CalendarButton" styleId="closedDateTrigger" width="15" height="18" border="0"/></td>
 		</tr>
 		
 		</table>
 		</html:form>
-
+	<script type="text/javascript">
+  		Calendar.setup( {
+		      inputField  : "createDate",
+		      ifFormat    : "%Y-%m-%d",
+		      daFormat    : "%Y-%m-%d",
+		      button      : "createDateTrigger",
+		      showOthers  : "true"
+	    });
+	    
+	    Calendar.setup( {
+		      inputField  : "modifyDate",
+		      ifFormat    : "%Y-%m-%d",
+		      daFormat    : "%Y-%m-%d",
+		      button      : "modifyDateTrigger",
+		      showOthers  : "true"
+	    });
+	    
+	    Calendar.setup( {
+		      inputField  : "dueDate",
+		      ifFormat    : "%Y-%m-%d",
+		      daFormat    : "%Y-%m-%d",
+		      button      : "dueDateTrigger",
+		      showOthers  : "true"
+	    });
+	    
+	    Calendar.setup( {
+		      inputField  : "closedDate",
+		      ifFormat    : "%Y-%m-%d",
+		      daFormat    : "%Y-%m-%d",
+		      button      : "closedDateTrigger",
+		      showOthers  : "true"
+	    });
+	</script>
 	</td>
     <td width="60%" align="left" valign="top" nowrap>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ticketlist">

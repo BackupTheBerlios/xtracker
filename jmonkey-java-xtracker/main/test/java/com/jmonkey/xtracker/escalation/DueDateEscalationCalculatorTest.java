@@ -42,11 +42,20 @@ public class DueDateEscalationCalculatorTest extends TestCase {
 		over100Days.setTimeInMillis(0);
 		over100Days.set(2005, Calendar.NOVEMBER, 28, 0, 0, 0);
 		calculator.setStartDate(over100Days);
-		
+
 		Integer result = calculator.calculate();
 		assertNotNull(result);
 		assertEquals(START_VALUE, result.intValue());
 	}
+
+	public void testSameDayDivideByZeroResultsinZero() {
+		calculator.setEndDate(testEndDate);
+		calculator.setStartDate(testEndDate);
+		Integer result = calculator.valuePerDay();
+		assertNotNull(result);
+		assertEquals(0, result.intValue());
+	}
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();

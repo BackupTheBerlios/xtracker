@@ -62,7 +62,10 @@ public class DueDateEscalationCalculator {
 	public Integer valuePerDay() {
 		int days = findDaysBetweenDates();
 		int remaining = findValueRemaining();
-		int part = remaining / days;
+		int part = 0;
+		if (days > 0) {
+			part = remaining / days;
+		}
 		return part;
 	}
 

@@ -29,29 +29,29 @@ public class EscalateTask extends TimerTask {
 		try {
 			List<Ticket> ticketList = ticketLoader.loadTicketsForDueDateEscalation();
 			for (Ticket ticket : ticketList) {
-				Date dueDate = ticket.getDueDate();
+				Calendar dueDate = getDueDateCalendar(ticket);
 				Integer priority = ticket.getPriority();
 
-				long oldPriority = priority.longValue();
+				DueDateEscalationCalculator calculator = new DueDateEscalationCalculator();
+				calculator.setMaxValue(100);
+				calculator.setStartDate(Calendar.getInstance());
+				calculator.setEndDate(dueDate);
+				calculator.setValue(priority);
+				Integer newPriority = calculator.calculate();
 
-				Calendar today = Calendar.getInstance();
-				long numDays = (dueDate.getTime() - today.getTime().getTime() + 43200000) / 86400000;
-				long numPoints = 100 - oldPriority;
-
-				if (numDays == 0) {
-					numDays = 1;
-				}
-				long incrementBy = numPoints / numDays;
-				long newPriority = oldPriority + incrementBy;
-				if (newPriority > 99) {
-					newPriority = 99;
-				}
-				ticket.setPriority(new Integer((int) newPriority));
+				ticket.setPriority(newPriority);
 				ticketPersistor.updateTicket(ticket);
 			}
 		} catch (HibernateException e) {
 			logger.error("Escalation failed", e);
 		}
+	}
+
+	private Calendar getDueDateCalendar(Ticket ticket) {
+		Calendar dueDate = Calendar.getInstance();
+		dueDate.setTimeInMillis(0);
+		dueDate.setTime(ticket.getDueDate());
+		return dueDate;
 	}
 
 }

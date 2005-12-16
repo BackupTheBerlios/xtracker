@@ -1,5 +1,6 @@
 package com.jmonkey.xtracker.escalation;
 
+import java.util.Date;
 import java.util.List;
 import java.util.TimerTask;
 
@@ -36,11 +37,12 @@ public class MaxTimeEscalateTask extends TimerTask {
 					Integer priority = ticket.getPriority();
 					long oldPriority = priority.longValue();
 					long newPriority = oldPriority + incrementBy;
-					if (newPriority > 99) {
-						newPriority = 99;
+					if (newPriority > 100) {
+						newPriority = 100;
 					}
 
-					ticket.setPriority(new Integer((int) newPriority));
+					ticket.setPriority((int) newPriority);
+					ticket.setModifyDate(new Date());
 					ticketPersistor.updateTicket(ticket);
 				}
 			} catch (HibernateException e) {

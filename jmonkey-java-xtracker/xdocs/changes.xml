@@ -9,19 +9,31 @@
         	Fixed and enabled support for TLS/SSL enabled POP servers.
         </action>
         <action dev="brill" type="add">
-        	Added raw socket reception of mail for injection of messages into XTracker from an external MTA.
+        	Added raw socket reception of mail for injection of 
+        	messages into XTracker from an external MTA.
         </action>
         <action dev="brill" type="fix">
-        	Changed mail check interval to seconds (integer) instead of a Quartz cron expression.
+        	Changed mail check interval to seconds (integer) instead 
+        	of a Quartz cron expression.
         </action>
         <action dev="brill" type="fix">
-        	Removed Quartz from the code. It was too unstable and would fail often for reasons outside its own scope. The scheduled tasks are now TimerTasks.
+        	Removed Quartz from the code. It was too unstable and 
+        	would fail often for reasons outside its own scope. 
+        	The scheduled tasks are now TimerTasks.
         </action>
         <action dev="brill" type="fix">
-        	New Tickets that have an owner assigned will now send email to the owner and not the queue manager.
+        	New Tickets that have an owner assigned will now send 
+        	email to the owner and not the queue manager.
         </action>
         <action dev="brill" type="add">
         	Mail templates now stored in the database.
+        </action>
+        <action dev="brill" type="fix">
+        	Ticket max age would increment many times a day. 
+        	cause by not updating last modified on the ticket when 
+        	the priority was incremented. When a ticket fits the max 
+        	age rule, it's priority is incremented as well as it's 
+        	last modified date.
         </action>
 	</release>
 	<release version="1.0.0.ALPHA.3" date="in CVS">
@@ -50,7 +62,7 @@
 	</release>
     <release version="1.0.0.ALPHA.2" date="2005-09-18">
 		<action dev="brill" type="update">
-        	First checkin to BerliOS.
+        	First check in to BerliOS.
         </action>
         <action dev="brill" type="update">
         	First public release.

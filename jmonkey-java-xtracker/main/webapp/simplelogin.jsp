@@ -1,56 +1,36 @@
 <%@ page language="java"%>
-<%@ taglib uri="http://jakarta.apache.org/struts/tags-logic" prefix="logic"%>
-<%@ taglib uri="http://jakarta.apache.org/struts/tags-bean"	prefix="bean"%>
-<%@ taglib uri="http://jakarta.apache.org/struts/tags-html"	prefix="html"%>
+<%@ include file="/taglibs.jsp"%>
+<%@ include file="/preamble.jsp"%>
 
-<html:html>
+<html:html xhtml="true" lang="true">
 <head>
 	<title>XTracker <bean:message key="view.panel.label.login"/></title>
+	<%@ include file="/styles.jsp"%>
+	<%@ include file="/scripts.jsp"%>
+	<%@ include file="/theme.jsp"%>
 </head>
 <body>
 
-<html:form action="/simpleLogin">
-<html:hidden name="simpleAuthLoginForm" property="redirectTo"/>
-<table align="center" width="100%" height="100%" cellspacing="0" cellpadding="2" border="0">
-<tr>
-    <td align="center" nowrap>
-	
-	<table border="0" cellspacing="0" cellpadding="1" frame="box">
-	<tr>
-	    <td align="center" nowrap><%@ include file="header.jsp"%></td>
-	</tr>
-	<tr>
-	    <td align="center" nowrap>
-		
-		<table border="0" cellspacing="0" cellpadding="5">
-		<tr bgcolor="#8080C0">
-		    <th colspan="2"><bean:message key="view.panel.label.login"/></th>
-		</tr>
-		<tr bgcolor="#8080FF" >
-		    <td><bean:message key="view.label.username"/>:</td>
-		    <td><html:text name="simpleAuthLoginForm" property="username"/></td>
-		</tr>
-		<tr bgcolor="#8080FF">
-		    <td><bean:message key="view.label.password"/></td>
-		    <td><html:password name="simpleAuthLoginForm" property="password"/></td>
-		</tr>
-		<tr>
-		    <td colspan="2" align="right" nowrap><html:submit>
-				<bean:message key="view.label.login"/>
-			</html:submit></td>
-		</tr>
-		</table>	
-		
-		</td>
-	</tr>
-	</table>
-	</td>
-</tr>
-</table>
 
 
+<div class="dialogbox">
 	
-	
-</html:form>
+	<div><stx:themeImg srcKey="HeaderLogo" alt="XTracker"/></div>
+		<html:form action="/simpleLogin">
+		<div>
+		<fieldset>
+		<legend><bean:message key="view.panel.label.login"/></legend>
+		<html:hidden name="simpleAuthLoginForm" property="redirectTo"/>
+		<ul>
+			<li><label for="username"><bean:message key="view.label.username"/></label> <html:text name="simpleAuthLoginForm" property="username" styleId="username"/></li>
+			<li><label for="password"><bean:message key="view.label.password"/></label> <html:password name="simpleAuthLoginForm" property="password" styleId="password"/></li>
+		</ul>
+		</fieldset>
+		<html:submit><bean:message key="view.label.login"/></html:submit>
+		</div>
+		</html:form>
+
+</div>
+
 </body>
 </html:html>

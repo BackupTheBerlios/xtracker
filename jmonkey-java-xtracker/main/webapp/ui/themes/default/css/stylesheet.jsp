@@ -433,3 +433,42 @@ input {
 	padding-left: 4px;
 	padding-bottom: 4px;
 }
+
+.errorbox {
+	padding: 0px; /*width: 100%;*/
+	background-color: #FFC8ED;
+	border-top: 2px solid Gray;
+	border-bottom: 2px solid Gray;
+	margin: 4px 4px 4px 4px;
+	padding-top: 4px;
+	padding-right: 4px;
+	padding-left: 4px;
+	padding-bottom: 4px;
+}
+
+.dialogbox {
+	margin: 4px 4px 4px 4px;
+	display: compact;
+}
+
+.dialogbox ul {
+	list-style-position: inside;
+	list-style-type: none;
+	white-space: nowrap;
+}
+
+.dialogbox .title {
+	margin-top: 0px;
+	font-weight: bold;
+	font-family: sans-serif;
+}
+
+.dialogbox .panel {
+	border: 1px solid Gray; 
+	padding: 4px 4px 4px 4px;
+}
+
+.dialogbox .commands {
+	padding: 4px 4px 4px 4px;
+	text-align: right;
+}

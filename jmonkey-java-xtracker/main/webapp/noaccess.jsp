@@ -4,7 +4,7 @@
 
 <html:html xhtml="true" lang="true">
 <head>
-	<title>XTracker No Access</title>
+	<title><bean:message key="label.xtracker"/> <bean:message key="label.no.access"/></title>
 	<%@ include file="/styles.jsp"%>
 	<%@ include file="/scripts.jsp"%>
 	<%@ include file="/theme.jsp"%>
@@ -12,8 +12,8 @@
 <body>
 
 <div class="dialogbox">
-	<div class="title">No Access</div>
-	You do not have access to that XTracker feature.
+	<div class="title"><bean:message key="label.no.access"/></div>
+	<bean:message key="message.no.access"/>
 </div>
 
 </body>

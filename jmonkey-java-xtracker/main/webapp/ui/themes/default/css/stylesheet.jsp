@@ -271,6 +271,11 @@ input, textarea, select {
 	border: 1px solid #DBDDE1;
 	background-image: ../images/input_dropshadow.gif;
 }
+input:checked{
+}
+button::disabled {
+	color:grey;
+}
 
 .navcontainer {
 	margin: 0;

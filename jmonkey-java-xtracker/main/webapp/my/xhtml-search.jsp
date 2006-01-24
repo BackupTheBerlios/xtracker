@@ -3,33 +3,42 @@
 <%@ include file="/preamble.jsp"%>
 <html:html>
 <head>
-
+<!-- <%
+ Object searchForm = request.getAttribute("searchForm");
+ if(searchForm != null){
+  	java.util.Map props = org.apache.commons.beanutils.BeanUtils.describe(searchForm);
+  	Set keys = props.keySet();
+  	for (Object key : keys) {
+  		Object value = props.get(key);
+		out.println(key.toString() + "=" + (value != null?value.toString():null) );
+  	}
+  }else{
+  	out.println("searchForm is null!");
+  }
+ %> -->
 <title><bean:message key="page.title.search" /></title>
 <%@ include file="/styles.jsp"%>
 <%@ include file="/scripts.jsp"%>
-<%@ include file="/theme.jsp"%>
+<!-- %@ include file="/theme.jsp"% -->
 
 </head>
 <body>
 	<%@ include file="/logo.jsp"%>
-	<%@ include file="/my/navlight.jsp"%>
+	<%@ include file="/my/nav.jsp"%>
 	
-	<div class="bodycontainer">
+	<div>
 	<table>
 	<tr>
-	<td style="vertical-align: top;">
+	<td>
 	<html:form action="/my/search" onsubmit="return (validateDate('searchForm','createDate') && validateDate('searchForm','modifyDate') && validateDate('searchForm','dueDate') && validateDate('searchForm','closedDate'));">
 		<div>
-		
-		<div class="inputcontainer">
-			<html:reset><bean:message key="view.label.reset"/></html:reset>
-			<html:submit><bean:message key="view.label.search"/></html:submit>
-		</div>
-	
-
+		<ul>
+			<li><html:reset><bean:message key="view.label.reset"/></html:reset></li>
+			<li><html:submit><bean:message key="view.label.search"/></html:submit></li>
+		</ul>
 		<fieldset id="propertiesGroup">
 			<legend style="cursor: pointer;" onclick="rollupFieldset('propertiesGroup', 'propertiesGroupContent')">Properties</legend>
-			<div class="inputcontainer" id="propertiesGroupContent">
+			<div id="propertiesGroupContent">
 			<ul>
 				<li><label for="subject"><bean:message key="view.label.subject"/></label></li>
 				<li><html:select name="searchForm" property="subjectOp">
@@ -58,7 +67,7 @@
 					</html:select></li>
 				<li><html:text name="searchForm" property="worked" styleId="worked" size="5" maxlength="10"/></li>
 			</ul>
-	
+			
 			<ul>
 				<li><label for="queue"><bean:message key="view.label.queue"/></label></li>
 				<li><html:select name="searchForm" property="queueOp">
@@ -119,13 +128,12 @@
 						<html:optionsCollection name="searchForm" property="dispositionList" value="id" label="label" />
 					</html:select></li>
 			</ul>
-	
 			</div>
 		</fieldset>
 		
 		<fieldset id="peopleGroup">
 			<legend style="cursor: pointer;" onclick="rollupFieldset('peopleGroup', 'peopleGroupContent')">People</legend>
-			<div class="inputcontainer" style="display:none" id="peopleGroupContent">
+			<div id="peopleGroupContent">
 			<ul>
 				<li><label for="requestor"><bean:message key="view.label.requestor"/></label></li>
 				<li><html:select name="searchForm" property="requestorOp">
@@ -167,7 +175,7 @@
 		
 		<fieldset id="datesGroup">
 			<legend style="cursor: pointer;" onclick="rollupFieldset('datesGroup', 'datesGroupContent')">Dates</legend>
-			<div class="inputcontainer" style="display:none" id="datesGroupContent">
+			<div id="datesGroupContent">
 			<ul>
 				<li><label for="createDate"><bean:message key="view.label.create.date"/></label></li>
 				<li><html:select name="searchForm" property="createDateOp">
@@ -245,7 +253,7 @@
 	    });
 	</script>
 	</td>
-	<td style="vertical-align: top;">
+	<td>
 		<fieldset>
 			<legend>Search Results</legend>
 			

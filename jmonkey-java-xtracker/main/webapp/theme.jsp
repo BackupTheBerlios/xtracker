@@ -1,2 +1,2 @@
-<stx:theme base="/ui/themes"/>
+<stx:theme base="/ui/themes" name="default"/>
 

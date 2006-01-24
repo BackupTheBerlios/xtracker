@@ -89,7 +89,14 @@
 						<table>
 						<tr>
 							<td>
-								<bean:write name="hist" property="createDate" />, <bean:write name="hist" property="subject" />
+								<div class="historycontainer">
+								<div class="header">
+								<ul>
+									<li class="date"><bean:write name="hist" property="createDate" /></li>
+									<li class="subject"><bean:write name="hist" property="subject" /></li>
+								</ul>
+								</div>
+								</div>
 							</td>
 						</table>
 					</logic:equal>
@@ -97,11 +104,15 @@
 						<table>
 						<tr>
 							<td>
+								<div class="historycontainer">
+								<div class="header">
 								<ul>
-									<li class="subject"><bean:write name="hist" property="subject" /></li>
-									<li class="author"><bean:write name="hist" property="author.realname" /></li>
 									<li class="date"><bean:write name="hist" property="createDate" /></li>
+									<li class="author">[<bean:write name="hist" property="author.realname" />]</li>
+									<li class="subject"><bean:write name="hist" property="subject" /></li>
 								</ul>
+								</div>
+								</div>
 							</td>
 						</tr>
 						<logic:notEmpty name="hist" property="content">

@@ -32,7 +32,8 @@ public class EditSearchAction extends BaseSearchAction {
 		setCurrentYearMonthDay(searchForm);
 
 		request.getSession().setAttribute("searchForm", searchForm);
-
+		request.getSession().setAttribute("myTicketsForm", searchForm);
+		
 		return mapping.findForward("input");
 	}
 }

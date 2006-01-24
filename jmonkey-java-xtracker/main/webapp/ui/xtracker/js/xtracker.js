@@ -29,3 +29,15 @@ function switchTab(count, index){
 	tab.style.background = "Silver";
 	panel.style.display = "block";
 }
+
+function rollupFieldset(fieldsetId, insideId){
+	var fieldsetBox = document.getElementById(fieldsetId);
+	var insideBox = document.getElementById(insideId);
+	if(insideBox.style.display == "block" || insideBox.style.display == ""){
+		insideBox.style.display = "none";
+		// fieldsetBox.style.background = "red";
+	}else{
+		insideBox.style.display = "block";
+		// fieldsetBox.style.background = null;
+	}
+}

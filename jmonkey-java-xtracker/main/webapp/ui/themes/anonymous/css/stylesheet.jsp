@@ -18,7 +18,7 @@ a:active   {
 	color: Green;
 }
 a:hover    {
-	color: Blue;
+	color: Green;
 }
 
 body {
@@ -521,3 +521,27 @@ input, textarea, select {
 }
 
 .quicklisttd a:hover, .quicklisttd a:active { background: #BBBBBB; }
+
+
+.historycontainer {
+}
+
+.historycontainer .header {
+	margin: 0;
+	padding: 0 0 0 12px;
+}
+
+.historycontainer .header ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+.historycontainer .header li {
+	display: block;
+	margin: 0px 0px 0px 0px;
+	padding: 0px 5px 0px 0px;
+	float: left;
+	width: auto;
+}

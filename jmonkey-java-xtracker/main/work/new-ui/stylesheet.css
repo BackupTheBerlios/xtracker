@@ -1,0 +1,41 @@
+#header {  
+	position: fixed;
+	top: 0px;
+   left: 0px;
+   width: 100%;
+	height: 100px;
+	z-index: 1;
+	background-color: #CCC;
+	border: 1px solid #0000DD;
+}
+
+#leftindex { 
+	border: 1px solid #0000DD;
+   width: 100px;
+   float: left;
+   background-color: rgb(204, 204, 255);
+}
+
+#rightindex { 
+	float: right;
+   border: 1px solid #0000DD;
+   text-align: right;
+   width: 100px;
+   background-color: rgb(204, 204, 255);
+}
+
+#content{ 
+	position: relative;
+   margin-left: 11em;
+}
+
+#footer {  
+	float: left;
+	position: relative;
+	top: 12px;
+   left: 0px;
+   width: 100%;
+	height: 12px;
+	background-color: #CCC;
+	border: 1px solid #0000DD;
+}
